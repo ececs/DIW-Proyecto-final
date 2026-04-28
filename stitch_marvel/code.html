@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MARVEL // S.H.I.E.L.D. DATABASE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#e5e1e7",
+                        "primary": "#ffb4ac",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#727373",
+                        "primary-container": "#e8001c",
+                        "surface": "#131317",
+                        "surface-container-low": "#1b1b1f",
+                        "background": "#131317",
+                        "on-surface-variant": "#e9bcb7",
+                        "on-primary-fixed-variant": "#93000d",
+                        "on-primary-container": "#fff9f8",
+                        "secondary-fixed": "#ffe16d",
+                        "tertiary": "#c6c6c6",
+                        "surface-dim": "#131317",
+                        "secondary": "#fff9ef",
+                        "secondary-container": "#ffdb3c",
+                        "on-tertiary": "#2f3131",
+                        "inverse-surface": "#e5e1e7",
+                        "surface-variant": "#353439",
+                        "surface-container-high": "#2a292e",
+                        "primary-fixed": "#ffdad6",
+                        "surface-container-lowest": "#0e0e12",
+                        "inverse-on-surface": "#303034",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "tertiary-fixed": "#e3e2e2",
+                        "surface-container-highest": "#353439",
+                        "surface-container": "#1f1f23",
+                        "primary-fixed-dim": "#ffb4ac",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "on-background": "#e5e1e7",
+                        "surface-bright": "#39393d",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#410002",
+                        "on-primary": "#690006",
+                        "outline": "#af8783",
+                        "inverse-primary": "#c00015",
+                        "secondary-fixed-dim": "#e9c400",
+                        "on-tertiary-container": "#fbfafa",
+                        "outline-variant": "#5e3f3b",
+                        "on-secondary-fixed-variant": "#544600",
+                        "on-secondary": "#3a3000",
+                        "error-container": "#93000a",
+                        "surface-tint": "#ffb4ac",
+                        "on-secondary-fixed": "#221b00",
+                        "on-tertiary-fixed-variant": "#464747",
+                        "on-secondary-container": "#725f00",
+                        "error": "#ffb4ab"
+                    },
+                    fontFamily: {
+                        "headline": ["Rajdhani", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0rem", "lg": "0rem", "xl": "0rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scanline {
+            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        .tech-grid {
+            background-image: radial-gradient(circle, #353439 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .hero-glow-red { text-shadow: 0 0 10px rgba(232,0,28,0.8); }
+        .hero-glow-gold { text-shadow: 0 0 10px rgba(255,219,60,0.8); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-x-hidden selection:bg-primary-container selection:text-white">
+<nav class="fixed top-0 w-full z-50 bg-[#131317]/80 backdrop-blur-md flex justify-between items-center px-8 h-20 w-full shadow-[0_0_15px_rgba(232,0,28,0.15)]">
+<div class="text-3xl font-bold italic text-[#e8001c] tracking-tighter font-headline uppercase">MARVEL</div>
+<div class="hidden md:flex gap-8 font-headline uppercase tracking-wide font-semibold">
+<a class="text-[#e8001c] border-b-2 border-[#e8001c] pb-1" href="#">HÉROES</a>
+<a class="text-[#e5e1e7] hover:text-[#ffb4ac] transition-colors" href="#">UNIVERSO</a>
+<a class="text-[#e5e1e7] hover:text-[#ffb4ac] transition-colors" href="#">CONTACTO</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 font-headline font-bold uppercase tracking-widest hover:bg-[#ffb4ac] transition-all duration-200 active:scale-95">ACCESO AGENTE</button>
+</nav>
+<aside class="fixed left-0 top-20 h-[calc(100vh-80px)] flex flex-col bg-[#1b1b1f] w-64 hidden lg:flex border-r border-surface-variant/20 z-40">
+<div class="p-6 border-b border-surface-variant/20">
+<h2 class="font-headline font-bold text-[#e5e1e7] text-xl italic leading-none">STRATEGIC HAZARD</h2>
+<p class="font-label text-[10px] tracking-[0.2em] text-[#e8001c] font-medium mt-1">CLEARANCE LEVEL 7</p>
+</div>
+<div class="flex flex-col flex-grow">
+<a class="bg-[#2a292e] text-[#e8001c] border-l-4 border-[#e8001c] py-4 px-6 font-label uppercase text-xs tracking-widest flex items-center gap-3 transition-all duration-100 hover:text-[#e8001c] active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">shield</span> AGENTES ACTIVOS
+            </a>
+<a class="text-[#e5e1e7]/60 py-4 px-6 font-label uppercase text-xs tracking-widest flex items-center gap-3 hover:bg-[#2a292e]/50 hover:text-[#e8001c] transition-all duration-100 active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">warning</span> AMENAZAS NEUTRALIZADAS
+            </a>
+<a class="text-[#e5e1e7]/60 py-4 px-6 font-label uppercase text-xs tracking-widest flex items-center gap-3 hover:bg-[#2a292e]/50 hover:text-[#e8001c] transition-all duration-100 active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">groups</span> EQUIPO
+            </a>
+</div>
+<div class="p-6 mt-auto bg-[#131317]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-highest border border-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container text-[20px]">encrypted</span>
+</div>
+<div>
+<p class="text-[9px] text-on-surface/40 font-label tracking-widest font-semibold">S.H.I.E.L.D. ID</p>
+<p class="text-xs text-on-surface font-bold font-label tracking-tighter italic">NICK_FURY_01</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="lg:ml-64 pt-20">
+<section class="relative h-screen flex flex-col items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0 tech-grid opacity-20"></div>
+<div class="absolute inset-0 z-10 scanline"></div>
+<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-surface/0 via-surface/40 to-surface z-20"></div>
+<div class="relative z-30 text-center px-4">
+<p class="font-label text-primary tracking-[0.4em] font-bold uppercase text-xs mb-6 animate-pulse">BASE DE DATOS CLASIFICADA // NIVEL 7</p>
+<h1 class="font-headline font-bold text-7xl md:text-[10rem] tracking-tighter text-on-surface leading-[0.85] uppercase">
+                    MARVEL <br/><span class="text-primary-container italic">HEROES</span>
+</h1>
+<div class="mt-12 flex flex-col md:flex-row gap-4 justify-center items-center">
+<button class="px-10 py-4 bg-primary-container text-white font-headline font-bold text-lg uppercase tracking-widest hover:shadow-[0_0_25px_rgba(232,0,28,0.5)] transition-all">INICIAR PROTOCOLO</button>
+<button class="px-10 py-4 border border-outline/30 text-on-surface font-headline font-bold text-lg uppercase tracking-widest hover:bg-surface-variant transition-all">VER ARCHIVOS</button>
+</div>
+</div>
+<div class="absolute bottom-10 left-10 z-30 hidden md:block">
+<div class="flex flex-col gap-1 font-label text-[10px] text-primary/40 font-medium">
+<p>LAT: 40.7128° N // LONG: 74.0060° W</p>
+<p>SYSTEM STATUS: SECURE</p>
+<p>CONNECTION: ENCRYPTED_G90</p>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-low py-16 px-8 border-y border-surface-variant/10 relative">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+<div class="flex flex-col">
+<span class="font-headline font-bold text-7xl text-secondary-container hero-glow-gold">4</span>
+<span class="font-label text-xs tracking-[0.2em] font-bold text-on-surface/60 mt-2">AGENTES ACTIVOS</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline font-bold text-7xl text-secondary-container hero-glow-gold">∞</span>
+<span class="font-label text-xs tracking-[0.2em] font-bold text-on-surface/60 mt-2">AMENAZAS NEUTRALIZADAS</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline font-bold text-7xl text-secondary-container hero-glow-gold">1</span>
+<span class="font-label text-xs tracking-[0.2em] font-bold text-on-surface/60 mt-2">EQUIPO</span>
+</div>
+</div>
+</section>
+<section class="py-24 px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="flex items-center justify-between mb-16 border-l-4 border-primary-container pl-6">
+<div>
+<h2 class="font-headline font-bold text-5xl uppercase tracking-tighter">PERFILES DE AGENTES</h2>
+<p class="font-label text-on-surface/40 text-xs tracking-[0.3em] font-semibold uppercase mt-2">S.H.I.E.L.D. ACTIVE FILES // YEAR 2024</p>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="p-2 border border-outline/20 hover:bg-primary-container transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-2 border border-outline/20 hover:bg-primary-container transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+<div class="group relative bg-surface-container-high overflow-hidden border border-outline/10 hover:border-secondary-container/50 transition-all duration-300">
+<div class="aspect-[3/4] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG_yYQU5qcmX4DNOjB-yVoz98PKQWINN5R90oWr21mPbTRdmtuLTUdRY35S6pX6AL2buysyNzkl52YwtKlAcTUuzUcuwv0d5LJX7-NR_38p5zV9-zjQBeWZD_qe7rb1YvJO8uHwY7lF1pz-NdKNbw62czztAfQ7xXrjhDOnEAzXn3GS6UzIS3mtsEhYPiwSS7R10N55BNpK4BnMyavkefphasgDyshJ4L25nqM-h_9YW5z5VyPKDtvA8-qZ2ACv20zjSO0h43M9J0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4 bg-secondary-container text-on-secondary px-3 py-1 font-headline font-bold text-sm italic">01</div>
+<div class="absolute bottom-6 left-6">
+<p class="text-primary-container font-label text-[10px] font-bold tracking-[0.2em] uppercase mb-1">AVENGER // GENIUS</p>
+<h3 class="text-4xl font-headline font-bold uppercase text-white tracking-tighter">IRON MAN</h3>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<p class="text-sm text-on-surface/70 leading-relaxed h-12 overflow-hidden font-body">Genio, multimillonario, playboy, filántropo. El cerebro detrás de Stark Industries.</p>
+<div class="grid grid-cols-2 gap-2 text-[10px] font-label text-on-surface/40 font-bold uppercase tracking-wider">
+<div class="bg-surface-container-highest p-2 border-l-2 border-secondary-container">ORIGEN: NY, USA</div>
+<div class="bg-surface-container-highest p-2">ESTADO: ACTIVO</div>
+<div class="bg-surface-container-highest p-2">ALTURA: 1.85 M</div>
+<div class="bg-surface-container-highest p-2">PESO: 102 KG</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-[10px] font-label font-bold tracking-[0.2em]">
+<span>INTELIGENCIA</span>
+<span class="text-secondary-container">100%</span>
+</div>
+<div class="h-1 bg-surface-variant">
+<div class="h-full bg-secondary-container w-[100%] shadow-[0_0_8px_rgba(255,219,60,0.5)]"></div>
+</div>
+</div>
+<button class="w-full py-3 border border-secondary-container/40 text-secondary-container font-headline font-bold text-sm uppercase tracking-widest hover:bg-secondary-container hover:text-on-secondary transition-all">VER PERFIL COMPLETO</button>
+</div>
+</div>
+<div class="group relative bg-surface-container-high overflow-hidden border border-outline/10 hover:border-primary/50 transition-all duration-300">
+<div class="aspect-[3/4] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4pULciD0xhN5hcP57RS7yGO8WsgH-5yDonvHXQ9hjB20IrL8cXJ0rzMgxnRjJ1nvt1eJ3NvgW9E4sBFLAwWAbA-5DoULiwMXo5OTsYr-FN_FNTz18h5UDJcZSWhBoTDiC4zIOZlAzMS__79P09DWqMvOqJ2ZSwTrUMW_HSgSP-GjHyXUROLPPwMpUB40Jvt6flUiMlqUqNrhC7TRwPTQMTfxPgCRJ_s-dyWT_F4bnMEdq4rPmow8HYd-nyHooF1ScpHwPpNTok1U"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4 bg-primary text-on-primary-fixed px-3 py-1 font-headline font-bold text-sm italic">02</div>
+<div class="absolute bottom-6 left-6">
+<p class="text-primary-container font-label text-[10px] font-bold tracking-[0.2em] uppercase mb-1">VETERAN // SOLDIER</p>
+<h3 class="text-4xl font-headline font-bold uppercase text-white tracking-tighter">CAP. AMERICA</h3>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<p class="text-sm text-on-surface/70 leading-relaxed h-12 overflow-hidden font-body">El primer vengador. Símbolo de justicia y portador del suero del súper soldado.</p>
+<div class="grid grid-cols-2 gap-2 text-[10px] font-label text-on-surface/40 font-bold uppercase tracking-wider">
+<div class="bg-surface-container-highest p-2 border-l-2 border-primary">ORIGEN: NY, USA</div>
+<div class="bg-surface-container-highest p-2">ESTADO: ACTIVO</div>
+<div class="bg-surface-container-highest p-2">ALTURA: 1.88 M</div>
+<div class="bg-surface-container-highest p-2">PESO: 109 KG</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-[10px] font-label font-bold tracking-[0.2em]">
+<span>LIDERAZGO</span>
+<span class="text-primary">100%</span>
+</div>
+<div class="h-1 bg-surface-variant">
+<div class="h-full bg-primary w-[100%] shadow-[0_0_8px_rgba(255,180,172,0.5)]"></div>
+</div>
+</div>
+<button class="w-full py-3 border border-primary/40 text-primary font-headline font-bold text-sm uppercase tracking-widest hover:bg-primary hover:text-on-primary-fixed transition-all">VER PERFIL COMPLETO</button>
+</div>
+</div>
+<div class="group relative bg-surface-container-high overflow-hidden border border-outline/10 hover:border-primary-container/50 transition-all duration-300">
+<div class="aspect-[3/4] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQq4X2xE_yMVnUIWglV_kTOzkdudDLMBdT0jxNUsraMxkWjkEDxtSqgZKqYC0Pf4sb5tMeqDwjYgvWWjlN4Zzmi3IeKYNm5dGfub3bcv7xM6BPu1TbLpWtnH1BNlr5-aphT_EDIbOauHbqgyXLn5yLwVGcy7zjE2OzDsO0AsrGb3a5PT68ioyjJ5Z10Ll1anCPzJW3mJW135gvOCOWbnW1V3bmobKgrNGbc4mJKDhwQFlefoW2OxerGlalUYcKSstaBn-JwWfdCk8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4 bg-primary-container text-white px-3 py-1 font-headline font-bold text-sm italic">03</div>
+<div class="absolute bottom-6 left-6">
+<p class="text-primary-container font-label text-[10px] font-bold tracking-[0.2em] uppercase mb-1">SPY // ASSASSIN</p>
+<h3 class="text-4xl font-headline font-bold uppercase text-white tracking-tighter">BLACK WIDOW</h3>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<p class="text-sm text-on-surface/70 leading-relaxed h-12 overflow-hidden font-body">Experta en espionaje y combate cuerpo a cuerpo. Ex-agente de la KGB.</p>
+<div class="grid grid-cols-2 gap-2 text-[10px] font-label text-on-surface/40 font-bold uppercase tracking-wider">
+<div class="bg-surface-container-highest p-2 border-l-2 border-primary-container">ORIGEN: RUSIA</div>
+<div class="bg-surface-container-highest p-2">ESTADO: ACTIVA</div>
+<div class="bg-surface-container-highest p-2">ALTURA: 1.70 M</div>
+<div class="bg-surface-container-highest p-2">PESO: 59 KG</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-[10px] font-label font-bold tracking-[0.2em]">
+<span>SIGILO</span>
+<span class="text-primary-container">98%</span>
+</div>
+<div class="h-1 bg-surface-variant">
+<div class="h-full bg-primary-container w-[98%] shadow-[0_0_8px_rgba(232,0,28,0.5)]"></div>
+</div>
+</div>
+<button class="w-full py-3 border border-primary-container/40 text-primary-container font-headline font-bold text-sm uppercase tracking-widest hover:bg-primary-container hover:text-white transition-all">VER PERFIL COMPLETO</button>
+</div>
+</div>
+<div class="group relative bg-surface-container-high overflow-hidden border border-outline/10 hover:border-secondary-container/50 transition-all duration-300">
+<div class="aspect-[3/4] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeKEc4dTetfTB7gWZ2iPc3pAZ3ckn4IWtSvwMj1RQSe16mQ-RXg_yMmqwJWZgVDNvXYEMH2lT1TBuCUQieTW5fxJmxLTiQnRupUjRK8KHwg11rWvzI3FykjF3ojbn2k9UlXtWGATGaedTvUFoMeVdZB0gOJ3i7HvpVt_vHVN50m4_ONA947yu6XiD-kOH7ev1FpG1DD1929i4BrPOvDyx4rvckv3O3ldBxNCmNuMEEBooThrR-SrNkj-jyrtQKv8Rs3dwNvKbojh0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4 bg-secondary-container text-on-secondary px-3 py-1 font-headline font-bold text-sm italic">04</div>
+<div class="absolute bottom-6 left-6">
+<p class="text-primary-container font-label text-[10px] font-bold tracking-[0.2em] uppercase mb-1">GOD // ASGARDIAN</p>
+<h3 class="text-4xl font-headline font-bold uppercase text-white tracking-tighter">THOR</h3>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<p class="text-sm text-on-surface/70 leading-relaxed h-12 overflow-hidden font-body">Dios del Trueno y Rey de Asgard. Poseedor del martillo místico Mjolnir.</p>
+<div class="grid grid-cols-2 gap-2 text-[10px] font-label text-on-surface/40 font-bold uppercase tracking-wider">
+<div class="bg-surface-container-highest p-2 border-l-2 border-secondary-container">ORIGEN: ASGARD</div>
+<div class="bg-surface-container-highest p-2">ESTADO: ACTIVO</div>
+<div class="bg-surface-container-highest p-2">ALTURA: 1.98 M</div>
+<div class="bg-surface-container-highest p-2">PESO: 290 KG</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-[10px] font-label font-bold tracking-[0.2em]">
+<span>FUERZA</span>
+<span class="text-secondary-container">100%</span>
+</div>
+<div class="h-1 bg-surface-variant">
+<div class="h-full bg-secondary-container w-[100%] shadow-[0_0_8px_rgba(255,219,60,0.5)]"></div>
+</div>
+</div>
+<button class="w-full py-3 border border-secondary-container/40 text-secondary-container font-headline font-bold text-sm uppercase tracking-widest hover:bg-secondary-container hover:text-on-secondary transition-all">VER PERFIL COMPLETO</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer class="bg-[#131317] w-full py-12 border-t border-[#353439]/20 flex flex-col items-center gap-6 w-full px-4">
+<div class="text-[#e8001c] font-bold font-headline text-3xl tracking-tighter italic uppercase">MARVEL</div>
+<div class="flex flex-wrap justify-center gap-10">
+<a class="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#e5e1e7]/40 hover:text-[#e8001c] transition-opacity duration-200" href="#">PROTOCOLS</a>
+<a class="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#e5e1e7]/40 hover:text-[#e8001c] transition-opacity duration-200" href="#">TERMINAL HELP</a>
+<a class="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#e5e1e7]/40 hover:text-[#e8001c] transition-opacity duration-200" href="#">LEGAL</a>
+</div>
+<p class="font-label text-[10px] font-medium uppercase tracking-[0.2em] text-[#e5e1e7]/30 mt-4">© 2024 S.H.I.E.L.D. DATABASE // ACCESS RESTRICTED</p>
+</footer>
+</main>
+<div class="fixed bottom-8 right-8 z-50 flex flex-col gap-2 items-end">
+<div class="bg-surface-bright/80 backdrop-blur-sm border-l-2 border-primary-container px-4 py-2 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container text-sm animate-pulse" style="font-variation-settings: 'FILL' 1;">sensors</span>
+<span class="font-label text-[10px] tracking-[0.2em] text-on-surface uppercase font-bold">SCANNING THREATS...</span>
+</div>
+<div class="bg-surface-container-highest/80 backdrop-blur-sm border-l-2 border-secondary-container px-4 py-2 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container text-sm">shield</span>
+<span class="font-label text-[10px] tracking-[0.2em] text-on-surface uppercase font-bold">SYSTEM SECURE</span>
+</div>
+</div>
+
+</body></html>

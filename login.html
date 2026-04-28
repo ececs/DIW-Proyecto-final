@@ -4,66 +4,63 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>S.H.I.E.L.D. — ACCESO RESTRINGIDO</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+    
+    <!-- Enlaces a hojas de estilo externas -->
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/animations.css"/>
     <link rel="stylesheet" type="text/css" href="css/enhancements.css"/>
+    
+    <!-- Iconos de Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
 </head>
-<body>
+<body class="login-page">
 
-<div class="crt-overlay"></div>
+<!-- Efectos CRT -->
+<div class="scanline-overlay"></div>
 
-<div class="warning-tape top-0 left-0"></div>
-<div class="warning-tape bottom-0 left-0"></div>
+<!-- Cintas de advertencia (Danger Tape) -->
+<div class="danger-tape top"></div>
+<div class="danger-tape bottom"></div>
 
-<div class="max-w-md w-full px-4">
-    <div class="danger-border text-center">
-        <div class="flex justify-center mb-4 text-6xl text-[#e8001c]">
-            <span class="material-symbols-outlined text-7xl">report</span>
+<main class="login-container">
+    <div class="login-box tech-grid">
+        <div class="alert-icon">
+            <span class="material-symbols-outlined">report</span>
         </div>
         
-        <h1 class="glitch-text text-2xl mb-2">ACCESS DENIED</h1>
-        <p class="text-[10px] tracking-[0.4em] opacity-60 mb-8 uppercase">Prohibido el paso a personal no autorizado</p>
+        <h1 class="glitch-text">ACCESS DENIED</h1>
+        <p class="login-subtitle">PROHIBIDO EL PASO A PERSONAL NO AUTORIZADO</p>
         
-        <div class="space-y-4 text-left">
-            <div>
-                <label class="text-[10px] uppercase tracking-widest opacity-50 block mb-2">AGENTE_ID</label>
+        <form class="login-form">
+            <div class="form-group">
+                <label>AGENTE_ID</label>
                 <input type="text" placeholder="EJ: STARK-001">
             </div>
-            <div>
-                <label class="text-[10px] uppercase tracking-widest opacity-50 block mb-2">CÓDIGO_ENCRIPTADO</label>
+            <div class="form-group">
+                <label>CÓDIGO_ENCRIPTADO</label>
                 <input type="password" placeholder="••••••••••••">
             </div>
-        </div>
+        </form>
 
-        <div class="fingerprint-scan group">
-            <div class="scan-line"></div>
-            <span class="material-symbols-outlined text-4xl opacity-40 group-hover:opacity-100 transition-opacity">fingerprint</span>
+        <div class="biometric-scan">
+            <div class="scan-line-laser"></div>
+            <span class="material-symbols-outlined">fingerprint</span>
         </div>
-        <p class="text-[8px] uppercase tracking-widest opacity-40">Presione para escaneo biométrico</p>
+        <p class="scan-text">PRESIONE PARA ESCANEO BIOMÉTRICO</p>
 
-        <div class="mt-8 pt-6 border-t border-white/10">
-            <button onclick="window.location.href='index.html'" class="text-[10px] uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity flex items-center justify-center gap-2 w-full">
-                <span class="material-symbols-outlined text-sm">arrow_back</span>
-                Abortar Misión y Volver
+        <div class="abort-mission">
+            <button onclick="window.location.href='index.html'" class="btn-abort">
+                <span class="material-symbols-outlined">arrow_back</span>
+                ABORTAR MISIÓN Y VOLVER
             </button>
         </div>
     </div>
     
-    <div class="mt-6 flex justify-between px-2 text-[8px] font-mono opacity-30 uppercase tracking-tighter">
+    <div class="system-logs">
         <span>S.H.I.E.L.D. SECURE LAYER v7.4</span>
         <span>IP_TRACED: 192.168.0.X</span>
     </div>
-</div>
-
-<script>
-    // Pequeño efecto visual de sonido o alerta
-    window.onload = () => {
-        console.log("ALERTA: Intento de acceso no autorizado detectado.");
-    };
-</script>
+</main>
 
 </body>
 </html>

@@ -1,559 +1,390 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta name="description" content="Base de datos clasificada de los Vengadores de Marvel — S.H.I.E.L.D. Clearance Level 7"/>
-<title>MARVEL // S.H.I.E.L.D. DATABASE</title>
-<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<link rel="stylesheet" type="text/css" href="css/animations.css"/>
-<link rel="stylesheet" type="text/css" href="css/enhancements.css"/>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>S.H.I.E.L.D. DATABASE // AGENTES VENGADORES</title>
+    
+    <!-- Enlaces a hojas de estilo externas (Cumplimiento de Rúbrica) -->
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/animations.css"/>
+    <link rel="stylesheet" type="text/css" href="css/enhancements.css"/>
+    
+    <!-- Iconos de Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
 </head>
-<body class="selection-primary">
+<body>
 
-<!-- Skip to main content (accesibilidad) -->
-<a href="#main" class="skip-link">Saltar al contenido principal</a>
+<!-- Capas de efectos visuales (Escanlines y rejilla técnica) -->
+<div class="scanline-overlay"></div>
+<div class="crt-screen-glow"></div>
 
-<!-- Audio Vengadores (Rúbrica: Multimedia) -->
-<audio id="bg-music" src="audio/sonido.mp3" loop hidden aria-hidden="true" title="Tema de los Vengadores"></audio>
-
-<!-- Overlay de carga -->
-<div id="intro-overlay" aria-hidden="true" role="presentation">
-  <div class="intro-inner">
-    <div class="intro-badge">S.H.I.E.L.D. SECURE ACCESS</div>
-    <div class="intro-title">CLASIFICADO</div>
-    <div class="intro-spinner"></div>
-    <div class="intro-status">AUTENTICANDO ACCESO...</div>
-  </div>
-</div>
-
-<!-- Navegación principal -->
-<nav id="main-nav" aria-label="Navegación principal" class="main-nav">
-  <a href="#hero" class="logo" aria-label="Marvel — Ir al inicio">MARVEL</a>
-  <div class="nav-links" role="list">
-    <a class="nav-link active" href="#hero" role="listitem">HÉROES</a>
-    <a class="nav-link" href="#profiles" role="listitem">UNIVERSO</a>
-    <a class="nav-link" href="#video-section" role="listitem">VIDEO</a>
-    <a class="nav-link" href="#contact" role="listitem">CONTACTO</a>
-  </div>
-  <a href="login.html" class="btn-access">
-    ACCESO AGENTE
-  </a>
+<!-- Navegación Superior Fija -->
+<nav class="fixed-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">S.H.I.E.L.D.</a>
+        <div class="nav-links">
+            <a href="#agentes" class="nav-link">HÉROES</a>
+            <a href="#video" class="nav-link">VIDEO</a>
+            <a href="#" class="nav-link">ARCHIVOS</a>
+        </div>
+        <button onclick="window.location.href='login.html'" class="btn-access">
+            ACCESO AGENTE
+        </button>
+    </div>
 </nav>
 
-<!-- Sidebar -->
-<aside class="sidebar" aria-label="Panel de navegación S.H.I.E.L.D.">
-  <div class="sidebar-header">
-    <h2 class="font-headline italic">STRATEGIC HAZARD</h2>
-    <p class="sidebar-clearance">CLEARANCE LEVEL 7</p>
-  </div>
-  <nav class="sidebar-nav" aria-label="Secciones clasificadas">
-    <a href="#profiles" class="sidebar-link active">
-      <span class="material-symbols-outlined icon-fill" aria-hidden="true">shield</span> AGENTES ACTIVOS
-    </a>
-    <a href="#stats" class="sidebar-link">
-      <span class="material-symbols-outlined" aria-hidden="true">warning</span> AMENAZAS NEUTRALIZADAS
-    </a>
-    <a href="#profiles" class="sidebar-link">
-      <span class="material-symbols-outlined" aria-hidden="true">groups</span> EQUIPO
-    </a>
-    <a href="#video-section" class="sidebar-link">
-      <span class="material-symbols-outlined" aria-hidden="true">movie</span> ARCHIVO VIDEO
-    </a>
-  </nav>
-  <div class="sidebar-footer">
-    <div class="user-badge">
-      <div class="user-badge-icon">
-        <span class="material-symbols-outlined" aria-hidden="true">encrypted</span>
-      </div>
-      <div>
-        <p class="user-id-label">S.H.I.E.L.D. ID</p>
-        <p class="user-id-value">NICK_FURY_01</p>
-      </div>
+<!-- Barra Lateral de Estado del Sistema -->
+<aside class="sidebar-terminal">
+    <div class="sidebar-header">
+        <h3 class="sidebar-title">STRATEGIC HAZARD</h3>
+        <p class="sidebar-subtitle">CLEARANCE LEVEL 7</p>
     </div>
-  </div>
+    <ul class="sidebar-menu">
+        <li class="sidebar-item active">
+            <span class="material-symbols-outlined">security</span>
+            AGENTES ACTIVOS
+        </li>
+        <li class="sidebar-item">
+            <span class="material-symbols-outlined">warning</span>
+            AMENAZAS
+        </li>
+        <li class="sidebar-item">
+            <span class="material-symbols-outlined">groups</span>
+            EQUIPO
+        </li>
+    </ul>
+    <div class="p-6 mt-auto border-t border-white/5">
+        <p class="text-[8px] opacity-30 font-mono">S.H.I.E.L.D. ID</p>
+        <p class="text-[10px] font-mono">NICK_FURY_01</p>
+    </div>
 </aside>
 
-<!-- Contenido principal -->
-<main id="main" class="content-area">
+<!-- Contenido Principal -->
+<main class="main-content">
+    
+    <!-- Sección de Bienvenida (Hero) -->
+    <section class="hero-section tech-grid">
+        <h1 class="hero-title">MARVEL<br/><span class="hero-accent">HEROES</span></h1>
+        <p class="text-xl max-w-2xl text-center mt-6 opacity-80">
+            Base de datos oficial de agentes con habilidades mejoradas. 
+            Acceso restringido a personal de Nivel 7.
+        </p>
+        <button class="btn-primary mt-12" onclick="document.getElementById('bg-music').play()">
+            INICIAR TERMINAL
+        </button>
+    </section>
 
-  <!-- Hero Section -->
-  <section id="hero" aria-label="Presentación Marvel Heroes" class="hero-section">
-    <canvas id="particle-canvas" aria-hidden="true"></canvas>
-    <div class="hero-tech-grid" aria-hidden="true"></div>
-    <div class="hero-scanline" aria-hidden="true"></div>
-    <div class="hero-gradient-overlay" aria-hidden="true"></div>
-    <div class="hero-content">
-      <p class="hero-subtitle animate-pulse">
-        BASE DE DATOS CLASIFICADA // NIVEL 7
-      </p>
-      <h1 id="hero-title" class="hero-title" data-text="MARVEL">
-        MARVEL <br/><span class="hero-title-accent">HEROES</span>
-      </h1>
-      <div class="hero-actions">
-        <button class="btn-hero-primary">INICIAR PROTOCOLO</button>
-        <button class="btn-hero-outline">VER ARCHIVOS</button>
-      </div>
-    </div>
-    <div class="hero-coordinates" aria-hidden="true">
-      <div class="hero-coordinates-inner">
-        <p>LAT: 40.7128° N // LONG: 74.0060° W</p>
-        <p>SYSTEM STATUS: SECURE</p>
-        <p>CONNECTION: ENCRYPTED_G90</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats Section -->
-  <section id="stats" aria-label="Estadísticas del equipo" class="stats-section">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <span class="stat-number hero-glow-gold" data-count-to="8" aria-live="polite" aria-label="8 agentes activos">8</span>
-        <span class="stat-label">AGENTES ACTIVOS</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number hero-glow-gold" aria-label="Amenazas neutralizadas: infinitas">∞</span>
-        <span class="stat-label">AMENAZAS NEUTRALIZADAS</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number hero-glow-gold" data-count-to="1" aria-live="polite" aria-label="1 equipo">1</span>
-        <span class="stat-label">EQUIPO</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Perfiles de Agentes -->
-  <section id="profiles" aria-labelledby="profiles-heading" class="profiles-section">
-    <div class="container-xl">
-      <div class="profiles-header">
-        <div>
-          <h2 id="profiles-heading" class="agent-name-main">PERFILES DE AGENTES</h2>
-          <p class="profiles-subtitle">S.H.I.E.L.D. ACTIVE FILES // YEAR 2024</p>
+    <!-- Sección de Estadísticas -->
+    <section class="stats-grid">
+        <div class="stat-item">
+            <span class="stat-number">08</span>
+            <p class="stat-label">AGENTES ACTIVOS</p>
         </div>
-        <div class="profiles-nav" aria-hidden="true">
-          <div class="profiles-nav-arrows">
-            <button class="btn-nav-arrow" aria-label="Anterior">
-              <span class="material-symbols-outlined">chevron_left</span>
-            </button>
-            <button class="btn-nav-arrow" aria-label="Siguiente">
-              <span class="material-symbols-outlined">chevron_right</span>
-            </button>
-          </div>
+        <div class="stat-item">
+            <span class="stat-number">12</span>
+            <p class="stat-label">MISIONES COMPLETADAS</p>
         </div>
-      </div>
-
-      <div class="profiles-grid">
-
-        <!-- IRON MAN -->
-        <article class="agent-card" tabindex="0" aria-label="Perfil de Iron Man — Tony Stark" style="--stagger: 0">
-          <a href="profile-detail.html?agent=ironman" class="card-link-wrapper">
-            <div class="agent-image-wrapper">
-              <img class="agent-image"
-                   src="img/ironman.png"
-                   alt="Ilustración de Iron Man con armadura roja y dorada"/>
-              <div class="agent-overlay"></div>
-              <div class="card-shimmer" aria-hidden="true"></div>
-              <div class="agent-id-badge secondary">01</div>
-              <div class="agent-header-info">
-                <p class="agent-role">AVENGER // GENIUS</p>
-                <h3 class="agent-name">IRON MAN</h3>
-              </div>
-            </div>
-          </a>
-          <div class="agent-content">
-            <p class="agent-desc">Genio, multimillonario, playboy, filántropo. El cerebro detrás de Stark Industries.</p>
-            <div class="agent-stats-grid">
-              <div class="agent-stat-box border-secondary">ORIGEN: NY, USA</div>
-              <div class="agent-stat-box">ESTADO: ACTIVO</div>
-              <div class="agent-stat-box">ALTURA: 1.85 M</div>
-              <div class="agent-stat-box">PESO: 102 KG</div>
-            </div>
-            <div class="agent-progress-wrapper">
-              <div class="agent-progress-label">
-                <span>INTELIGENCIA</span>
-                <span class="color-secondary">100%</span>
-              </div>
-              <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Inteligencia: 100%">
-                <div class="progress-fill bg-secondary glow-gold" style="width: 100%;"></div>
-              </div>
-            </div>
-            <a href="profile-detail.html?agent=ironman" class="btn-profile">VER PERFIL COMPLETO</a>
-          </div>
-        </article>
-
-        <!-- CAPTAIN AMERICA -->
-        <article class="agent-card" tabindex="0" aria-label="Perfil de Capitán América — Steve Rogers" style="--stagger: 1">
-          <a href="profile-detail.html?agent=cap_america" class="card-link-wrapper">
-            <div class="agent-image-wrapper">
-              <img class="agent-image"
-                   src="img/cap_america.png"
-                   alt="Ilustración de Capitán América con escudo rojo, blanco y azul"/>
-              <div class="agent-overlay"></div>
-              <div class="card-shimmer" aria-hidden="true"></div>
-              <div class="agent-id-badge primary">02</div>
-              <div class="agent-header-info">
-                <p class="agent-role">VETERAN // SOLDIER</p>
-                <h3 class="agent-name">CAP. AMERICA</h3>
-              </div>
-            </div>
-          </a>
-          <div class="agent-content">
-            <p class="agent-desc">El primer vengador. Símbolo de justicia y portador del suero del súper soldado.</p>
-            <div class="agent-stats-grid">
-              <div class="agent-stat-box border-primary">ORIGEN: NY, USA</div>
-              <div class="agent-stat-box">ESTADO: ACTIVO</div>
-              <div class="agent-stat-box">ALTURA: 1.88 M</div>
-              <div class="agent-stat-box">PESO: 109 KG</div>
-            </div>
-            <div class="agent-progress-wrapper">
-              <div class="agent-progress-label">
-                <span>LIDERAZGO</span>
-                <span class="color-primary">100%</span>
-              </div>
-              <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Liderazgo: 100%">
-                <div class="progress-fill bg-primary glow-primary" style="width: 100%;"></div>
-              </div>
-            </div>
-            <a href="profile-detail.html?agent=cap_america" class="btn-profile">VER PERFIL COMPLETO</a>
-          </div>
-        </article>
-
-        <!-- BLACK WIDOW -->
-        <article class="agent-card" tabindex="0" aria-label="Perfil de Black Widow — Natasha Romanoff" style="--stagger: 2">
-          <a href="profile-detail.html?agent=widow" class="card-link-wrapper">
-            <div class="agent-image-wrapper">
-              <img class="agent-image"
-                   src="img/widow.png"
-                   alt="Ilustración de Black Widow con traje de combate negro"/>
-              <div class="agent-overlay"></div>
-              <div class="card-shimmer" aria-hidden="true"></div>
-              <div class="agent-id-badge primary">03</div>
-              <div class="agent-header-info">
-                <p class="agent-role">SPY // ASSASSIN</p>
-                <h3 class="agent-name">BLACK WIDOW</h3>
-              </div>
-            </div>
-          </a>
-          <div class="agent-content">
-            <p class="agent-desc">Experta en espionaje y combate cuerpo a cuerpo. Ex-agente de la KGB.</p>
-            <div class="agent-stats-grid">
-              <div class="agent-stat-box border-primary-container">ORIGEN: RUSIA</div>
-              <div class="agent-stat-box">ESTADO: ACTIVA</div>
-              <div class="agent-stat-box">ALTURA: 1.70 M</div>
-              <div class="agent-stat-box">PESO: 59 KG</div>
-            </div>
-            <div class="agent-progress-wrapper">
-              <div class="agent-progress-label">
-                <span>SIGILO</span>
-                <span class="color-primary-container">98%</span>
-              </div>
-              <div class="progress-bar" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" aria-label="Sigilo: 98%">
-                <div class="progress-fill bg-primary-container glow-error" style="width: 98%;"></div>
-              </div>
-            </div>
-            <a href="profile-detail.html?agent=widow" class="btn-profile">VER PERFIL COMPLETO</a>
-          </div>
-        </article>
-
-        <!-- THOR -->
-        <article class="agent-card" tabindex="0" aria-label="Perfil de Thor Odinson — Dios del Trueno" style="--stagger: 3">
-          <a href="profile-detail.html?agent=thor" class="card-link-wrapper">
-            <div class="agent-image-wrapper">
-              <img class="agent-image"
-                   src="img/thor.png"
-                   alt="Ilustración de Thor con capa roja y martillo Mjolnir"/>
-              <div class="agent-overlay"></div>
-              <div class="card-shimmer" aria-hidden="true"></div>
-              <div class="agent-id-badge secondary">04</div>
-              <div class="agent-header-info">
-                <p class="agent-role">GOD // ASGARDIAN</p>
-                <h3 class="agent-name">THOR</h3>
-              </div>
-            </div>
-          </a>
-          <div class="agent-content">
-            <p class="agent-desc">Dios del Trueno y Rey de Asgard. Poseedor del martillo místico Mjolnir.</p>
-            <div class="agent-stats-grid">
-              <div class="agent-stat-box border-secondary">ORIGEN: ASGARD</div>
-              <div class="agent-stat-box">ESTADO: ACTIVO</div>
-              <div class="agent-stat-box">ALTURA: 1.98 M</div>
-              <div class="agent-stat-box">PESO: 290 KG</div>
-            </div>
-            <div class="agent-progress-wrapper">
-              <div class="agent-progress-label">
-                <span>FUERZA</span>
-                <span class="color-secondary">100%</span>
-              </div>
-              <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Fuerza: 100%">
-                <div class="progress-fill bg-secondary glow-gold" style="width: 100%;"></div>
-              </div>
-            </div>
-            <a href="profile-detail.html?agent=thor" class="btn-profile">VER PERFIL COMPLETO</a>
-          </div>
-        </article>
-
-        <!-- HULK -->
-        <article class="agent-card" tabindex="0" aria-label="Perfil de Hulk — Bruce Banner" style="--stagger: 4">
-          <a href="profile-detail.html?agent=hulk" class="card-link-wrapper">
-            <div class="agent-image-wrapper">
-              <img class="agent-image"
-                   src="img/hulk.png"
-                   alt="Ilustración de Hulk, el gigante esmeralda"/>
-              <div class="agent-overlay"></div>
-              <div class="card-shimmer" aria-hidden="true"></div>
-              <div class="agent-id-badge secondary">05</div>
-              <div class="agent-header-info">
-                <p class="agent-role">BEAST // SCIENTIST</p>
-                <h3 class="agent-name">HULK</h3>
-              </div>
-            </div>
-          </a>
-          <div class="agent-content">
-            <p class="agent-desc">Fuerza pura impulsada por la radiación gamma. El Dr. Banner es el cerebro, Hulk es el músculo.</p>
-            <div class="agent-stats-grid">
-              <div class="agent-stat-box border-secondary">ORIGEN: USA</div>
-              <div class="agent-stat-box">ESTADO: ACTIVO</div>
-              <div class="agent-stat-box">ALTURA: 2.50 M</div>
-              <div class="agent-stat-box">PESO: 635 KG</div>
-            </div>
-            <div class="agent-progress-wrapper">
-              <div class="agent-progress-label">
-                <span>FUERZA</span>
-                <span class="color-secondary">100%</span>
-              </div>
-              <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Fuerza: 100%">
-                <div class="progress-fill bg-secondary glow-gold" style="width: 100%;"></div>
-              </div>
-            </div>
-            <a href="profile-detail.html?agent=hulk" class="btn-profile">VER PERFIL COMPLETO</a>
-          </div>
-        </article>
-
-        <!-- HAWKEYE -->
-        <article class="agent-card" tabindex="0" aria-label="Perfil de Hawkeye — Clint Barton" style="--stagger: 5">
-          <a href="profile-detail.html?agent=hawkeye" class="card-link-wrapper">
-            <div class="agent-image-wrapper">
-              <img class="agent-image"
-                   src="img/hawkeye.png"
-                   alt="Ilustración de Hawkeye con su arco"/>
-              <div class="agent-overlay"></div>
-              <div class="card-shimmer" aria-hidden="true"></div>
-              <div class="agent-id-badge primary">06</div>
-              <div class="agent-header-info">
-                <p class="agent-role">MARKSMAN // SPY</p>
-                <h3 class="agent-name">HAWKEYE</h3>
-              </div>
-            </div>
-          </a>
-          <div class="agent-content">
-            <p class="agent-desc">El mejor arquero del mundo. Su puntería es infalible y su lealtad a S.H.I.E.L.D. inquebrantable.</p>
-            <div class="agent-stats-grid">
-              <div class="agent-stat-box border-primary">ORIGEN: USA</div>
-              <div class="agent-stat-box">ESTADO: ACTIVO</div>
-              <div class="agent-stat-box">ALTURA: 1.91 M</div>
-              <div class="agent-stat-box">PESO: 104 KG</div>
-            </div>
-            <div class="agent-progress-wrapper">
-              <div class="agent-progress-label">
-                <span>PUNTERÍA</span>
-                <span class="color-primary">99%</span>
-              </div>
-              <div class="progress-bar" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" aria-label="Puntería: 99%">
-                <div class="progress-fill bg-primary glow-primary" style="width: 99%;"></div>
-              </div>
-            </div>
-            <a href="profile-detail.html?agent=hawkeye" class="btn-profile">VER PERFIL COMPLETO</a>
-          </div>
-        </article>
-
-        <!-- SCARLET WITCH -->
-        <article class="agent-card" tabindex="0" aria-label="Perfil de Scarlet Witch — Wanda Maximoff" style="--stagger: 6">
-          <a href="profile-detail.html?agent=escarlata" class="card-link-wrapper">
-            <div class="agent-image-wrapper">
-              <img class="agent-image"
-                   src="img/escarlata.png"
-                   alt="Ilustración de Scarlet Witch usando sus poderes"/>
-              <div class="agent-overlay"></div>
-              <div class="card-shimmer" aria-hidden="true"></div>
-              <div class="agent-id-badge primary">07</div>
-              <div class="agent-header-info">
-                <p class="agent-role">MAGE // NEXUS</p>
-                <h3 class="agent-name">S. WITCH</h3>
-              </div>
-            </div>
-          </a>
-          <div class="agent-content">
-            <p class="agent-desc">Manipulación de la realidad y magia del caos. Una de las fuerzas más poderosas del universo.</p>
-            <div class="agent-stats-grid">
-              <div class="agent-stat-box border-primary">ORIGEN: SOKOVIA</div>
-              <div class="agent-stat-box">ESTADO: ACTIVA</div>
-              <div class="agent-stat-box">ALTURA: 1.70 M</div>
-              <div class="agent-stat-box">PESO: 60 KG</div>
-            </div>
-            <div class="agent-progress-wrapper">
-              <div class="agent-progress-label">
-                <span>PODER</span>
-                <span class="color-primary">98%</span>
-              </div>
-              <div class="progress-bar" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" aria-label="Poder: 98%">
-                <div class="progress-fill bg-primary glow-error" style="width: 98%;"></div>
-              </div>
-            </div>
-            <a href="profile-detail.html?agent=escarlata" class="btn-profile">VER PERFIL COMPLETO</a>
-          </div>
-        </article>
-
-        <!-- BLACK PANTHER -->
-        <article class="agent-card" tabindex="0" aria-label="Perfil de Black Panther — T'Challa" style="--stagger: 7">
-          <a href="profile-detail.html?agent=black_panter" class="card-link-wrapper">
-            <div class="agent-image-wrapper">
-              <img class="agent-image"
-                   src="img/black_panter.png"
-                   alt="Ilustración de Black Panther con traje de vibranium"/>
-              <div class="agent-overlay"></div>
-              <div class="card-shimmer" aria-hidden="true"></div>
-              <div class="agent-id-badge secondary">08</div>
-              <div class="agent-header-info">
-                <p class="agent-role">KING // WARRIOR</p>
-                <h3 class="agent-name">B. PANTHER</h3>
-              </div>
-            </div>
-          </a>
-          <div class="agent-content">
-            <p class="agent-desc">Rey de Wakanda. Protegido por el Dios Pantera y equipado con tecnología de vibranium avanzada.</p>
-            <div class="agent-stats-grid">
-              <div class="agent-stat-box border-secondary">ORIGEN: WAKANDA</div>
-              <div class="agent-stat-box">ESTADO: ACTIVO</div>
-              <div class="agent-stat-box">ALTURA: 1.83 M</div>
-              <div class="agent-stat-box">PESO: 91 KG</div>
-            </div>
-            <div class="agent-progress-wrapper">
-              <div class="agent-progress-label">
-                <span>AGILIDAD</span>
-                <span class="color-secondary">95%</span>
-              </div>
-              <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Agilidad: 95%">
-                <div class="progress-fill bg-secondary glow-gold" style="width: 95%;"></div>
-              </div>
-            </div>
-            <a href="profile-detail.html?agent=black_panter" class="btn-profile">VER PERFIL COMPLETO</a>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Sección de Video Clasificado -->
-  <section id="video-section" aria-label="Archivo de video clasificado" class="video-section">
-    <div class="video-tech-grid" aria-hidden="true"></div>
-    <div class="video-gradient-overlay" aria-hidden="true"></div>
-
-    <div class="container-lg">
-
-      <!-- Header sección -->
-      <div class="video-section-header">
-        <div>
-          <p class="video-label">S.H.I.E.L.D. MULTIMEDIA ARCHIVE // RESTRICTED</p>
-          <h2 class="video-title">ARCHIVO DE VÍDEO</h2>
-          <p class="video-subtitle">IRON MAN IV — CLASSIFIED FOOTAGE</p>
+        <div class="stat-item">
+            <span class="stat-number">05</span>
+            <p class="stat-label">AMENAZAS NIVEL OMEGA</p>
         </div>
-        <div class="video-badge" aria-hidden="true">
-          <span class="material-symbols-outlined animate-pulse color-primary-container">movie</span>
-          <span class="video-badge-text">LEVEL 7 ACCESS</span>
+    </section>
+
+    <!-- Base de Datos de Agentes (8 tarjetas) -->
+    <section id="agentes" class="agents-section p-12">
+        <div class="section-header mb-12">
+            <h2 class="section-title">BASE DE DATOS</h2>
+            <p class="section-subtitle uppercase tracking-widest text-xs opacity-50">S.H.I.E.L.D. ACTIVE FILES // 2024</p>
         </div>
-      </div>
 
-      <!-- Contenedor del reproductor -->
-      <div class="video-wrapper" role="region" aria-label="Reproductor de vídeo: Iron Man 4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="agent-grid">
+            <!-- Tarjeta 1: Iron Man -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=ironman'">
+                <div class="agent-image-wrapper">
+                    <img src="img/ironman.png" alt="Iron Man" class="agent-image">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">01</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">AVENGER // GENIUS</p>
+                        <h3 class="agent-name">IRON MAN</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Genio, multimillonario, playboy, filántropo. El cerebro tecnológico de los Vengadores.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: NY, USA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.85 M</div>
+                        <div class="data-item">PESO: 102 KG</div>
+                    </div>
+                    <div class="agent-stat-container">
+                        <div class="stat-header">
+                            <span>INTELIGENCIA</span>
+                            <span class="text-secondary">100%</span>
+                        </div>
+                        <div class="stat-bar-mini">
+                            <div class="stat-bar-mini-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn-outline-primary">VER EXPEDIENTE</button>
+                </div>
+            </article>
+            
+            <!-- Tarjeta 2: Cap. America -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=capamerica'">
+                <div class="agent-image-wrapper">
+                    <img src="img/cap_america.png" alt="Capitán América" class="agent-image">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">02</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">VETERAN // SOLDIER</p>
+                        <h3 class="agent-name">CAP. AMERICA</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">El primer vengador. Símbolo de justicia y portador del suero del súper soldado.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: NY, USA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.88 M</div>
+                        <div class="data-item">PESO: 109 KG</div>
+                    </div>
+                    <div class="agent-stat-container">
+                        <div class="stat-header">
+                            <span>LIDERAZGO</span>
+                            <span class="text-secondary">100%</span>
+                        </div>
+                        <div class="stat-bar-mini">
+                            <div class="stat-bar-mini-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn-outline-primary">VER EXPEDIENTE</button>
+                </div>
+            </article>
 
-        <!-- Decoración HUD esquinas -->
-        <div class="hud-corner hud-tl" aria-hidden="true"></div>
-        <div class="hud-corner hud-tr" aria-hidden="true"></div>
-        <div class="hud-corner hud-bl" aria-hidden="true"></div>
-        <div class="hud-corner hud-br" aria-hidden="true"></div>
+            <!-- Tarjeta 3: Thor -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=thor'">
+                <div class="agent-image-wrapper">
+                    <img src="img/thor.png" alt="Thor" class="agent-image">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">03</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">GOD // ASGARDIAN</p>
+                        <h3 class="agent-name">THOR</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Dios del Trueno y Rey de Asgard. Poseedor del martillo místico Mjolnir.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: ASGARD</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.98 M</div>
+                        <div class="data-item">PESO: 290 KG</div>
+                    </div>
+                    <div class="agent-stat-container">
+                        <div class="stat-header">
+                            <span>FUERZA</span>
+                            <span class="text-secondary">100%</span>
+                        </div>
+                        <div class="stat-bar-mini">
+                            <div class="stat-bar-mini-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn-outline-primary">VER EXPEDIENTE</button>
+                </div>
+            </article>
 
-        <!-- Línea de escaneo sobre el video -->
-        <div class="video-scanline" aria-hidden="true"></div>
+            <!-- Tarjeta 4: Hulk -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=hulk'">
+                <div class="agent-image-wrapper">
+                    <img src="img/hulk.png" alt="Hulk" class="agent-image">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">04</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">MONSTER // SCIENTIST</p>
+                        <h3 class="agent-name">HULK</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Tras una exposición masiva a radiación gamma, el Dr. Banner se transforma en Hulk.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: OHIO, USA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 2.44 M</div>
+                        <div class="data-item">PESO: 635 KG</div>
+                    </div>
+                    <div class="agent-stat-container">
+                        <div class="stat-header">
+                            <span>PODER</span>
+                            <span class="text-secondary">100%</span>
+                        </div>
+                        <div class="stat-bar-mini">
+                            <div class="stat-bar-mini-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn-outline-primary">VER EXPEDIENTE</button>
+                </div>
+            </article>
 
-        <!-- Video HTML5 nativo -->
-        <video
-          id="marvel-video"
-          class="video-player"
-          controls
-          preload="metadata"
-          aria-label="Tráiler de Iron Man 4 — Archivo clasificado S.H.I.E.L.D."
-        >
-          <source src="videos/trailer.mp4" type="video/mp4">
-          <source src="videos/trailer.webm" type="video/webm">
-          <p class="video-fallback-msg">
-            Tu navegador no soporta la reproducción de vídeo HTML5.
-            <a href="videos/trailer.mp4" class="color-primary-container underline">Descargar vídeo</a>.
-          </p>
-        </video>
+            <!-- Tarjeta 5: Black Widow -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=blackwidow'">
+                <div class="agent-image-wrapper">
+                    <img src="img/widow.png" alt="Black Widow" class="agent-image">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">05</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">SPY // ASSASSIN</p>
+                        <h3 class="agent-name">BLACK WIDOW</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Experta en espionaje y combate cuerpo a cuerpo. Ex-agente de la KGB.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: RUSIA</div>
+                        <div class="data-item">ESTADO: ACTIVA</div>
+                        <div class="data-item">ALTURA: 1.70 M</div>
+                        <div class="data-item">PESO: 59 KG</div>
+                    </div>
+                    <div class="agent-stat-container">
+                        <div class="stat-header">
+                            <span>SIGILO</span>
+                            <span class="text-secondary">98%</span>
+                        </div>
+                        <div class="stat-bar-mini">
+                            <div class="stat-bar-mini-fill" style="width: 98%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn-outline-primary">VER EXPEDIENTE</button>
+                </div>
+            </article>
 
-        <!-- Overlay decorativo antes de reproducir -->
-        <div class="video-overlay-placeholder" id="video-placeholder" aria-hidden="true">
-          <div class="video-play-icon">
-            <span class="material-symbols-outlined icon-fill">play_circle</span>
-          </div>
-          <p class="video-overlay-title">IRON MAN IV</p>
-          <p class="video-overlay-subtitle">TRÁILER OFICIAL</p>
+            <!-- Tarjeta 6: Hawkeye -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=hawkeye'">
+                <div class="agent-image-wrapper">
+                    <img src="img/hawkeye.png" alt="Hawkeye" class="agent-image">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">06</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">ARCHER // AGENT</p>
+                        <h3 class="agent-name">HAWKEYE</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Maestro tirador con una precisión del 100%. Experto en armas tácticas.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: IOWA, USA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.90 M</div>
+                        <div class="data-item">PESO: 104 KG</div>
+                    </div>
+                    <div class="agent-stat-container">
+                        <div class="stat-header">
+                            <span>PRECISIÓN</span>
+                            <span class="text-secondary">95%</span>
+                        </div>
+                        <div class="stat-bar-mini">
+                            <div class="stat-bar-mini-fill" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn-outline-primary">VER EXPEDIENTE</button>
+                </div>
+            </article>
+
+            <!-- Tarjeta 7: Black Panther -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=blackpanther'">
+                <div class="agent-image-wrapper">
+                    <img src="img/black_panter.png" alt="Black Panther" class="agent-image">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">07</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">KING // WAKANDA</p>
+                        <h3 class="agent-name">BLACK PANTHER</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Rey de Wakanda. Combina tecnología de Vibranium con habilidades ancestrales.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: WAKANDA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.83 M</div>
+                        <div class="data-item">PESO: 91 KG</div>
+                    </div>
+                    <div class="agent-stat-container">
+                        <div class="stat-header">
+                            <span>TECNOLOGÍA</span>
+                            <span class="text-secondary">95%</span>
+                        </div>
+                        <div class="stat-bar-mini">
+                            <div class="stat-bar-mini-fill" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn-outline-primary">VER EXPEDIENTE</button>
+                </div>
+            </article>
+
+            <!-- Tarjeta 8: Scarlet Witch -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=scarletwitch'">
+                <div class="agent-image-wrapper">
+                    <img src="img/escarlata.png" alt="Scarlet Witch" class="agent-image">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">08</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">MAGE // CHAOS</p>
+                        <h3 class="agent-name">SCARLET WITCH</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Poseedora de la Magia del Caos. Capaz de alterar la realidad a su voluntad.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: SOKOVIA</div>
+                        <div class="data-item">ESTADO: ACTIVA</div>
+                        <div class="data-item">ALTURA: 1.70 M</div>
+                        <div class="data-item">PESO: 59 KG</div>
+                    </div>
+                    <div class="agent-stat-container">
+                        <div class="stat-header">
+                            <span>PODER</span>
+                            <span class="text-secondary">100%</span>
+                        </div>
+                        <div class="stat-bar-mini">
+                            <div class="stat-bar-mini-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn-outline-primary">VER EXPEDIENTE</button>
+                </div>
+            </article>
         </div>
-      </div>
+    </section>
 
-      <!-- Meta info bajo el video -->
-      <div class="video-meta-grid" aria-hidden="true">
-        <div class="video-info-boxes">
-          <div class="info-box">
-            <span class="info-box-label">CLASIFICACIÓN</span>
-            <span class="info-box-value color-primary-container">NIVEL 7</span>
-          </div>
-          <div class="info-box">
-            <span class="info-box-label">FORMATO</span>
-            <span class="info-box-value color-dim">MP4 / H.264</span>
-          </div>
-          <div class="info-box">
-            <span class="info-box-label">ESTADO</span>
-            <span class="info-box-value color-secondary">ARCHIVADO</span>
-          </div>
+    <!-- Sección Multimedia (Video) -->
+    <section id="video" class="video-section p-12 bg-black/30">
+        <h2 class="text-4xl mb-8">MATERIAL DE ARCHIVO</h2>
+        <div class="max-w-4xl mx-auto">
+            <video controls poster="images/video-poster.jpg">
+                <source src="videos/trailer.mp4" type="video/mp4"/>
+                Tu navegador no soporta el elemento de video.
+            </video>
         </div>
-        <div class="video-meta-status">
-          <span class="material-symbols-outlined color-primary-container text-sm">encrypted</span>
-          <span class="info-box-label">CONEXIÓN CIFRADA</span>
-        </div>
-      </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- Audio del Sistema -->
+    <audio id="bg-music" loop>
+        <source src="audio/sonido.mp3" type="audio/mpeg"/>
+    </audio>
 
-  <!-- Footer -->
-  <footer id="contact" class="main-footer">
-    <div class="logo">MARVEL</div>
-    <nav aria-label="Links del pie de página" class="footer-nav">
-      <a class="footer-link" href="#">PROTOCOLS</a>
-      <a class="footer-link" href="#">TERMINAL HELP</a>
-      <a class="footer-link" href="#">LEGAL</a>
-    </nav>
-    <p class="footer-copy">© 2024 S.H.I.E.L.D. DATABASE // ACCESS RESTRICTED</p>
-  </footer>
+    <!-- Pie de Página -->
+    <footer class="terminal-footer p-12 border-t border-white/5 text-center">
+        <h3 class="text-xl text-primary mb-4 italic">S.H.I.E.L.D.</h3>
+        <p class="text-[10px] opacity-40 uppercase tracking-widest">
+            © 2024 Strategic Homeland Intervention, Enforcement and Logistics Division.
+        </p>
+    </footer>
 
 </main>
 
-<!-- Floating HUD -->
-<div class="floating-hud" aria-hidden="true">
-  <div class="hud-item primary">
-    <span class="material-symbols-outlined hud-blink icon-fill">sensors</span>
-    <span class="hud-label">SCANNING THREATS...</span>
-  </div>
-  <div class="hud-item secondary">
-    <span class="material-symbols-outlined">shield</span>
-    <span class="hud-label">SYSTEM SECURE</span>
-  </div>
-</div>
+<!-- Scripts de Funcionalidad -->
+<script src="js/main.js"></script>
 
-<script type="module" src="js/main.js"></script>
 </body>
 </html>

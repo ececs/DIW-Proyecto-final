@@ -3,114 +3,86 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>S.H.I.E.L.D. TERMINAL - PERFIL DE AGENTE</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+    <title>S.H.I.E.L.D. — PERFIL DE AGENTE</title>
+    
+    <!-- Enlaces a hojas de estilo externas -->
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/animations.css"/>
     <link rel="stylesheet" type="text/css" href="css/enhancements.css"/>
+    
+    <!-- Iconos de Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
 </head>
-<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-white">
+<body class="profile-page">
 
-<!-- TOP NAVIGATION SHELL -->
-<nav class="bg-[#131317] text-[#e8001c] font-headline tracking-widest uppercase text-sm font-bold flex justify-between items-center w-full px-6 h-16 z-50 fixed top-0 shadow-[0_4px_20px_rgba(232,0,28,0.1)]">
-    <div class="text-2xl font-black tracking-tighter text-[#e8001c] italic">S.H.I.E.L.D. TERMINAL</div>
-    <div class="hidden md:flex space-x-8">
-        <a class="text-[#e5e1e7] opacity-70 hover:opacity-100 transition-opacity" href="index.html">DB_HOME</a>
-        <a class="text-[#e8001c] border-b-2 border-[#e8001c] pb-1" href="#">MISSION_LOG</a>
-        <a class="text-[#e5e1e7] opacity-70 hover:opacity-100 transition-opacity" href="#">LOGISTICS</a>
-    </div>
-    <div class="flex items-center gap-4">
-        <span class="material-symbols-outlined hover:text-[#ffb4ac] transition-colors cursor-pointer">notifications_active</span>
-        <div class="w-8 h-8 bg-[#2a292e] overflow-hidden border border-[#e8001c]/30">
-            <img alt="Agent Avatar" class="w-full h-full object-cover" src="img/ironman.png"/>
+<!-- Capas de efectos CRT -->
+<div class="scanline-overlay"></div>
+
+<!-- Navegación Superior -->
+<nav class="fixed-nav">
+    <div class="nav-container">
+        <div class="nav-logo">S.H.I.E.L.D. TERMINAL</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">BASE_DE_DATOS</a>
+            <a href="#" class="nav-link active">EXPEDIENTE</a>
         </div>
+        <button onclick="window.location.href='index.html'" class="btn-access">
+            SALIR
+        </button>
     </div>
 </nav>
 
-<!-- MAIN CONTENT AREA -->
-<main class="pt-16 min-h-screen flex flex-col">
-    <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden relative">
+<main class="main-content-profile">
+    <div class="profile-grid">
         
-        <!-- LEFT SECTION: HERO IMAGE & HUD -->
-        <section class="lg:col-span-5 h-[50vh] lg:h-full relative overflow-hidden bg-[#0e0e12]">
-            <div class="absolute inset-0 z-0">
-                <img id="hero-img" alt="Hero Portrait" class="w-full h-full object-cover opacity-60 mix-blend-screen" src="img/ironman.png"/>
-                <div class="absolute inset-0 bg-gradient-to-t from-[#131317] via-transparent to-transparent"></div>
-                <div class="scanline-overlay absolute inset-0"></div>
-            </div>
+        <!-- SECCIÓN IZQUIERDA: IMAGEN Y HUD -->
+        <section class="profile-hero">
+            <img id="hero-img" src="" alt="Agente" class="hero-image">
+            <div class="hero-overlay"></div>
             
-            <!-- HUD Overlays -->
-            <div class="absolute inset-0 p-8 flex flex-col justify-between z-10">
-                <div class="flex justify-between items-start">
-                    <div class="bg-[#e8001c]/20 border border-[#e8001c] p-2">
-                        <div class="flex items-center gap-2 text-[#e8001c] font-bold text-[10px] tracking-[0.2em]">
-                            <span class="w-2 h-2 bg-[#e8001c] animate-pulse"></span>
-                            IDENTITY VERIFIED: 100%
-                        </div>
-                        <div class="text-[8px] opacity-60 mt-1 uppercase">Stark, Anthony Edward // Avengers-001</div>
-                    </div>
-                    <div class="text-right text-[#ffdb3c] font-headline text-[10px]">
-                        <div>LAT: 40.7128° N</div>
-                        <div>LNG: 74.0060° W</div>
+            <div class="hud-overlay">
+                <div class="hud-top">
+                    <div class="hud-badge">
+                        <span class="hud-dot"></span>
+                        IDENTIDAD VERIFICADA: 100%
                     </div>
                 </div>
-                               <div class="hero-glitch-border pl-6 pb-12">
-                    <div id="subject-label" class="text-[#fff9ef] uppercase text-xs font-bold tracking-[0.3em] mb-2">Subject: Iron Man</div>
-                    <h1 id="agent-name-display" class="font-headline text-6xl lg:text-8xl font-black text-[#e5e1e7] leading-none tracking-tighter uppercase italic">
-                        TONY<br/><span class="text-[#e8001c]">STARK</span>
-                    </h1>
-                    <div class="flex gap-4 mt-6">
-                        <div id="file-id" class="border border-white/20 px-3 py-1 text-[10px] uppercase font-bold tracking-widest bg-[#2a292e]">S.H.I.E.L.D. FILE // 882-B</div>
-                        <div class="border border-[#e8001c] px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-[#e8001c] bg-[#e8001c]/10">CLEARANCE: LEVEL 7</div>
+                
+                <div class="hud-bottom">
+                    <h3 id="subject-label" class="hud-label">SUBJECT: AGENT</h3>
+                    <h1 id="agent-name-display" class="hero-name">NOMBRE<br/><span class="text-primary">APELLIDO</span></h1>
+                    <div class="hud-files">
+                        <span id="file-id" class="file-badge">FILE // 000-X</span>
+                        <span class="clearance-badge">NIVEL 7</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- RIGHT SECTION: TECHNICAL DATA PANEL -->
-        <section class="lg:col-span-7 p-6 lg:p-12 overflow-y-auto bg-[#131317] crt-glow">
-            <div class="max-w-3xl mx-auto space-y-16">
+        <!-- SECCIÓN DERECHA: DATOS TÉCNICOS -->
+        <section class="profile-data p-12">
+            <div class="data-container">
                 
-                <!-- POWER GRID SECTION -->
-                <div>
-                    <div class="flex items-center gap-4 mb-8">
-                        <span class="text-[#ffdb3c] material-symbols-outlined text-3xl">analytics</span>
-                        <h2 class="font-headline text-2xl font-bold tracking-widest uppercase">POWER GRID // ANALYTICS</h2>
-                    </div>
-                    
-                    <div id="stats-container" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-                        <!-- Stats will be injected here -->
+                <!-- Cuadrícula de Poder -->
+                <div class="power-grid-section">
+                    <h2 class="section-title-small">POWER GRID // ANALÍTICAS</h2>
+                    <div id="stats-container" class="stats-bars">
+                        <!-- Las barras de poder se inyectan por JS -->
                     </div>
                 </div>
 
-                <!-- BIOGRAFÍA CLASIFICADA -->
-                <div class="glass-panel p-8 relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-[#e8001c]"></div>
-                    <h3 class="font-headline text-lg font-bold tracking-widest text-[#e8001c] mb-6 uppercase">BIOGRAFÍA CLASIFICADA</h3>
-                    <p id="agent-bio" class="font-body text-sm leading-relaxed opacity-80">
-                        <!-- Bio will be injected here -->
+                <!-- Biografía Clasificada -->
+                <article class="bio-article">
+                    <h3 class="bio-title">BIOGRAFÍA CLASIFICADA</h3>
+                    <p id="agent-bio" class="bio-text">
+                        Cargando datos del servidor central...
                     </p>
-                </div>
+                </article>
 
-                <!-- REGISTRO DE MISIONES -->
-                <div class="space-y-4">
-                    <div class="flex justify-between items-end border-b border-white/10 pb-2">
-                        <h3 class="font-headline text-lg font-bold tracking-widest uppercase">REGISTRO DE MISIONES</h3>
-                        <span class="text-[10px] opacity-50 uppercase">Live Feed // Active</span>
-                    </div>
-                    <div id="mission-log" class="h-48 overflow-y-auto bg-black/40 p-4 font-mono text-[11px] text-[#e8001c]/80 leading-tight space-y-2">
-                        <!-- Mission log will be injected here -->
-                    </div>
-                </div>
-
-                <!-- CTA BUTTON -->
-                <div class="pt-8 pb-16 lg:pb-0">
-                    <a href="index.html" class="group relative w-full overflow-hidden bg-[#e8001c] text-white py-5 flex items-center justify-center gap-4 transition-all hover:scale-[1.02] active:scale-95 no-underline">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
-                        <span class="material-symbols-outlined">arrow_back</span>
-                        <span class="font-headline font-black tracking-[0.2em] uppercase text-sm">VOLVER A LA BASE DE DATOS</span>
+                <!-- Botón de retorno -->
+                <div class="mt-12">
+                    <a href="index.html" class="btn-primary-wide">
+                        VOLVER A LA BASE DE DATOS
                     </a>
                 </div>
             </div>
@@ -119,6 +91,7 @@
 </main>
 
 <script>
+    // Datos de los 8 agentes sincronizados con index.html
     const agentsData = {
         'ironman': {
             subject: 'Iron Man',
@@ -126,29 +99,17 @@
             lastName: 'STARK',
             id: '882-B',
             img: 'img/ironman.png',
-            bio: 'Genio, multimillonario, playboy y filántropo. Tras ser capturado en Afganistán, Anthony Stark diseñó una armadura de alta tecnología para escapar de sus captores. Desde entonces, ha refinado su tecnología Mark para convertirse en el protector global conocido como Iron Man.',
-            stats: [6, 6, 5, 6, 6, 4],
-            missions: ['OP_ULTRON: Critical failure in Sokovia sector.', 'IRON_MAN: Deployment at coordinates 48.2082° N.', 'MISSION_STATUS: Target neutralized.']
+            bio: 'Genio, multimillonario, playboy y filántropo. Tony Stark diseñó una armadura de alta tecnología tras ser capturado, convirtiéndose en el pilar tecnológico de los Vengadores.',
+            stats: [6, 6, 5, 6, 6, 4]
         },
-        'cap_america': {
+        'capamerica': {
             subject: 'Capitán América',
             firstName: 'STEVE',
             lastName: 'ROGERS',
             id: '107-C',
             img: 'img/cap_america.png',
-            bio: 'El Primer Vengador. Transformado por el suero del Súper Soldado, Steve Rogers luchó en la Segunda Guerra Mundial antes de quedar congelado. Hoy, lidera a los Vengadores con un código moral inquebrantable.',
-            stats: [3, 4, 3, 4, 1, 7],
-            missions: ['OP_WINTER_SOLDIER: Security breach at Triskelion.', 'CAP_AMERICA: Engaging rogue assets.', 'MISSION_STATUS: Objective secured.']
-        },
-        'widow': {
-            subject: 'Black Widow',
-            firstName: 'NATASHA',
-            lastName: 'ROMANOFF',
-            id: '422-R',
-            img: 'img/widow.png',
-            bio: 'Antigua espía de la KGB y asesina de élite, Natasha Romanoff desertó a S.H.I.E.L.D. para limpiar las "manchas rojas" de su historial. Es la maestra indiscutible del sigilo y la infiltración.',
-            stats: [4, 3, 2, 3, 1, 7],
-            missions: ['OP_BUDAPEST: Classified retrieval operation.', 'WIDOW: Silent entry confirmed.', 'MISSION_STATUS: Intel recovered.']
+            bio: 'El Primer Vengador. Transformado por el suero del Súper Soldado, Steve Rogers lidera con un valor y una moral inquebrantables.',
+            stats: [3, 4, 3, 4, 1, 7]
         },
         'thor': {
             subject: 'Thor Odinson',
@@ -156,19 +117,26 @@
             lastName: 'ODINSON',
             id: '004-A',
             img: 'img/thor.png',
-            bio: 'Hijo de Odín y Dios del Trueno de Asgard. Armado con el Mjolnir, Thor protege tanto a la Tierra como a los Nueve Reinos de amenazas cósmicas, aprendiendo el valor de la humildad.',
-            stats: [2, 7, 6, 7, 6, 4],
-            missions: ['OP_JOTUNHEIM: Frost Giant incursions detected.', 'THOR: Bifrost bridge engaged.', 'MISSION_STATUS: Realms stabilized.']
+            bio: 'Dios del Trueno y heredero de Asgard. Armado con el Mjolnir, protege tanto la Tierra como los Nueve Reinos de amenazas cósmicas.',
+            stats: [2, 7, 6, 7, 6, 4]
         },
         'hulk': {
-            subject: 'Hulk',
+            subject: 'Bruce Banner',
             firstName: 'BRUCE',
             lastName: 'BANNER',
             id: '505-G',
             img: 'img/hulk.png',
-            bio: 'El Dr. Bruce Banner fue expuesto a niveles letales de radiación gamma, lo que lo convirtió en un monstruo de furia incontrolable. Hulk es la fuerza física más destructiva conocida por S.H.I.E.L.D.',
-            stats: [6, 7, 3, 7, 1, 4],
-            missions: ['OP_WORLD_BREAKER: Containment breach in Nevada.', 'HULK: Smashing initiated.', 'MISSION_STATUS: Threat suppressed.']
+            bio: 'Tras una exposición masiva a radiación gamma, el Dr. Banner se transforma en Hulk, la fuerza física más destructiva de S.H.I.E.L.D.',
+            stats: [6, 7, 3, 7, 1, 4]
+        },
+        'blackwidow': {
+            subject: 'Black Widow',
+            firstName: 'NATASHA',
+            lastName: 'ROMANOFF',
+            id: '422-R',
+            img: 'img/widow.png',
+            bio: 'Experta en espionaje y combate cuerpo a cuerpo. Natasha es una pieza clave para misiones de infiltración y sigilo táctico.',
+            stats: [4, 3, 2, 3, 1, 7]
         },
         'hawkeye': {
             subject: 'Hawkeye',
@@ -176,78 +144,63 @@
             lastName: 'BARTON',
             id: '606-H',
             img: 'img/hawkeye.png',
-            bio: 'Clint Barton es el mejor tirador del mundo. Sin superpoderes, su maestría con el arco y sus flechas trucadas lo convierten en un activo indispensable para operaciones tácticas de precisión.',
-            stats: [3, 3, 2, 2, 1, 6],
-            missions: ['OP_TARGET: Long-range suppression required.', 'HAWKEYE: 100% accuracy confirmed.', 'MISSION_STATUS: Target neutralized.']
+            bio: 'Maestro tirador con una precisión del 100%. Sus flechas trucadas le permiten enfrentarse a cualquier tipo de amenaza.',
+            stats: [3, 3, 2, 2, 1, 6]
         },
-        'escarlata': {
-            subject: 'Scarlet Witch',
-            firstName: 'WANDA',
-            lastName: 'MAXIMOFF',
-            id: '707-W',
-            img: 'img/escarlata.png',
-            bio: 'Capaz de alterar la realidad y manipular la Magia del Caos, Wanda Maximoff es una de las entidades más poderosas. Su control emocional es el factor crítico para la seguridad global.',
-            stats: [3, 2, 2, 2, 7, 3],
-            missions: ['OP_CHAOS: Reality fluctuations detected.', 'WITCH: Stabilizing temporal rift.', 'MISSION_STATUS: Reality restored.']
-        },
-        'black_panter': {
+        'blackpanther': {
             subject: 'Black Panther',
             firstName: "T'CHALLA",
             lastName: 'KING',
             id: '909-P',
             img: 'img/black_panter.png',
-            bio: 'Rey de Wakanda y portador del manto de Black Panther. Equipado con tecnología de Vibranium avanzada, T\'Challa combina sabiduría ancestral con el poderío tecnológico de su nación.',
-            stats: [5, 4, 4, 4, 1, 7],
-            missions: ['OP_VIBRANIUM: Smuggling ring detected.', 'PANTHER: Tracking assets in Busan.', 'MISSION_STATUS: Wakandan tech recovered.']
+            bio: 'Rey de Wakanda. Combina tecnología avanzada de Vibranium con habilidades físicas aumentadas y sabiduría ancestral.',
+            stats: [5, 4, 4, 4, 1, 7]
+        },
+        'scarletwitch': {
+            subject: 'Scarlet Witch',
+            firstName: 'WANDA',
+            lastName: 'MAXIMOFF',
+            id: '707-W',
+            img: 'img/escarlata.png',
+            bio: 'Poseedora de la Magia del Caos. Su capacidad para alterar la realidad la convierte en uno de los seres más poderosos de la Tierra.',
+            stats: [3, 2, 2, 2, 7, 3]
         }
     };
 
-    const statNames = ['Intelligence', 'Strength', 'Speed', 'Durability', 'Energy Projection', 'Combat Skills'];
+    const statNames = ['Inteligencia', 'Fuerza', 'Velocidad', 'Resistencia', 'Energía', 'Combate'];
 
-    function updateProfile() {
-        const params = new URLSearchParams(window.location.search);
-        const agentKey = params.get('agent') || 'ironman';
-        const data = agentsData[agentKey] || agentsData['ironman'];
+    function initProfile() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const agentId = urlParams.get('agent') || 'ironman';
+        const data = agentsData[agentId] || agentsData['ironman'];
 
-        // Update UI
+        // Cargar Datos en UI
         document.getElementById('hero-img').src = data.img;
-        document.getElementById('subject-label').textContent = `Subject: ${data.subject}`;
-        document.getElementById('agent-name-display').innerHTML = `${data.firstName}<br/><span class="text-[#e8001c]">${data.lastName}</span>`;
-        document.getElementById('file-id').textContent = `S.H.I.E.L.D. FILE // ${data.id}`;
-        document.getElementById('agent-bio').innerHTML = data.bio;
+        document.getElementById('subject-label').textContent = `SUBJECT: ${data.subject}`;
+        document.getElementById('agent-name-display').innerHTML = `${data.firstName}<br/><span style="color:#e8001c">${data.lastName}</span>`;
+        document.getElementById('file-id').textContent = `FILE // ${data.id}`;
+        document.getElementById('agent-bio').textContent = data.bio;
 
-        // Update Stats
-        const statsContainer = document.getElementById('stats-container');
-        statsContainer.innerHTML = '';
+        // Cargar Estadísticas
+        const container = document.getElementById('stats-container');
         data.stats.forEach((val, i) => {
-            const perc = (val / 7 * 100).toFixed(1);
-            statsContainer.innerHTML += `
-                <div class="space-y-2">
-                    <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest opacity-70">
+            const percentage = (val / 7) * 100;
+            container.innerHTML += `
+                <div class="stat-row">
+                    <div class="stat-info">
                         <span>${statNames[i]}</span>
-                        <span class="text-[#ffdb3c]">${val} / 7</span>
+                        <span class="stat-value">${val} / 7</span>
                     </div>
-                    <div class="h-1 bg-[#353439] w-full relative">
-                        <div class="stat-bar-fill h-full absolute left-0" style="width: ${perc}%"></div>
+                    <div class="stat-bar-bg">
+                        <div class="stat-bar-fill" style="width: ${percentage}%"></div>
                     </div>
                 </div>
             `;
         });
-
-        // Update Missions
-        const missionLog = document.getElementById('mission-log');
-        missionLog.innerHTML = '';
-        data.missions.forEach((m, i) => {
-            const time = (14 + i * 3) + ':' + (i < 3 ? '0' + (2 + i * 3) : (2 + i * 3));
-            missionLog.innerHTML += `
-                <div class="flex gap-2"><span class="text-[#ffdb3c]">[${time}]</span> ${m}</div>
-            `;
-        });
     }
 
-    window.onload = updateProfile;
-</script></div>
-</main>
+    window.onload = initProfile;
+</script>
 
 </body>
 </html>
