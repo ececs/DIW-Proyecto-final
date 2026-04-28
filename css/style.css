@@ -1803,3 +1803,95 @@ input:focus, textarea:focus {
     .agent-card { flex: 0 0 100%; }
 }
 
+
+/* Barras de Capacidad en Tarjetas */
+.agent-capabilities {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(232, 0, 28, 0.2);
+}
+
+.capability-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    color: var(--primary);
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.capability-item {
+    margin-bottom: 0.8rem;
+}
+
+.capability-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    margin-bottom: 0.3rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.capability-bar-bg {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.capability-bar-fill {
+    height: 100%;
+    background: #ffaa00;
+    box-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Etiquetas de Colores (Badges) */
+.agent-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.badge-tag {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.badge-red { background: rgba(232, 0, 28, 0.3); color: #ff8a8a; border-color: #e8001c; }
+.badge-blue { background: rgba(0, 102, 204, 0.3); color: #8ab4ff; border-color: #0066cc; }
+.badge-green { background: rgba(0, 153, 51, 0.3); color: #8aff9d; border-color: #009933; }
+.badge-grey { background: rgba(100, 100, 100, 0.3); color: #cccccc; border-color: #666666; }
+.badge-gold { background: rgba(212, 175, 55, 0.3); color: #fff1c1; border-color: #d4af37; }
+
+.btn-view-profile-card {
+    margin-top: 1.5rem;
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: bold;
+}
+
+.btn-view-profile-card:hover {
+    background: rgba(232, 0, 28, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(232, 0, 28, 0.3);
+}
