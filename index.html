@@ -441,7 +441,7 @@
     </button>
 
     <!-- Audio del Sistema -->
-    <audio id="bg-music" loop>
+    <audio id="bg-music" loop autoplay>
         <source src="audio/sonido.mp3" type="audio/mpeg"/>
     </audio>
 
@@ -520,6 +520,21 @@
     backToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    // Intentar reproducir audio automáticamente
+    const playAudio = () => {
+        audio.play().catch(() => {
+            // Si el navegador bloquea el autoplay, esperamos a la primera interacción
+            document.addEventListener('click', () => {
+                audio.play();
+            }, { once: true });
+            document.addEventListener('scroll', () => {
+                audio.play();
+            }, { once: true });
+        });
+    };
+    
+    playAudio();
 
     // Sincronización Audio-Video
     if (video) {

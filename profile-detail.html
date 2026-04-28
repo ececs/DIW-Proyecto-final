@@ -90,6 +90,11 @@
     </div>
 </main>
 
+<!-- Audio del Sistema -->
+<audio id="bg-music" loop autoplay>
+    <source src="audio/sonido.mp3" type="audio/mpeg"/>
+</audio>
+
 <script>
     // Datos de los 8 agentes sincronizados con index.html
     const agentsData = {
@@ -209,7 +214,17 @@
     }
 
     // Ejecución diferida para asegurar la carga completa del DOM.
-    window.onload = initProfile;
+    window.onload = () => {
+        initProfile();
+        
+        // Autoplay Fallback
+        const audio = document.getElementById('bg-music');
+        if (audio) {
+            audio.play().catch(() => {
+                document.addEventListener('click', () => audio.play(), { once: true });
+            });
+        }
+    };
 </script>
 
 </body>
