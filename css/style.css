@@ -7,17 +7,6 @@
   Autor: Eudaldo Alvaro Cal Saul
 
   Este archivo CSS externo centraliza TODA la maquetación del proyecto.
-  Está organizado en 14 secciones comentadas que cubren los criterios de la
-  rúbrica académica:
-
-    ✔ Selectores de tipo: se aplican estilos a más de 18 etiquetas HTML
-      (html, body, h1, h2, h3, h4, p, nav, ul, li, aside, main, section,
-       article, footer, a, button, video, audio, img, form, label, input,
-       textarea).
-    ✔ CSS externo vinculado con <link rel="stylesheet" type="text/css">.
-    ✔ Box model, tipografía, color, display, position, flexbox y grid.
-    ✔ Multimedia: estilos para <video>, <audio> e <img>.
-    ✔ Clases reutilizables (.btn-primary, .agent-card, .badge-tag, etc.).
 
   =============================================================================
 */
