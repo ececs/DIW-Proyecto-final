@@ -496,45 +496,38 @@
 
     // Función para intentar reproducir audio
     const playAudio = () => {
-        audio.play().catch(e => console.log("Autoplay bloqueado por el navegador"));
+        if (!audio) return;
+        audio.play().catch(() => {
+            // Si el navegador bloquea el autoplay, esperamos a la primera interacción
+            const startAudio = () => {
+                if (audio.paused && (!video || video.paused)) {
+                    audio.play();
+                }
+            };
+            document.addEventListener('click', startAudio, { once: true });
+            document.addEventListener('scroll', startAudio, { once: true });
+            document.addEventListener('touchstart', startAudio, { once: true });
+        });
     };
 
-    // Autoplay tras primera interacción del usuario
-    document.addEventListener('click', () => {
-        if (audio.paused && (!video || video.paused)) {
-            playAudio();
-        }
-    }, { once: true });
+    // Intentar reproducir audio al cargar
+    playAudio();
 
     // Lógica Botón Volver Arriba
     const backToTopBtn = document.getElementById('back-to-top');
-
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 400) {
-            backToTopBtn.classList.add('show');
-        } else {
-            backToTopBtn.classList.remove('show');
-        }
-    });
-
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Intentar reproducir audio automáticamente
-    const playAudio = () => {
-        audio.play().catch(() => {
-            // Si el navegador bloquea el autoplay, esperamos a la primera interacción
-            document.addEventListener('click', () => {
-                audio.play();
-            }, { once: true });
-            document.addEventListener('scroll', () => {
-                audio.play();
-            }, { once: true });
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 400) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
         });
-    };
-    
-    playAudio();
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
     // Sincronización Audio-Video
     if (video) {
