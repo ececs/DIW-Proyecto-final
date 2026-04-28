@@ -1368,7 +1368,19 @@ input:focus, textarea:focus {
 
 /* Tablet y Pantallas Medianas */
 @media (max-width: 1024px) {
-    .sidebar-terminal { display: none; }
+    .sidebar-terminal { 
+        display: flex !important;
+        transform: translateX(-100%);
+        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        z-index: 1000;
+        width: 280px;
+    }
+    
+    .sidebar-terminal.active {
+        transform: translateX(0);
+        box-shadow: 0 0 50px rgba(232, 0, 28, 0.2);
+    }
+
     .main-content { margin-left: 0; padding: 1.5rem; }
     h1 { font-size: 5rem; }
     .hero-section { padding: 4rem 1.5rem; }
@@ -1381,7 +1393,36 @@ input:focus, textarea:focus {
     .profile-data { padding: 2rem; }
     .hud-overlay { padding: 1.5rem; }
     .hero-name { font-size: 3.5rem; }
+
+    /* Mostrar botón hamburguesa */
+    .menu-hamburger {
+        display: flex !important;
+    }
 }
+
+/* Estilos del Botón Hamburguesa */
+.menu-hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+.menu-hamburger:hover {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.menu-hamburger .material-symbols-outlined {
+    font-size: 2rem;
+}
+
 
 /* Móvil - Pantallas Pequeñas */
 @media (max-width: 768px) {

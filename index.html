@@ -38,6 +38,10 @@
 <!-- Navegación Superior Fija -->
 <nav class="fixed-nav">
     <div class="nav-container">
+        <!-- Botón Hamburguesa (Solo móvil/tablet) -->
+        <button id="menu-toggle" class="menu-hamburger" aria-label="Abrir menú">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
         <a href="index.html" class="nav-logo">S.H.I.E.L.D.</a>
         <div class="nav-links">
             <a href="index.html" class="nav-link">INICIO</a>
@@ -621,6 +625,37 @@
 
     window.addEventListener('resize', updateCarousel);
     window.addEventListener('load', () => setTimeout(updateCarousel, 3000));
+
+    // --- Lógica del Menú Hamburguesa ---
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.querySelector('.sidebar-terminal');
+
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+            
+            // Cambiar icono
+            const icon = menuToggle.querySelector('.material-symbols-outlined');
+            icon.innerText = sidebar.classList.contains('active') ? 'close' : 'menu';
+        });
+
+        // Cerrar al hacer clic fuera o en un enlace
+        document.addEventListener('click', (e) => {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && e.target !== menuToggle) {
+                sidebar.classList.remove('active');
+                menuToggle.querySelector('.material-symbols-outlined').innerText = 'menu';
+            }
+        });
+
+        const sidebarLinks = document.querySelectorAll('.sidebar-item');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                menuToggle.querySelector('.material-symbols-outlined').innerText = 'menu';
+            });
+        });
+    }
 </script>
 <script src="js/main.js"></script>
 
