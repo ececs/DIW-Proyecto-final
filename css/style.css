@@ -156,6 +156,43 @@ aside {
     z-index: 90;
 }
 
+/* Control de Audio en Sidebar */
+.audio-control {
+    margin-top: auto;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mute-btn {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.mute-btn:hover {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.audio-status {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+
 main {
     display: block;
     min-height: 100vh;
@@ -1329,16 +1366,40 @@ input:focus, textarea:focus {
    12. DISEÑO RESPONSIVO (Media Queries)
    ══════════════════════════════════════════════════════════ */
 
+/* Tablet y Pantallas Medianas */
 @media (max-width: 1024px) {
     .sidebar-terminal { display: none; }
-    .main-content { margin-left: 0; }
+    .main-content { margin-left: 0; padding: 1.5rem; }
     h1 { font-size: 5rem; }
+    .hero-section { padding: 4rem 1.5rem; }
+    .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 }
 
+/* Móvil - Pantallas Pequeñas */
 @media (max-width: 768px) {
-    h1 { font-size: 3.5rem; }
+    h1 { font-size: 3rem; }
+    .section-title { font-size: 2rem; }
     .nav-links { display: none; }
-    .stats-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-grid { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1rem; }
+    .stat-number { font-size: 3.5rem; }
+    /* Las tarjetas pasan a 1 columna en móviles */
+    .agent-grid { grid-template-columns: 1fr !important; gap: 2rem; }
+    .video-section video { width: 100%; height: auto; }
+}
+
+/* Tablet y pantallas estrechas */
+@media (max-width: 1024px) and (min-width: 769px) {
+    /* Las tarjetas pasan a 2 columnas en tablets */
+    .agent-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 2rem; }
+}
+
+
+/* Móvil Pequeño */
+@media (max-width: 480px) {
+    h1 { font-size: 2.2rem; }
+    .hero-subtitle { font-size: 0.7rem; }
+    .preloader-content { width: 80%; }
+    .shield-logo-loading { width: 60px; height: 60px; }
 }
 
 /* Clases de Utilidad */

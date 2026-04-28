@@ -17,6 +17,8 @@
     
     <!-- Iconos de Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+    <!-- Icono de pestaña (Favicon) -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
 </head>
 <body>
 
@@ -73,6 +75,14 @@
             CONTACTO
         </li>
     </ul>
+    <div class="audio-control">
+        <button id="mute-toggle" class="mute-btn" title="Alternar Sonido" aria-label="Alternar Sonido de fondo">
+            <span id="mute-icon" class="material-symbols-outlined">volume_up</span>
+        </button>
+        <div class="audio-info">
+            <p class="audio-status" id="audio-status-text">Audio: Activo</p>
+        </div>
+    </div>
     <div class="sidebar-footer">
         <p class="id-label">S.H.I.E.L.D. ID</p>
         <p class="id-value">NICK_FURY_01</p>
@@ -381,7 +391,7 @@
     <section id="video" class="video-section p-12 bg-black/30">
         <h2 class="text-4xl mb-8">MATERIAL DE ARCHIVO</h2>
         <div class="max-w-4xl mx-auto">
-            <video id="promo-video" controls poster="images/video-poster.jpg" preload="metadata">
+            <video id="promo-video" controls poster="img/video-poster.png" preload="metadata">
                 <source src="videos/trailer.mp4" type="video/mp4"/>
                 Tu navegador no soporta el elemento de video.
             </video>
@@ -505,6 +515,26 @@
         video.onplay = () => audio.pause();
         video.onpause = () => audio.play();
         video.onended = () => audio.play();
+    }
+
+    // Control de Mute del Sidebar
+    const muteBtn = document.getElementById('mute-toggle');
+    const muteIcon = document.getElementById('mute-icon');
+    const audioStatusText = document.getElementById('audio-status-text');
+
+    if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+            audio.muted = !audio.muted;
+            if (audio.muted) {
+                muteIcon.innerText = 'volume_off';
+                audioStatusText.innerText = 'Audio: Silenciado';
+                muteBtn.style.background = 'rgba(255, 0, 0, 0.3)';
+            } else {
+                muteIcon.innerText = 'volume_up';
+                audioStatusText.innerText = 'Audio: Activo';
+                muteBtn.style.background = 'rgba(255, 0, 0, 0.1)';
+            }
+        });
     }
 </script>
 <script src="js/main.js"></script>
