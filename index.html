@@ -128,7 +128,12 @@
             <p class="section-subtitle uppercase tracking-widest text-xs opacity-50">S.H.I.E.L.D. ACTIVE FILES // 2024</p>
         </div>
 
-        <div class="carousel-container">
+        <div class="carousel-container" id="carousel-container">
+            <!-- Botones Laterales -->
+            <button id="prev-btn" class="carousel-btn prev" title="Anterior" aria-label="Agente anterior">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            
             <div class="agent-grid" id="agent-grid">
             <!-- Tarjeta 1: Iron Man -->
             <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=ironman'">
@@ -385,21 +390,13 @@
                     <button class="btn-outline-primary">VER EXPEDIENTE</button>
                 </div>
             </article>
-        </div>
-    </div>
+            </div>
 
-    <!-- Controles del Carrusel -->
-    <div class="carousel-controls">
-        <button id="prev-btn" class="carousel-btn" title="Anterior">
-            <span class="material-symbols-outlined">arrow_back_ios</span>
-            PREV
-        </button>
-        <button id="next-btn" class="carousel-btn" title="Siguiente">
-            NEXT
-            <span class="material-symbols-outlined">arrow_forward_ios</span>
-        </button>
-    </div>
-</section>
+            <button id="next-btn" class="carousel-btn next" title="Siguiente" aria-label="Siguiente agente">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+        </div>
+    </section>
 
     <!-- Sección Multimedia (Video) -->
     <section id="video" class="video-section p-12 bg-black/30">
@@ -551,8 +548,9 @@
         });
     }
 
-    // Lógica del Carrusel de Agentes
+    // Lógica del Carrusel de Agentes con Soporte Táctil
     const agentGrid = document.getElementById('agent-grid');
+    const carouselContainer = document.getElementById('carousel-container');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     let currentPosition = 0;
@@ -562,44 +560,55 @@
         const card = document.querySelector('.agent-card');
         if (!card) return;
         
-        // Obtener el gap dinámicamente
         const style = window.getComputedStyle(agentGrid);
         const gap = parseInt(style.columnGap) || 0;
-        
         const cardWidth = card.offsetWidth + gap;
-        const containerWidth = agentGrid.parentElement.offsetWidth;
+        const containerWidth = carouselContainer.offsetWidth;
         const visibleCards = Math.round(containerWidth / (cardWidth - gap)) || 1;
         const totalCards = document.querySelectorAll('.agent-card').length;
         const maxPosition = Math.max(0, totalCards - visibleCards);
 
-        // Limitar posición
         currentPosition = Math.max(0, Math.min(currentPosition, maxPosition));
-
-        // Aplicar transformación
         agentGrid.style.transform = `translateX(-${currentPosition * cardWidth}px)`;
 
-        // Actualizar botones
         if (prevBtn) prevBtn.disabled = currentPosition === 0;
         if (nextBtn) nextBtn.disabled = currentPosition >= maxPosition;
     };
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            currentPosition++;
-            updateCarousel();
-        });
+    if (nextBtn) nextBtn.addEventListener('click', () => { currentPosition++; updateCarousel(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { currentPosition--; updateCarousel(); });
+
+    // --- Soporte Táctil (Swipe) ---
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    if (carouselContainer) {
+        carouselContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
     }
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            currentPosition--;
-            updateCarousel();
-        });
-    }
+    const handleSwipe = () => {
+        const swipeThreshold = 50;
+        if (touchStartX - touchEndX > swipeThreshold) {
+            if (currentPosition < document.querySelectorAll('.agent-card').length - 1) {
+                currentPosition++;
+                updateCarousel();
+            }
+        } else if (touchEndX - touchStartX > swipeThreshold) {
+            if (currentPosition > 0) {
+                currentPosition--;
+                updateCarousel();
+            }
+        }
+    };
 
-    // Ajustar en resize
     window.addEventListener('resize', updateCarousel);
-    // Inicializar tras carga
     window.addEventListener('load', () => setTimeout(updateCarousel, 3000));
 </script>
 <script src="js/main.js"></script>

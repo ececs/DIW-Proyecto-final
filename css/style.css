@@ -1657,42 +1657,46 @@ input:focus, textarea:focus {
 
 .carousel-container {
     overflow: hidden;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     position: relative;
+    cursor: grab; /* Indica que se puede arrastrar */
+}
+
+.carousel-container:active {
+    cursor: grabbing;
 }
 
 .agent-grid {
-    display: flex !important; /* Cambiamos grid por flex para el carrusel */
+    display: flex !important;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     gap: 1.5rem;
+    will-change: transform;
 }
 
 .agent-card {
-    flex: 0 0 calc(25% - 1.2rem); /* 4 por fila en PC */
+    flex: 0 0 calc(25% - 1.2rem);
     min-width: 0;
+    user-select: none; /* Evita seleccionar texto al arrastrar */
 }
 
-.carousel-controls {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
+/* Botones Laterales */
 .carousel-btn {
-    background: rgba(255, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
     border: 1px solid var(--primary);
     color: var(--primary);
-    padding: 0.8rem 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    justify-content: center;
+    z-index: 10;
     transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
 }
 
 .carousel-btn:hover:not(:disabled) {
@@ -1701,23 +1705,30 @@ input:focus, textarea:focus {
     box-shadow: 0 0 20px var(--primary);
 }
 
+.carousel-btn.prev { left: -25px; }
+.carousel-btn.next { right: -25px; }
+
 .carousel-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    border-color: #444;
-    color: #444;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+    .carousel-btn { width: 40px; height: 40px; }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
 }
 
 /* Ajustes Responsivos para el Carrusel */
 @media (max-width: 1200px) {
-    .agent-card { flex: 0 0 calc(33.333% - 1.2rem); } /* 3 por fila */
+    .agent-card { flex: 0 0 calc(33.333% - 1.2rem); }
 }
 
 @media (max-width: 1024px) {
-    .agent-card { flex: 0 0 calc(50% - 1.2rem); } /* 2 por fila */
+    .agent-card { flex: 0 0 calc(50% - 1.2rem); }
 }
 
 @media (max-width: 768px) {
-    .agent-card { flex: 0 0 100%; } /* 1 por fila */
-    .agent-grid { gap: 0; }
+    .agent-card { flex: 0 0 100%; }
 }
+
