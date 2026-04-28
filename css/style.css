@@ -20,6 +20,10 @@
    1. RESET Y BASE (Uso de Selectores de Tipo)
    ══════════════════════════════════════════════════════════ */
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* Importación de tipografías premium para el aspecto técnico */
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
@@ -214,6 +218,8 @@ img {
     letter-spacing: 1px;
     color: rgba(229, 225, 231, 0.6);
     text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .sidebar-item:hover, .sidebar-item.active {
@@ -349,8 +355,6 @@ img {
     color: rgba(229, 225, 231, 0.6);
     line-height: 1.5;
     margin-bottom: 1.25rem;
-    height: 3rem; /* Altura controlada para alineación */
-    overflow: hidden;
 }
 
 .agent-data-grid {
@@ -641,7 +645,7 @@ img {
     margin-bottom: 0.5rem;
 }
 
-.form-group input {
+.form-group input, .form-group textarea {
     width: 100%;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -651,7 +655,11 @@ img {
     outline: none;
 }
 
-.form-group input:focus {
+.form-group textarea {
+    resize: none;
+}
+
+.form-group input:focus, .form-group textarea:focus {
     border-color: var(--primary);
 }
 
@@ -769,8 +777,10 @@ img {
 
 /* Grid System */
 .grid { display: grid; }
+.gap-6 { gap: 1.5rem; }
 .gap-8 { gap: 2rem; }
 .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.mb-6 { margin-bottom: 1.5rem; }
 
 @media (min-width: 768px) {
     .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }

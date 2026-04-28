@@ -27,6 +27,7 @@
             <a href="#agentes" class="nav-link">HÉROES</a>
             <a href="#video" class="nav-link">VIDEO</a>
             <a href="#" class="nav-link">ARCHIVOS</a>
+            <a href="#contacto" class="nav-link">CONTACTO</a>
         </div>
         <button onclick="window.location.href='login.html'" class="btn-access">
             ACCESO AGENTE
@@ -41,17 +42,21 @@
         <p class="sidebar-subtitle">CLEARANCE LEVEL 7</p>
     </div>
     <ul class="sidebar-menu">
-        <li class="sidebar-item active">
+        <li class="sidebar-item active" onclick="window.location.hash='#agentes'">
             <span class="material-symbols-outlined">security</span>
             AGENTES ACTIVOS
         </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item" onclick="window.location.hash='#agentes'">
             <span class="material-symbols-outlined">warning</span>
             AMENAZAS
         </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item" onclick="window.location.hash='#agentes'">
             <span class="material-symbols-outlined">groups</span>
             EQUIPO
+        </li>
+        <li class="sidebar-item" onclick="window.location.hash='#contacto'">
+            <span class="material-symbols-outlined">mail</span>
+            CONTACTO
         </li>
     </ul>
     <div class="p-6 mt-auto border-t border-white/5">
@@ -365,6 +370,32 @@
                 <source src="videos/trailer.mp4" type="video/mp4"/>
                 Tu navegador no soporta el elemento de video.
             </video>
+        </div>
+    </section>
+    
+    <!-- Sección de Contacto (Transmisión) -->
+    <section id="contacto" class="contact-section p-12 bg-black/20 border-t border-white/5">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-4xl mb-4">CANAL DE TRANSMISIÓN</h2>
+            <p class="text-xs tracking-widest opacity-50 mb-12 uppercase">Estableciendo conexión segura // Protocolo S.H.I.E.L.D.</p>
+            
+            <form class="tech-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="form-group">
+                        <label>IDENTIFICACIÓN AGENTE</label>
+                        <input type="text" placeholder="Nombre completo...">
+                    </div>
+                    <div class="form-group">
+                        <label>CÓDIGO DE ENLACE</label>
+                        <input type="email" placeholder="Email de contacto...">
+                    </div>
+                </div>
+                <div class="form-group mb-8">
+                    <label>MENSAJE CODIFICADO</label>
+                    <textarea rows="4" placeholder="Escriba su mensaje..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-full">ENVIAR TRANSMISIÓN</button>
+            </form>
         </div>
     </section>
 
