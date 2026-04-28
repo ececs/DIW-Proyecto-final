@@ -1638,3 +1638,79 @@ input:focus, textarea:focus {
     background: #ff1a35;
     box-shadow: 0 0 30px var(--primary);
 }
+
+/* ══════════════════════════════════════════════════════════
+   16. CARRUSEL DE AGENTES
+   ══════════════════════════════════════════════════════════ */
+
+.carousel-section {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.carousel-container {
+    overflow: hidden;
+    padding: 1rem 0;
+    position: relative;
+}
+
+.agent-grid {
+    display: flex !important; /* Cambiamos grid por flex para el carrusel */
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 1.5rem;
+}
+
+.agent-card {
+    flex: 0 0 calc(25% - 1.2rem); /* 4 por fila en PC */
+    min-width: 0;
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.carousel-btn {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover:not(:disabled) {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 0 20px var(--primary);
+}
+
+.carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: #444;
+    color: #444;
+}
+
+/* Ajustes Responsivos para el Carrusel */
+@media (max-width: 1200px) {
+    .agent-card { flex: 0 0 calc(33.333% - 1.2rem); } /* 3 por fila */
+}
+
+@media (max-width: 1024px) {
+    .agent-card { flex: 0 0 calc(50% - 1.2rem); } /* 2 por fila */
+}
+
+@media (max-width: 768px) {
+    .agent-card { flex: 0 0 100%; } /* 1 por fila */
+    .agent-grid { gap: 0; }
+}

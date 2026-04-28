@@ -128,7 +128,8 @@
             <p class="section-subtitle uppercase tracking-widest text-xs opacity-50">S.H.I.E.L.D. ACTIVE FILES // 2024</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="agent-grid">
+        <div class="carousel-container">
+            <div class="agent-grid" id="agent-grid">
             <!-- Tarjeta 1: Iron Man -->
             <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=ironman'">
                 <div class="agent-image-wrapper">
@@ -385,7 +386,20 @@
                 </div>
             </article>
         </div>
-    </section>
+    </div>
+
+    <!-- Controles del Carrusel -->
+    <div class="carousel-controls">
+        <button id="prev-btn" class="carousel-btn" title="Anterior">
+            <span class="material-symbols-outlined">arrow_back_ios</span>
+            PREV
+        </button>
+        <button id="next-btn" class="carousel-btn" title="Siguiente">
+            NEXT
+            <span class="material-symbols-outlined">arrow_forward_ios</span>
+        </button>
+    </div>
+</section>
 
     <!-- Sección Multimedia (Video) -->
     <section id="video" class="video-section p-12 bg-black/30">
@@ -536,6 +550,53 @@
             }
         });
     }
+
+    // Lógica del Carrusel de Agentes
+    const agentGrid = document.getElementById('agent-grid');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    let currentPosition = 0;
+
+    const updateCarousel = () => {
+        if (!agentGrid) return;
+        const card = document.querySelector('.agent-card');
+        if (!card) return;
+        
+        const cardWidth = card.offsetWidth + 24; // ancho + gap
+        const containerWidth = agentGrid.parentElement.offsetWidth;
+        const visibleCards = Math.round(containerWidth / cardWidth) || 1;
+        const totalCards = document.querySelectorAll('.agent-card').length;
+        const maxPosition = Math.max(0, totalCards - visibleCards);
+
+        // Limitar posición
+        currentPosition = Math.max(0, Math.min(currentPosition, maxPosition));
+
+        // Aplicar transformación
+        agentGrid.style.transform = `translateX(-${currentPosition * cardWidth}px)`;
+
+        // Actualizar botones
+        if (prevBtn) prevBtn.disabled = currentPosition === 0;
+        if (nextBtn) nextBtn.disabled = currentPosition >= maxPosition;
+    };
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentPosition++;
+            updateCarousel();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentPosition--;
+            updateCarousel();
+        });
+    }
+
+    // Ajustar en resize
+    window.addEventListener('resize', updateCarousel);
+    // Inicializar tras carga
+    window.addEventListener('load', () => setTimeout(updateCarousel, 3000));
 </script>
 <script src="js/main.js"></script>
 
