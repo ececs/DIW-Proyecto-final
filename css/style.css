@@ -1063,10 +1063,14 @@ input:focus, textarea:focus {
 }
 
 /* ══════════════════════════════════════════════════════════
-   11. TEMAS ESPECÍFICOS DE HÉROE (EFECTOS ESPECIALES)
+   11. SISTEMA DE TEMATIZACIÓN DINÁMICA (EFECTOS DE HÉROE)
+   Implementación técnica:
+   - Uso de clases de 'body' dinámicas (theme-[agent]) inyectadas por JS.
+   - Pseudo-elementos (::before/::after) con 'z-index' controlado para capas visuales.
+   - Keyframes avanzados para animaciones de partículas y estados.
    ══════════════════════════════════════════════════════════ */
 
-/* Animación de entrada general */
+/* Animación de entrada: Revelado táctico de los datos */
 .profile-hero, .profile-data {
     animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -1078,7 +1082,7 @@ input:focus, textarea:focus {
     to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
-/* Efectos compartidos en el Body */
+/* Base de efectos: Capa superior fija para resplandores y partículas */
 .profile-page::before {
     content: "";
     position: fixed;
@@ -1089,7 +1093,8 @@ input:focus, textarea:focus {
     transition: all 1s ease;
 }
 
-/* 1. IRON MAN: Rejilla Tecnológica Stark */
+/* --- 1. IRON MAN: Rejilla Tecnológica Stark ---
+   Simula el HUD de la armadura mediante gradientes lineales y desplazamiento infinito. */
 .theme-ironman .profile-hero::before {
     content: "";
     position: absolute;
@@ -1138,7 +1143,8 @@ input:focus, textarea:focus {
 
 .theme-capamerica .hero-image { border-radius: 20px; box-shadow: 0 0 30px rgba(0, 82, 155, 0.3); }
 
-/* 3. THOR: Lluvia y Trueno */
+/* --- 3. THOR: Relámpagos de Asgard ---
+   Efecto de iluminación estroboscópica que simula descargas eléctricas aleatorias. */
 .theme-thor.profile-page::after {
     content: "";
     position: fixed;
@@ -1153,7 +1159,8 @@ input:focus, textarea:focus {
     92%, 96% { background: rgba(255, 255, 255, 0.2); box-shadow: inset 0 0 100px rgba(0, 150, 255, 0.3); }
 }
 
-/* 4. HULK: Pulso Gamma y Temblor */
+/* --- 4. HULK: Inestabilidad Gamma y Temblor Sísmico ---
+   Combinación de resplandor pulsante y transformaciones de traslación para simular fuerza bruta. */
 .theme-hulk.profile-page::before {
     background: radial-gradient(circle at center, rgba(0, 255, 0, 0.25) 0%, transparent 80%);
     animation: gammaPulse 2s infinite alternate;
@@ -1175,7 +1182,8 @@ input:focus, textarea:focus {
     100% { transform: translate(0, 0); }
 }
 
-/* 5. BLACK WIDOW: Escaneo Tactico */
+/* --- 5. BLACK WIDOW: Escaneo Táctico Láser ---
+   Línea de barrido con desenfoque de brillo (glow) para estética de espionaje. */
 .theme-blackwidow .profile-hero::after {
     content: "";
     position: absolute;
@@ -1194,6 +1202,8 @@ input:focus, textarea:focus {
     100% { top: 100%; opacity: 0; }
 }
 
+/* --- 6. HAWKEYE: Enfoque de Precisión (Mira Telescópica) ---
+   Uso de caracteres Unicode con posicionamiento absoluto y animación de deriva para simular puntería. */
 @keyframes scopeDrift {
     0% { transform: translate(-50%, -50%); }
     25% { transform: translate(-70%, -30%); }
@@ -1209,7 +1219,7 @@ input:focus, textarea:focus {
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 20rem;
-    color: rgba(255, 255, 255, 0.1); /* Más visible */
+    color: rgba(255, 255, 255, 0.1);
     font-family: monospace;
     pointer-events: none;
     z-index: 5;
@@ -1221,7 +1231,8 @@ input:focus, textarea:focus {
     filter: contrast(1.1) brightness(1.1);
 }
 
-/* 7. BLACK PANTHER: Energía Cinética de Vibranium */
+/* --- 7. BLACK PANTHER: Energía Cinética de Vibranium ---
+   Efecto de carga energética perimetral mediante box-shadow y glow púrpuras. */
 .theme-blackpanther.profile-page::before {
     background: radial-gradient(circle at center, rgba(147, 51, 234, 0.3) 0%, transparent 80%);
     animation: bpEnergy 2s infinite alternate ease-in-out;
@@ -1253,7 +1264,8 @@ input:focus, textarea:focus {
     filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.5));
 }
 
-/* 8. SCARLET WITCH: Magia del Caos */
+/* --- 8. SCARLET WITCH: Magia del Caos (Partículas Glifo) ---
+   Generación de elementos decorativos flotantes con rotación y escalado dinámico. */
 .theme-scarletwitch.profile-page::after {
     content: "✧";
     position: fixed;
