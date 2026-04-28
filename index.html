@@ -562,9 +562,13 @@
         const card = document.querySelector('.agent-card');
         if (!card) return;
         
-        const cardWidth = card.offsetWidth + 24; // ancho + gap
+        // Obtener el gap dinámicamente
+        const style = window.getComputedStyle(agentGrid);
+        const gap = parseInt(style.columnGap) || 0;
+        
+        const cardWidth = card.offsetWidth + gap;
         const containerWidth = agentGrid.parentElement.offsetWidth;
-        const visibleCards = Math.round(containerWidth / cardWidth) || 1;
+        const visibleCards = Math.round(containerWidth / (cardWidth - gap)) || 1;
         const totalCards = document.querySelectorAll('.agent-card').length;
         const maxPosition = Math.max(0, totalCards - visibleCards);
 
