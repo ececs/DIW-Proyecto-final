@@ -1063,7 +1063,217 @@ input:focus, textarea:focus {
 }
 
 /* ══════════════════════════════════════════════════════════
-   11. DISEÑO RESPONSIVO (Media Queries)
+   11. TEMAS ESPECÍFICOS DE HÉROE (EFECTOS ESPECIALES)
+   ══════════════════════════════════════════════════════════ */
+
+/* Animación de entrada general */
+.profile-hero, .profile-data {
+    animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.profile-data { animation-delay: 0.3s; }
+
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(50px); filter: blur(15px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* Efectos compartidos en el Body */
+.profile-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.6;
+    transition: all 1s ease;
+}
+
+/* 1. IRON MAN: Rejilla Tecnológica Stark */
+.theme-ironman .profile-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background-image: 
+        linear-gradient(rgba(255, 215, 0, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 215, 0, 0.15) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 10s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes gridMove {
+    from { background-position: 0 0; }
+    to { background-position: 50px 50px; }
+}
+
+.theme-ironman { --primary: #ffd700; }
+.theme-ironman .hero-image { filter: sepia(0.3) brightness(1.2); }
+
+/* 2. CAPTAIN AMERICA: Pulso de Vibranium */
+.theme-capamerica.profile-page::before {
+    background: radial-gradient(circle at 30% 50%, rgba(0, 82, 155, 0.4) 0%, transparent 75%);
+}
+
+.theme-capamerica .profile-hero::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: shieldPulse 3s infinite;
+    pointer-events: none;
+    z-index: 15;
+}
+
+@keyframes shieldPulse {
+    0% { width: 100px; height: 100px; opacity: 1; border-width: 5px; }
+    100% { width: 600px; height: 600px; opacity: 0; border-width: 1px; }
+}
+
+.theme-capamerica .hero-image { border-radius: 20px; box-shadow: 0 0 30px rgba(0, 82, 155, 0.3); }
+
+/* 3. THOR: Lluvia y Trueno */
+.theme-thor.profile-page::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 150;
+    animation: lightningFlash 4s infinite;
+}
+
+@keyframes lightningFlash {
+    0%, 90%, 94%, 98%, 100% { background: transparent; }
+    92%, 96% { background: rgba(255, 255, 255, 0.2); box-shadow: inset 0 0 100px rgba(0, 150, 255, 0.3); }
+}
+
+/* 4. HULK: Pulso Gamma y Temblor */
+.theme-hulk.profile-page::before {
+    background: radial-gradient(circle at center, rgba(0, 255, 0, 0.25) 0%, transparent 80%);
+    animation: gammaPulse 2s infinite alternate;
+}
+
+@keyframes gammaPulse {
+    from { opacity: 0.3; transform: scale(1); }
+    to { opacity: 0.7; transform: scale(1.1); }
+}
+
+.theme-hulk .main-content-profile {
+    animation: seismicShake 4s infinite;
+}
+
+@keyframes seismicShake {
+    0%, 90% { transform: translate(0, 0); }
+    91%, 95% { transform: translate(-10px, 5px); }
+    93%, 97% { transform: translate(10px, -5px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* 5. BLACK WIDOW: Escaneo Tactico */
+.theme-blackwidow .profile-hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #ff0000;
+    box-shadow: 0 0 20px #ff0000;
+    z-index: 20;
+    animation: targetScan 2.5s infinite ease-in-out;
+}
+
+@keyframes targetScan {
+    0% { top: 0; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+@keyframes scopeDrift {
+    0% { transform: translate(-50%, -50%); }
+    25% { transform: translate(-70%, -30%); }
+    50% { transform: translate(-30%, -70%); }
+    75% { transform: translate(-40%, -40%); }
+    100% { transform: translate(-50%, -50%); }
+}
+
+.theme-hawkeye .profile-hero::after {
+    content: "⊕";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20rem;
+    color: rgba(255, 255, 255, 0.1); /* Más visible */
+    font-family: monospace;
+    pointer-events: none;
+    z-index: 5;
+    animation: scopeDrift 4s infinite ease-in-out;
+}
+
+.theme-hawkeye .hero-image {
+    transition: transform 0.5s ease;
+    filter: contrast(1.1) brightness(1.1);
+}
+
+/* 7. BLACK PANTHER: Energía Cinética de Vibranium */
+.theme-blackpanther.profile-page::before {
+    background: radial-gradient(circle at center, rgba(147, 51, 234, 0.3) 0%, transparent 80%);
+    animation: bpEnergy 2s infinite alternate ease-in-out;
+}
+
+@keyframes bpEnergy {
+    0% { opacity: 0.2; filter: hue-rotate(0deg); }
+    100% { opacity: 0.6; filter: hue-rotate(20deg); }
+}
+
+.theme-blackpanther .profile-hero::after {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    border: 4px solid rgba(147, 51, 234, 0.4);
+    box-shadow: inset 0 0 50px rgba(147, 51, 234, 0.3), 0 0 50px rgba(147, 51, 234, 0.3);
+    border-radius: 15px;
+    z-index: 15;
+    animation: bpSuitCharge 3s infinite ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes bpSuitCharge {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.02); }
+}
+
+.theme-blackpanther .hero-image {
+    filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.5));
+}
+
+/* 8. SCARLET WITCH: Magia del Caos */
+.theme-scarletwitch.profile-page::after {
+    content: "✧";
+    position: fixed;
+    font-size: 8rem;
+    color: #ff0000;
+    text-shadow: 0 0 50px #ff0000;
+    opacity: 0;
+    z-index: 160;
+    animation: chaosParticle 3.5s infinite linear;
+}
+
+@keyframes chaosParticle {
+    0% { top: 100%; left: 20%; opacity: 0; transform: scale(0.5) rotate(0deg); }
+    20% { opacity: 0.4; }
+    80% { opacity: 0.4; }
+    100% { top: -10%; left: 80%; opacity: 0; transform: scale(2) rotate(360deg); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   12. DISEÑO RESPONSIVO (Media Queries)
    ══════════════════════════════════════════════════════════ */
 
 @media (max-width: 1024px) {

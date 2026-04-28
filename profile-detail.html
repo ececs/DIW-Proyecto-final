@@ -174,6 +174,9 @@
         const agentId = urlParams.get('agent') || 'ironman';
         const data = agentsData[agentId] || agentsData['ironman'];
 
+        // Aplicar tema visual al body
+        document.body.className = `profile-page theme-${agentId}`;
+
         // Cargar Datos en UI
         document.getElementById('hero-img').src = data.img;
         document.getElementById('subject-label').textContent = `SUBJECT: ${data.subject}`;
