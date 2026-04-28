@@ -1373,6 +1373,14 @@ input:focus, textarea:focus {
     h1 { font-size: 5rem; }
     .hero-section { padding: 4rem 1.5rem; }
     .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    
+    /* Adaptación de Perfil para Tablet */
+    .main-content-profile { height: auto; display: block; }
+    .profile-grid { grid-template-columns: 1fr; }
+    .profile-hero { height: 60vh; }
+    .profile-data { padding: 2rem; }
+    .hud-overlay { padding: 1.5rem; }
+    .hero-name { font-size: 3.5rem; }
 }
 
 /* Móvil - Pantallas Pequeñas */
@@ -1391,6 +1399,14 @@ input:focus, textarea:focus {
     .contact-section { padding: 4rem 1rem; }
     .tech-form { padding: 2rem 1rem; }
     .tech-form::before, .tech-form::after { display: none; } /* Quitamos esquinas en móvil para ganar espacio */
+
+    /* Adaptación de Perfil para Móvil */
+    .profile-hero { height: 50vh; }
+    .hero-name { font-size: 2.5rem; }
+    .hud-badge { font-size: 0.6rem; padding: 0.3rem 0.6rem; }
+    .bio-title { font-size: 1.2rem; }
+    .bio-text { font-size: 0.95rem; line-height: 1.6; }
+    .p-12 { padding: 1.5rem !important; }
 }
 
 
