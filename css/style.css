@@ -1854,18 +1854,21 @@ input:focus, textarea:focus {
     display: flex;
     gap: 0.5rem;
     margin-top: 1.2rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
 }
 
 .badge-tag {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.6rem;
-    padding: 0.2rem 0.6rem;
+    font-size: 0.55rem; /* Ligeramente más pequeño para asegurar que quepan 3 */
+    padding: 0.2rem 0.5rem;
     border-radius: 2px;
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
     border: 1px solid rgba(255,255,255,0.1);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .badge-red { background: rgba(232, 0, 28, 0.3); color: #ff8a8a; border-color: #e8001c; }
