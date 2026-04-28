@@ -41,6 +41,39 @@ body {
     margin: 0;
     overflow-x: hidden;
     line-height: 1.6;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* ══════════════════════════════════════════════════════════
+   2. ACCESIBILIDAD Y USABILIDAD (Personalización de Interfaz)
+   ══════════════════════════════════════════════════════════ */
+
+/* Scrollbar Personalizada Táctica */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0e0e12;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e8001c;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(232, 0, 28, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff1a35;
+}
+
+/* Foco de Accesibilidad (Glow para navegación por teclado) */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    box-shadow: 0 0 15px var(--primary);
+    transition: box-shadow 0.2s ease;
 }
 
 /* Encabezados con selector de tipo */
@@ -669,6 +702,12 @@ input:focus, textarea:focus {
     background-size: 100% 2px;
     pointer-events: none;
     z-index: 1000;
+    transform: translateZ(0);
+}
+
+.agents-section, .video-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
 }
 
 .crt-screen-glow {
@@ -692,6 +731,8 @@ input:focus, textarea:focus {
 .agent-card {
     opacity: 0;
     animation: fadeInUp 0.6s ease-out forwards;
+    will-change: transform, opacity;
+    contain: layout style;
 }
 
 .agent-card:nth-child(1) { animation-delay: 0.1s; }
@@ -725,7 +766,7 @@ input:focus, textarea:focus {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     background: #1b1b1f;
-    padding: 4rem 2rem;
+    padding: 1.5rem 2rem;
     border-top: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -734,7 +775,7 @@ input:focus, textarea:focus {
 }
 
 .stat-number {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 700;
     color: var(--secondary);
     font-family: 'Rajdhani', sans-serif;
@@ -1341,4 +1382,198 @@ input:focus, textarea:focus {
     color: white;
     font-family: 'Rajdhani', sans-serif;
     letter-spacing: 1px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   13. EFECTOS ESPECIALES DE LA TERMINAL PRINCIPAL
+   Simulación de flujo de datos y aberración cromática.
+   ══════════════════════════════════════════════════════════ */
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at center, rgba(232, 0, 28, 0.05) 0%, transparent 70%);
+}
+
+.terminal-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.1;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+.terminal-bg::before {
+    content: "SYSTEM_ACCESS_GRANTED... LOADING_AGENT_DATA... CLEARANCE_LEVEL_7... ENCRYPTING... 0101010110100101010110101010110101101010110101010110101011010101011010101101010101101010110101010110101011010101011010101101010101101010110101010110101011010101011010101101010101101010110101010110101011010101011010101101010101101010110101010110101011010101011010101101010";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: var(--primary);
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    white-space: pre-wrap;
+    word-break: break-all;
+    animation: terminalScroll 40s linear infinite;
+}
+
+@keyframes terminalScroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+}
+
+/* Efecto de Aura Explosiva Potenciado V2 */
+.hero-marvel {
+    color: var(--primary);
+    filter: drop-shadow(0 0 20px var(--primary));
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    animation: textFlash 3s infinite alternate ease-in-out;
+}
+
+@keyframes textFlash {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px var(--primary)); }
+    50% { opacity: 0.9; filter: drop-shadow(0 0 20px var(--primary)); }
+}
+
+.hero-title {
+    position: relative;
+    padding: 3rem;
+}
+
+
+
+.hero-accent {
+    position: relative;
+    display: inline-block;
+    color: white;
+}
+
+.hero-accent::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    box-shadow: 0 0 15px var(--primary);
+    animation: linePulse 2s infinite;
+}
+
+@keyframes linePulse {
+    0%, 100% { opacity: 0.5; transform: scaleX(0.8); }
+    50% { opacity: 1; transform: scaleX(1); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   15. PANTALLA DE CARGA (BOOT SEQUENCE)
+   Simulación de arranque de terminal táctico.
+   ══════════════════════════════════════════════════════════ */
+
+.preloader {
+    position: fixed;
+    inset: 0;
+    background: #0e0e12;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader-content {
+    text-align: center;
+    width: 300px;
+}
+
+.shield-logo-loading {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: url('../img/shield_logo.png') no-repeat center;
+    background-size: contain;
+    filter: drop-shadow(0 0 15px var(--primary));
+    animation: logoPulse 1.5s infinite ease-in-out;
+}
+
+@keyframes logoPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+.loading-text {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--primary);
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.loading-bar {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-progress {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+    animation: progressMove 2.5s infinite ease-in-out;
+}
+
+@keyframes progressMove {
+    0% { left: -100%; }
+    50% { left: 0%; }
+    100% { left: 100%; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   16. BOTÓN VOLVER ARRIBA (UX)
+   ══════════════════════════════════════════════════════════ */
+
+.btn-back-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(232, 0, 28, 0.4);
+}
+
+.btn-back-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.btn-back-top:hover {
+    transform: translateY(-5px);
+    background: #ff1a35;
+    box-shadow: 0 0 30px var(--primary);
 }
