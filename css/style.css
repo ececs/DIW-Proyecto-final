@@ -1668,14 +1668,14 @@ input:focus, textarea:focus {
 
 .carousel-section {
     position: relative;
-    padding: 2rem 0;
+    padding: 2rem 60px; /* Espacio para los botones laterales */
 }
 
 .carousel-container {
     overflow: hidden;
     padding: 1.5rem 0;
     position: relative;
-    cursor: grab; /* Indica que se puede arrastrar */
+    cursor: grab;
 }
 
 .carousel-container:active {
@@ -1692,48 +1692,62 @@ input:focus, textarea:focus {
 .agent-card {
     flex: 0 0 calc(25% - 1.2rem);
     min-width: 0;
-    user-select: none; /* Evita seleccionar texto al arrastrar */
+    user-select: none;
 }
 
-/* Botones Laterales */
+/* Botones Laterales fuera del contenedor */
 .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid var(--primary);
+    background: rgba(232, 0, 28, 0.1);
+    border: 2px solid var(--primary);
     color: var(--primary);
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
+    z-index: 100;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
 }
 
-.carousel-btn:hover:not(:disabled) {
+.carousel-btn:hover {
     background: var(--primary);
     color: white;
-    box-shadow: 0 0 20px var(--primary);
+    box-shadow: 0 0 25px var(--primary);
+    transform: translateY(-50%) scale(1.1);
 }
 
-.carousel-btn.prev { left: -25px; }
-.carousel-btn.next { right: -25px; }
+.carousel-btn.prev { left: 5px; }
+.carousel-btn.next { right: 5px; }
 
 .carousel-btn:disabled {
-    opacity: 0;
-    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #666;
+    color: #666;
 }
 
 @media (max-width: 1024px) {
-    .carousel-btn { width: 40px; height: 40px; }
-    .carousel-btn.prev { left: 10px; }
-    .carousel-btn.next { right: 10px; }
+    .carousel-section { padding: 2rem 40px; }
+    .carousel-btn { width: 35px; height: 35px; }
+    .carousel-btn.prev { left: 2px; }
+    .carousel-btn.next { right: 2px; }
 }
+
+@media (max-width: 768px) {
+    .carousel-section { padding: 2rem 10px; }
+    .carousel-btn { 
+        width: 30px; 
+        height: 30px;
+        background: rgba(0,0,0,0.5); /* Más visible en móvil */
+    }
+}
+
 
 /* Ajustes Responsivos para el Carrusel */
 @media (max-width: 1200px) {

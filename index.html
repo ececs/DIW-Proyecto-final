@@ -128,12 +128,15 @@
             <p class="section-subtitle uppercase tracking-widest text-xs opacity-50">S.H.I.E.L.D. ACTIVE FILES // 2024</p>
         </div>
 
+        <!-- Botones de Navegación -->
+        <button id="prev-btn" class="carousel-btn prev" title="Anterior" aria-label="Agente anterior">
+            <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <button id="next-btn" class="carousel-btn next" title="Siguiente" aria-label="Siguiente agente">
+            <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+
         <div class="carousel-container" id="carousel-container">
-            <!-- Botones Laterales -->
-            <button id="prev-btn" class="carousel-btn prev" title="Anterior" aria-label="Agente anterior">
-                <span class="material-symbols-outlined">chevron_left</span>
-            </button>
-            
             <div class="agent-grid" id="agent-grid">
             <!-- Tarjeta 1: Iron Man -->
             <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=ironman'">
@@ -391,10 +394,6 @@
                 </div>
             </article>
             </div>
-
-            <button id="next-btn" class="carousel-btn next" title="Siguiente" aria-label="Siguiente agente">
-                <span class="material-symbols-outlined">chevron_right</span>
-            </button>
         </div>
     </section>
 
@@ -576,11 +575,15 @@
         const totalCards = document.querySelectorAll('.agent-card').length;
         const maxPosition = Math.max(0, totalCards - visibleCards);
 
-        currentPosition = Math.max(0, Math.min(currentPosition, maxPosition));
+        // Ajuste de límites para bucle infinito
+        if (currentPosition < 0) currentPosition = maxPosition;
+        if (currentPosition > maxPosition) currentPosition = 0;
+
         agentGrid.style.transform = `translateX(-${currentPosition * cardWidth}px)`;
 
-        if (prevBtn) prevBtn.disabled = currentPosition === 0;
-        if (nextBtn) nextBtn.disabled = currentPosition >= maxPosition;
+        // Los botones ya no se deshabilitan para permitir el bucle infinito
+        if (prevBtn) prevBtn.disabled = false;
+        if (nextBtn) nextBtn.disabled = false;
     };
 
     if (nextBtn) nextBtn.addEventListener('click', () => { currentPosition++; updateCarousel(); });
