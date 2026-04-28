@@ -879,7 +879,8 @@ input:focus, textarea:focus {
 
 /* Botón "Ver Perfil" en tarjeta de agente — margin-top:auto lo ancla siempre al fondo */
 .btn-view-profile-card {
-    margin-top: auto;
+    margin-top: auto; /* Mantiene el botón al fondo */
+    padding-top: 0.5rem; /* Pequeño ajuste interno */
     width: 100%;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1140,8 +1141,15 @@ input:focus, textarea:focus {
     display: flex;
     gap: 0.4rem;
     margin-top: 1.2rem;
-    flex-wrap: wrap;    /* Permite pasar a la siguiente línea en lugar de cortarse */
-    row-gap: 0.4rem;
+    margin-bottom: 2rem; /* Espacio extra respecto al botón */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.agent-tags::-webkit-scrollbar {
+    display: none;
 }
 
 /* Etiqueta de rol (badge) */
