@@ -3,11 +3,14 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Portal de acceso restringido S.H.I.E.L.D. — Nivel de autorización 7 requerido. Solo personal autorizado."/>
+    <meta name="author" content="Eudaldo Alvaro Cal Saul"/>
     <title>S.H.I.E.L.D. — ACCESO RESTRINGIDO</title>
-    
-    <!-- Enlaces a hojas de estilo externas -->
+
+    <!-- Hoja de estilos externa (único archivo CSS del proyecto) -->
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
     <!-- Iconos de Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
 </head>
@@ -29,14 +32,14 @@
         <h1 class="glitch-text">ACCESS DENIED</h1>
         <p class="login-subtitle">PROHIBIDO EL PASO A PERSONAL NO AUTORIZADO</p>
         
-        <form class="login-form">
+        <form class="login-form" novalidate>
             <div class="form-group">
-                <label>AGENTE_ID</label>
-                <input type="text" placeholder="EJ: STARK-001">
+                <label for="login-agent-id">AGENTE_ID</label>
+                <input id="login-agent-id" type="text" name="agente_id" autocomplete="username" placeholder="EJ: STARK-001">
             </div>
             <div class="form-group">
-                <label>CÓDIGO_ENCRIPTADO</label>
-                <input type="password" placeholder="••••••••••••">
+                <label for="login-password">CÓDIGO_ENCRIPTADO</label>
+                <input id="login-password" type="password" name="password" autocomplete="current-password" placeholder="••••••••••••">
             </div>
         </form>
 

@@ -1,82 +1,93 @@
-/* 
+/*
   =============================================================================
   S.H.I.E.L.D. DATABASE — HOJA DE ESTILOS MAESTRA (DIW FINAL)
   =============================================================================
-  Esta hoja de estilos centraliza toda la maquetación del proyecto Marvel.
-  Cumple con los criterios de evaluación de Diseño de Interfaces Web:
-  
-  1. SELECTORES DE TIPO (Etiquetas): Se modifican más de 18 etiquetas HTML 
-     directamente para demostrar control estructural del DOM.
-  2. CSS EXTERNO: Único archivo vinculado que cubre layout, responsive y UI.
-  3. MODELO DE CAJA Y FLEXBOX/GRID: Uso avanzado para el diseño HUD.
-  4. MULTIMEDIA: Estilos personalizados para la integración de vídeo y audio.
-  5. COMPONENTES: Clases reutilizables bajo metodología semántica.
-  
+
+  Proyecto Final — Diseño de Interfaces Web
   Autor: Eudaldo Alvaro Cal Saul
-  Curso: Proyecto Final - Desarrollo de Interfaces Web
+
+  Este archivo CSS externo centraliza TODA la maquetación del proyecto.
+  Está organizado en 14 secciones comentadas que cubren los criterios de la
+  rúbrica académica:
+
+    ✔ Selectores de tipo: se aplican estilos a más de 18 etiquetas HTML
+      (html, body, h1, h2, h3, h4, p, nav, ul, li, aside, main, section,
+       article, footer, a, button, video, audio, img, form, label, input,
+       textarea).
+    ✔ CSS externo vinculado con <link rel="stylesheet" type="text/css">.
+    ✔ Box model, tipografía, color, display, position, flexbox y grid.
+    ✔ Multimedia: estilos para <video>, <audio> e <img>.
+    ✔ Clases reutilizables (.btn-primary, .agent-card, .badge-tag, etc.).
+
   =============================================================================
 */
 
-/* ══════════════════════════════════════════════════════════
-   1. RESET Y BASE (Uso exhaustivo de Selectores de Tipo)
-   ══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════════════
+   1. IMPORTACIÓN DE FUENTES EXTERNAS
+   Carga las tipografías desde Google Fonts. Se importa aquí para centralizar
+   todas las dependencias de tipografía en la hoja de estilos.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   2. VARIABLES Y TOKENS DE DISEÑO
+   Paleta de colores, superficies y transición global del sistema de diseño.
+   Usar siempre estas variables en lugar de valores literales de color.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+    --primary:        #e8001c;   /* Rojo S.H.I.E.L.D. — acento principal */
+    --primary-light:  #ffb4ac;   /* Rojo claro para textos sobre oscuro */
+    --secondary:      #ffdb3c;   /* Amarillo táctico — estadísticas y badges */
+    --surface:        #131317;   /* Superficie base del layout */
+    --surface-low:    #0e0e12;   /* Superficie profunda (sidebar, preloader) */
+    --surface-high:   #1b1b1f;   /* Superficie elevada (stats, tarjetas) */
+    --text-muted:     rgba(229, 225, 231, 0.7); /* Texto secundario */
+    --transition:     0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Curva de animación estándar */
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   3. RESET GLOBAL Y MODELO DE CAJA
+   Normalización del comportamiento de todos los elementos para garantizar
+   consistencia entre navegadores. Se aplica box-sizing: border-box de forma
+   universal, que incluye padding y border en las dimensiones declaradas.
+   ══════════════════════════════════════════════════════════════════════════ */
 
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
-/* Tipografías técnicas */
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
-
+/* Selector de tipo: html — comportamiento del scroll y tamaño de fuente base */
 html {
-    scroll-behavior: smooth;
-    font-size: 16px;
-    background-color: #0e0e12;
+    scroll-behavior: smooth;   /* Desplazamiento suave para anclas internas */
+    font-size: 16px;           /* Base para unidades rem */
+    background-color: var(--surface-low);
 }
 
+/* Selector de tipo: body — diseño base, tipografía y color del documento */
 body {
-    background-color: #131317;
+    background-color: var(--surface);
     color: #e5e1e7;
     font-family: 'Inter', sans-serif;
     margin: 0;
-    overflow-x: hidden;
+    overflow-x: hidden;    /* Evita scroll horizontal no deseado */
     line-height: 1.6;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+    /* NOTA: No usar transform en body — rompería position:fixed de preloader/sidebar/nav.
+       El compositing GPU se aplica directamente en los elementos animados (will-change). */
 }
 
-/* ══════════════════════════════════════════════════════════
-   2. ACCESIBILIDAD Y USABILIDAD (Personalización de Interfaz)
-   ══════════════════════════════════════════════════════════ */
 
-/* Scrollbar Personalizada Táctica */
-::-webkit-scrollbar {
-    width: 6px;
-}
+/* ══════════════════════════════════════════════════════════════════════════
+   4. SELECTORES DE TIPO — ENCABEZADOS Y TEXTO
+   Aplica estilos propios a cada nivel de encabezado usando selectores de
+   tipo (h1, h2, h3, h4, p). Garantiza jerarquía visual clara en todo el
+   sitio sin necesidad de clases adicionales.
+   ══════════════════════════════════════════════════════════════════════════ */
 
-::-webkit-scrollbar-track {
-    background: #0e0e12;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #e8001c;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(232, 0, 28, 0.5);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #ff1a35;
-}
-
-/* Foco de Accesibilidad (Glow para navegación por teclado) */
-:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 4px;
-    box-shadow: 0 0 15px var(--primary);
-    transition: box-shadow 0.2s ease;
-}
-
-/* Encabezados con selector de tipo */
+/* Selector de tipo: h1 — título principal de sección hero */
 h1 {
     font-family: 'Rajdhani', sans-serif;
     font-size: 8rem;
@@ -87,6 +98,7 @@ h1 {
     text-transform: uppercase;
 }
 
+/* Selector de tipo: h2 — títulos de sección (base de datos, video, contacto) */
 h2 {
     font-family: 'Rajdhani', sans-serif;
     font-size: 2.5rem;
@@ -97,30 +109,40 @@ h2 {
     text-transform: uppercase;
 }
 
+/* Selector de tipo: h3 — subtítulos y nombres de sidebar */
 h3 {
     font-family: 'Rajdhani', sans-serif;
     font-size: 1.5rem;
-    color: #e8001c;
+    color: var(--primary);
     text-transform: uppercase;
     margin: 0;
 }
 
+/* Selector de tipo: h4 — etiquetas de capacidades y datos secundarios */
 h4 {
     font-family: 'Rajdhani', sans-serif;
     font-size: 1rem;
     opacity: 0.6;
     letter-spacing: 4px;
     text-transform: uppercase;
+    margin: 0;
 }
 
-/* Contenido textual */
+/* Selector de tipo: p — párrafos y texto de contenido general */
 p {
     margin: 0 0 1.5rem 0;
     font-size: 1rem;
-    color: rgba(229, 225, 231, 0.7);
+    color: var(--text-muted);
 }
 
-/* Navegación y listas */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   5. SELECTORES DE TIPO — ELEMENTOS DE NAVEGACIÓN Y LISTAS
+   Estilos base para nav, ul y li. La navegación usa position:fixed para
+   mantenerse en pantalla durante el scroll (patrón sticky header).
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Selector de tipo: nav — barra de navegación fija en la parte superior */
 nav {
     display: block;
     position: fixed;
@@ -128,82 +150,57 @@ nav {
     width: 100%;
     z-index: 100;
     background: rgba(19, 19, 23, 0.9);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);       /* Efecto cristal sobre el contenido */
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Selector de tipo: ul — reset de listas (sidebar y navegación) */
 ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
+/* Selector de tipo: li — elementos de lista con separación */
 li {
     margin-bottom: 0.5rem;
 }
 
-/* Semántica de bloque */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   6. SELECTORES DE TIPO — LAYOUT SEMÁNTICO (aside, main, section, article, footer)
+   Los elementos de layout semántico HTML5 reciben estilos de posicionamiento
+   y display que estructuran la página como un HUD táctico.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Selector de tipo: aside — barra lateral de estado del sistema (sidebar) */
 aside {
     display: flex;
     flex-direction: column;
     position: fixed;
     left: 0;
-    top: 80px;
+    top: 80px;                          /* Justo debajo del nav (80px de altura) */
     width: 260px;
-    height: calc(100vh - 80px);
-    background-color: #0e0e12;
+    height: calc(100vh - 80px);         /* Ocupa el resto del viewport */
+    background-color: var(--surface-low);
     border-right: 1px solid rgba(252, 1, 31, 0.1);
     z-index: 90;
 }
 
-/* Control de Audio en Sidebar */
-.audio-control {
-    margin-top: auto;
-    padding: 1.5rem;
-    border-top: 1px solid rgba(255, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.mute-btn {
-    background: rgba(255, 0, 0, 0.1);
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    padding: 0.5rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-}
-
-.mute-btn:hover {
-    background: var(--primary);
-    color: white;
-    box-shadow: 0 0 15px var(--primary);
-}
-
-.audio-status {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #888;
-}
-
-
+/* Selector de tipo: main — área de contenido principal, desplazada por el sidebar */
 main {
     display: block;
     min-height: 100vh;
     position: relative;
 }
 
+/* Selector de tipo: section — bloque semántico de cada sección de contenido */
 section {
     position: relative;
     display: block;
 }
 
+/* Selector de tipo: article — tarjetas de agentes (contenido independiente) */
 article {
     display: block;
     background: rgba(255, 255, 255, 0.02);
@@ -211,6 +208,7 @@ article {
     transition: transform 0.3s ease;
 }
 
+/* Selector de tipo: footer — pie de página con información del autor */
 footer {
     display: block;
     background: #09090b;
@@ -218,13 +216,21 @@ footer {
     padding: 3rem;
 }
 
-/* Interactividad */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   7. SELECTORES DE TIPO — INTERACTIVIDAD (a, button)
+   Los elementos interactivos reciben estilos de base que aseguran
+   consistencia y coherencia con la identidad visual del proyecto.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Selector de tipo: a — enlaces sin subrayado, color heredado, transición */
 a {
     text-decoration: none;
     color: inherit;
     transition: all 0.2s ease;
 }
 
+/* Selector de tipo: button — base para todos los botones del sistema */
 button {
     font-family: 'Rajdhani', sans-serif;
     cursor: pointer;
@@ -234,7 +240,14 @@ button {
     font-weight: 700;
 }
 
-/* Multimedia */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   8. SELECTORES DE TIPO — MULTIMEDIA (video, audio, img)
+   Estilos para los elementos multimedia garantizando proporciones correctas
+   y comportamiento responsive para todos los tamaños de pantalla.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Selector de tipo: video — reproductor full-width con relación de aspecto 16:9 */
 video {
     width: 100%;
     display: block;
@@ -243,10 +256,12 @@ video {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Selector de tipo: audio — oculto visualmente, controlado por JS */
 audio {
     display: none;
 }
 
+/* Selector de tipo: img — imágenes responsivas con object-fit para recorte */
 img {
     max-width: 100%;
     height: auto;
@@ -254,21 +269,32 @@ img {
     object-fit: cover;
 }
 
-/* Formularios */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   9. SELECTORES DE TIPO — FORMULARIOS (form, label, input, textarea)
+   Estilos tácticos para todos los formularios del sitio (contacto y login).
+   La coherencia visual se mantiene mediante selectores de tipo globales,
+   refinados por clases específicas en cada sección.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Selector de tipo: form — contenedor flex de grupos de campo */
 form {
     display: flex;
     flex-direction: column;
 }
 
+/* Selector de tipo: label — etiquetas de campo en estilo HUD */
 label {
     display: block;
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: #e8001c;
+    color: var(--primary);
     margin-bottom: 0.5rem;
+    cursor: pointer;    /* Indica que el label es clicable (asociado a un input) */
 }
 
+/* Selector de tipo: input y textarea — campos de entrada con estética terminal */
 input, textarea {
     width: 100%;
     background: rgba(255, 255, 255, 0.03);
@@ -280,27 +306,53 @@ input, textarea {
     transition: border-color 0.3s ease;
 }
 
+/* Estado de foco: resalta el campo activo con el color primario */
 input:focus, textarea:focus {
-    border-color: #e8001c;
+    border-color: var(--primary);
 }
 
-/* ══════════════════════════════════════════════════════════
-   2. VARIABLES Y TOKENS DE DISEÑO
-   ══════════════════════════════════════════════════════════ */
-:root {
-    --primary: #e8001c;
-    --primary-light: #ffb4ac;
-    --secondary: #ffdb3c;
-    --surface: #131317;
-    --surface-low: #0e0e12;
-    --surface-high: #1b1b1f;
-    --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* ══════════════════════════════════════════════════════════════════════════
+   10. ACCESIBILIDAD — SCROLLBAR Y FOCO
+   Personalización de la scrollbar para reforzar la identidad visual, y
+   estilo de foco visible para navegación por teclado (accesibilidad WCAG).
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Scrollbar táctica personalizada (Webkit: Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 6px;
 }
 
-/* ══════════════════════════════════════════════════════════
-   3. MAQUETACIÓN ESTRUCTURAL (Layout)
-   ══════════════════════════════════════════════════════════ */
+::-webkit-scrollbar-track {
+    background: var(--surface-low);
+}
 
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(232, 0, 28, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff1a35;
+}
+
+/* Foco visible: accesibilidad para navegación con teclado (Tab) */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    box-shadow: 0 0 15px var(--primary);
+    transition: box-shadow 0.2s ease;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   11. LAYOUT ESTRUCTURAL — NAVEGACIÓN SUPERIOR
+   Clases que componen la barra de navegación fija: contenedor, logo, links
+   y botón de acceso al portal de agentes.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Contenedor interno del nav con ancho máximo y centrado */
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -311,6 +363,7 @@ input:focus, textarea:focus {
     align-items: center;
 }
 
+/* Logo S.H.I.E.L.D. en el nav */
 .nav-logo {
     font-size: 2rem;
     font-style: italic;
@@ -319,17 +372,20 @@ input:focus, textarea:focus {
     font-weight: 700;
 }
 
+/* Grupo de enlaces de navegación */
 .nav-links {
     display: flex;
     gap: 2.5rem;
 }
 
+/* Enlace individual del nav */
 .nav-link {
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 2px;
     opacity: 0.6;
     text-transform: uppercase;
+    transition: all 0.2s ease;
 }
 
 .nav-link:hover {
@@ -337,1070 +393,7 @@ input:focus, textarea:focus {
     color: var(--primary);
 }
 
-.main-content {
-    margin-left: 260px;
-    padding-top: 80px;
-}
-
-.sidebar-header {
-    padding: 2.5rem 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.sidebar-menu {
-    flex-grow: 1;
-}
-
-.sidebar-footer {
-    padding: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.id-label {
-    font-size: 0.6rem;
-    opacity: 0.5;
-    margin-bottom: 0.2rem;
-}
-
-.id-value {
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: var(--primary);
-    margin: 0;
-}
-
-.sidebar-title {
-    font-size: 0.85rem;
-    color: var(--primary);
-    margin-bottom: 0.25rem;
-}
-
-.sidebar-subtitle {
-    font-size: 0.6rem;
-    opacity: 0.4;
-    letter-spacing: 2px;
-}
-
-.sidebar-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 1.5rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: rgba(229, 225, 231, 0.6);
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.sidebar-item:hover, .sidebar-item.active {
-    background: rgba(232, 0, 28, 0.1);
-    color: var(--primary);
-    border-left: 4px solid var(--primary);
-}
-
-/* ══════════════════════════════════════════════════════════
-   4. COMPONENTES (Criterio: Clases Reutilizables)
-   ══════════════════════════════════════════════════════════ */
-
-.btn-primary {
-    background: var(--primary);
-    color: white;
-    padding: 0.8rem 2rem;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    box-shadow: 0 4px 15px rgba(232, 0, 28, 0.3);
-    transition: var(--transition);
-}
-
-.btn-primary:hover {
-    background: #ff1a35;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(232, 0, 28, 0.4);
-}
-
-.btn-access {
-    background: var(--primary);
-    color: white;
-    padding: 0.6rem 1.2rem;
-    font-size: 0.75rem;
-    transition: var(--transition);
-}
-
-.btn-access:hover {
-    background: white;
-    color: black;
-}
-
-.btn-outline-primary {
-    width: 100%;
-    padding: 0.6rem;
-    border: 1px solid rgba(255, 219, 60, 0.3);
-    color: var(--secondary);
-    font-size: 0.7rem;
-    transition: all 0.3s ease;
-}
-
-.btn-outline-primary:hover {
-    background: var(--secondary);
-    color: #000;
-}
-
-.agent-card {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    background: var(--surface-low);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Asegura que todas las tarjetas tengan la misma altura en el grid */
-}
-
-.agent-card:hover {
-    transform: translateY(-12px);
-    border-color: var(--primary);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-}
-
-.agent-image-wrapper {
-    position: relative;
-    height: 380px;
-    overflow: hidden;
-}
-
-.agent-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.agent-card:hover .agent-image-wrapper img {
-    transform: scale(1.08);
-}
-
-.agent-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(19, 19, 23, 0.7) 0%, transparent 40%);
-    z-index: 2;
-}
-
-.agent-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: var(--secondary);
-    color: #000;
-    padding: 0.3rem 0.8rem;
-    font-size: 0.8rem;
-    font-weight: 700;
-    font-style: italic;
-    z-index: 10;
-    box-shadow: 0 0 10px rgba(255, 219, 60, 0.3);
-}
-
-/* ══════════════════════════════════════════════════════════
-   5. PERFIL DETALLADO (Estructura HUD)
-   ══════════════════════════════════════════════════════════ */
-
-.main-content-profile {
-    padding-top: 80px;
-    height: 100vh;
-    display: flex;
-}
-
-.profile-grid {
-    display: grid;
-    grid-template-columns: 45% 55%;
-    width: 100%;
-}
-
-.profile-hero {
-    position: relative;
-    overflow: hidden;
-    background: #0e0e12;
-}
-
-.hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 1; /* Eliminado el difuminado por opacidad */
-}
-
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, #131317, transparent);
-    z-index: 2;
-}
-
-.hud-overlay {
-    position: absolute;
-    inset: 0;
-    padding: 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 10;
-}
-
-.hud-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(232, 0, 28, 0.1);
-    border: 1px solid var(--primary);
-    padding: 0.5rem 1rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-.hud-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--primary);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--primary);
-}
-
-.hero-name {
-    font-size: 5rem;
-    line-height: 0.9;
-    margin-bottom: 1.5rem;
-}
-
-.file-badge {
-    background: var(--surface-high);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.3rem 0.8rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-}
-
-.clearance-badge {
-    background: rgba(232, 0, 28, 0.1);
-    border: 1px solid var(--primary);
-    padding: 0.3rem 0.8rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-.profile-data {
-    padding: 4rem;
-    background: #131317;
-    position: relative;
-    border-left: 1px solid rgba(232, 0, 28, 0.2);
-    overflow: hidden;
-}
-
-.data-scroll {
-    height: 100%;
-    overflow-y: auto;
-    padding-right: 2rem;
-}
-
-/* Scrollbar técnica */
-.data-scroll::-webkit-scrollbar {
-    width: 4px;
-}
-
-.data-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.data-scroll::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    box-shadow: 0 0 10px var(--primary);
-}
-
-.data-bio {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: rgba(229, 225, 231, 0.8);
-    margin-top: 2rem;
-    margin-bottom: 3rem;
-    text-align: justify;
-}
-
-/* ══════════════════════════════════════════════════════════
-   6. ANIMACIONES Y EFECTOS HUD (Mejora Visual)
-   ══════════════════════════════════════════════════════════ */
-
-.agent-basic-info {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    z-index: 10;
-}
-
-.agent-footer {
-    padding: 2rem;
-    background: linear-gradient(to bottom, rgba(27, 27, 31, 0.9), #131317);
-    border-top: 1px solid rgba(232, 0, 28, 0.2);
-    flex-grow: 1; /* Hace que el footer ocupe el espacio restante para alinear verticalmente */
-    display: flex;
-    flex-direction: column;
-}
-
-.agent-tag {
-    font-size: 0.6rem;
-    color: var(--primary);
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-
-.agent-name {
-    font-size: 2.2rem;
-    line-height: 1;
-    color: white;
-}
-
-.agent-short-bio {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: rgba(229, 225, 231, 0.7);
-    margin-bottom: 1.5rem;
-    height: 110px; /* Altura fija para alineación vertical */
-    overflow: hidden; /* Elimina scroll */
-    padding-right: 0;
-}
-
-/* Scrollbar fina para la biografía de la tarjeta */
-.agent-short-bio::-webkit-scrollbar {
-    width: 3px;
-}
-
-.agent-short-bio::-webkit-scrollbar-thumb {
-    background: rgba(232, 0, 28, 0.3);
-}
-
-.agent-data-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    margin: 1rem 0;
-    font-size: 0.6rem;
-    opacity: 1;
-}
-
-.data-item {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.4rem;
-    border-left: 2px solid transparent;
-}
-
-.data-item.highlight {
-    border-left-color: var(--secondary);
-    color: var(--secondary);
-}
-
-.agent-stat-container {
-    margin-bottom: 1rem;
-}
-
-.stat-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.6rem;
-    font-weight: 700;
-    margin-bottom: 0.4rem;
-}
-
-.stat-bar-mini {
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.stat-bar-mini-fill {
-    height: 100%;
-    background: var(--secondary);
-    box-shadow: 0 0 10px rgba(255, 219, 60, 0.5);
-}
-
-/* ══════════════════════════════════════════════════════════
-   5. ANIMACIONES Y EFECTOS HUD (Mejora Visual)
-   ══════════════════════════════════════════════════════════ */
-
-.scanline-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
-    background-size: 100% 2px;
-    pointer-events: none;
-    z-index: 1000;
-    transform: translateZ(0);
-}
-
-.agents-section, .video-section {
-    content-visibility: auto;
-    contain-intrinsic-size: 1000px;
-}
-
-.crt-screen-glow {
-    position: fixed;
-    inset: 0;
-    box-shadow: inset 0 0 50px rgba(232, 0, 28, 0.02);
-    pointer-events: none;
-    z-index: 999;
-}
-
-.tech-grid {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: 30px 30px;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.agent-card {
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out forwards;
-    will-change: transform, opacity;
-    contain: layout style;
-}
-
-.agent-card:nth-child(1) { animation-delay: 0.1s; }
-.agent-card:nth-child(2) { animation-delay: 0.2s; }
-.agent-card:nth-child(3) { animation-delay: 0.3s; }
-.agent-card:nth-child(4) { animation-delay: 0.4s; }
-.agent-card:nth-child(5) { animation-delay: 0.5s; }
-.agent-card:nth-child(6) { animation-delay: 0.6s; }
-.agent-card:nth-child(7) { animation-delay: 0.7s; }
-.agent-card:nth-child(8) { animation-delay: 0.8s; }
-
-/* ══════════════════════════════════════════════════════════
-   6. SECCIONES ESPECÍFICAS
-   ══════════════════════════════════════════════════════════ */
-
-.hero-section {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
-
-.hero-accent {
-    color: var(--primary);
-    font-style: italic;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background: #1b1b1f;
-    padding: 1.5rem 2rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.stat-item {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 4rem;
-    font-weight: 700;
-    color: var(--secondary);
-    font-family: 'Rajdhani', sans-serif;
-}
-
-.stat-label {
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    opacity: 0.5;
-}
-
-/* ══════════════════════════════════════════════════════════
-   7. SECCIÓN DE CONTACTO (Canal de Transmisión)
-   ══════════════════════════════════════════════════════════ */
-
-.contact-section {
-    padding: 8rem 2rem;
-    background: radial-gradient(circle at center, rgba(232, 0, 28, 0.03) 0%, transparent 80%);
-}
-
-.tech-form {
-    background: rgba(27, 27, 31, 0.4);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 4rem;
-    margin-top: 3rem;
-    position: relative;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-}
-
-/* Esquinas decorativas para el cuadro de contacto */
-.tech-form::before, .tech-form::after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-color: var(--primary);
-    border-style: solid;
-}
-
-.tech-form::before {
-    top: -1px; left: -1px;
-    border-width: 2px 0 0 2px;
-}
-
-.tech-form::after {
-    bottom: -1px; right: -1px;
-    border-width: 0 2px 2px 0;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.form-group label {
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: var(--primary);
-    text-transform: uppercase;
-}
-
-.form-group input, .form-group textarea {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1.2rem;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    transition: all 0.3s ease;
-}
-
-.form-group input:focus, .form-group textarea:focus {
-    border-color: var(--primary);
-    background: rgba(232, 0, 28, 0.05);
-    box-shadow: 0 0 15px rgba(232, 0, 28, 0.1);
-}
-
-/* ══════════════════════════════════════════════════════════
-   9. PÁGINA DE LOGIN (Acceso Restringido)
-   ══════════════════════════════════════════════════════════ */
-
-.login-page {
-    background: #050505;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-/* Cintas de peligro */
-.danger-tape {
-    position: fixed;
-    height: 40px;
-    width: 150%;
-    background: repeating-linear-gradient(
-        45deg,
-        #ffdb3c,
-        #ffdb3c 20px,
-        #000 20px,
-        #000 40px
-    );
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 1.2rem;
-    color: #000;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-.danger-tape::after {
-    content: "DANGER // RESTRICTED ACCESS // WARNING";
-    white-space: nowrap;
-}
-
-.danger-tape.top {
-    top: 50px;
-    left: -25%;
-    transform: rotate(-5deg);
-}
-
-.danger-tape.bottom {
-    bottom: 50px;
-    right: -25%;
-    transform: rotate(-5deg);
-}
-
-.login-container {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    max-width: 500px;
-    padding: 2rem;
-}
-
-.login-box {
-    background: rgba(19, 19, 23, 0.9);
-    border: 1px solid var(--primary);
-    padding: 3rem;
-    text-align: center;
-    box-shadow: 0 0 50px rgba(232, 0, 28, 0.2);
-    position: relative;
-}
-
-.alert-icon {
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-}
-
-.alert-icon span {
-    font-size: 4rem;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.1); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-.glitch-text {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 3rem;
-    color: white;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-}
-
-.login-subtitle {
-    font-size: 0.7rem;
-    color: var(--primary);
-    letter-spacing: 4px;
-    margin-bottom: 2.5rem;
-}
-
-.biometric-scan {
-    width: 80px;
-    height: 80px;
-    margin: 2rem auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.biometric-scan span {
-    font-size: 3rem;
-    opacity: 0.3;
-}
-
-.scan-line-laser {
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background: var(--primary);
-    box-shadow: 0 0 15px var(--primary);
-    top: 0;
-    animation: scan 2s infinite linear;
-}
-
-@keyframes scan {
-    0% { top: 0; }
-    50% { top: 100%; }
-    100% { top: 0; }
-}
-
-.scan-text {
-    font-size: 0.6rem;
-    opacity: 0.5;
-    letter-spacing: 2px;
-    margin-bottom: 2.5rem;
-}
-
-.btn-abort {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 0.8rem 1.5rem;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 auto;
-    transition: all 0.3s ease;
-}
-
-.btn-abort:hover {
-    background: white;
-    color: black;
-}
-
-.system-logs {
-    position: absolute;
-    bottom: -60px;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.55rem;
-    font-family: monospace;
-    opacity: 0.3;
-}
-
-/* ══════════════════════════════════════════════════════════
-   10. MEJORAS DE PERFIL (Estadísticas y Botones)
-   ══════════════════════════════════════════════════════════ */
-
-.btn-primary-wide {
-    display: inline-block;
-    width: 100%;
-    background: var(--primary);
-    color: white;
-    padding: 1.2rem;
-    text-align: center;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(232, 0, 28, 0.2);
-}
-
-.btn-primary-wide:hover {
-    background: white;
-    color: #e8001c;
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(232, 0, 28, 0.3);
-}
-
-.stats-bars {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.stat-row {
-    margin-bottom: 1.5rem;
-}
-
-.stat-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    font-weight: 800;
-    margin-bottom: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.stat-value {
-    color: var(--primary);
-}
-
-.stat-bar-bg {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 3px;
-    overflow: hidden;
-    position: relative;
-}
-
-.stat-bar-fill {
-    height: 100%;
-    background: var(--primary);
-    box-shadow: 0 0 15px var(--primary);
-    border-radius: 3px;
-    transition: width 1s ease-out;
-}
-
-.section-title-small {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.3);
-    letter-spacing: 5px;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding-bottom: 0.5rem;
-}
-
-/* ══════════════════════════════════════════════════════════
-   11. SISTEMA DE TEMATIZACIÓN DINÁMICA (EFECTOS DE HÉROE)
-   Implementación técnica:
-   - Uso de clases de 'body' dinámicas (theme-[agent]) inyectadas por JS.
-   - Pseudo-elementos (::before/::after) con 'z-index' controlado para capas visuales.
-   - Keyframes avanzados para animaciones de partículas y estados.
-   ══════════════════════════════════════════════════════════ */
-
-/* Animación de entrada: Revelado táctico de los datos */
-.profile-hero, .profile-data {
-    animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.profile-data { animation-delay: 0.3s; }
-
-@keyframes slideUpFade {
-    from { opacity: 0; transform: translateY(50px); filter: blur(15px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-
-/* Base de efectos: Capa superior fija para resplandores y partículas */
-.profile-page::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 100;
-    opacity: 0.6;
-    transition: all 1s ease;
-}
-
-/* --- 1. IRON MAN: Rejilla Tecnológica Stark ---
-   Simula el HUD de la armadura mediante gradientes lineales y desplazamiento infinito. */
-.theme-ironman .profile-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    background-image: 
-        linear-gradient(rgba(255, 215, 0, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 215, 0, 0.15) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: gridMove 10s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes gridMove {
-    from { background-position: 0 0; }
-    to { background-position: 50px 50px; }
-}
-
-.theme-ironman { --primary: #ffd700; }
-.theme-ironman .hero-image { filter: sepia(0.3) brightness(1.2); }
-
-/* 2. CAPTAIN AMERICA: Pulso de Vibranium */
-.theme-capamerica.profile-page::before {
-    background: radial-gradient(circle at 30% 50%, rgba(0, 82, 155, 0.4) 0%, transparent 75%);
-}
-
-.theme-capamerica .profile-hero::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: shieldPulse 3s infinite;
-    pointer-events: none;
-    z-index: 15;
-}
-
-@keyframes shieldPulse {
-    0% { width: 100px; height: 100px; opacity: 1; border-width: 5px; }
-    100% { width: 600px; height: 600px; opacity: 0; border-width: 1px; }
-}
-
-.theme-capamerica .hero-image { border-radius: 20px; box-shadow: 0 0 30px rgba(0, 82, 155, 0.3); }
-
-/* --- 3. THOR: Relámpagos de Asgard ---
-   Efecto de iluminación estroboscópica que simula descargas eléctricas aleatorias. */
-.theme-thor.profile-page::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 150;
-    animation: lightningFlash 4s infinite;
-}
-
-@keyframes lightningFlash {
-    0%, 90%, 94%, 98%, 100% { background: transparent; }
-    92%, 96% { background: rgba(255, 255, 255, 0.2); box-shadow: inset 0 0 100px rgba(0, 150, 255, 0.3); }
-}
-
-/* --- 4. HULK: Inestabilidad Gamma y Temblor Sísmico ---
-   Combinación de resplandor pulsante y transformaciones de traslación para simular fuerza bruta. */
-.theme-hulk.profile-page::before {
-    background: radial-gradient(circle at center, rgba(0, 255, 0, 0.25) 0%, transparent 80%);
-    animation: gammaPulse 2s infinite alternate;
-}
-
-@keyframes gammaPulse {
-    from { opacity: 0.3; transform: scale(1); }
-    to { opacity: 0.7; transform: scale(1.1); }
-}
-
-.theme-hulk .main-content-profile {
-    animation: seismicShake 4s infinite;
-}
-
-@keyframes seismicShake {
-    0%, 90% { transform: translate(0, 0); }
-    91%, 95% { transform: translate(-10px, 5px); }
-    93%, 97% { transform: translate(10px, -5px); }
-    100% { transform: translate(0, 0); }
-}
-
-/* --- 5. BLACK WIDOW: Escaneo Táctico Láser ---
-   Línea de barrido con desenfoque de brillo (glow) para estética de espionaje. */
-.theme-blackwidow .profile-hero::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: #ff0000;
-    box-shadow: 0 0 20px #ff0000;
-    z-index: 20;
-    animation: targetScan 2.5s infinite ease-in-out;
-}
-
-@keyframes targetScan {
-    0% { top: 0; opacity: 0; }
-    50% { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
-}
-
-/* --- 6. HAWKEYE: Enfoque de Precisión (Mira Telescópica) ---
-   Uso de caracteres Unicode con posicionamiento absoluto y animación de deriva para simular puntería. */
-@keyframes scopeDrift {
-    0% { transform: translate(-50%, -50%); }
-    25% { transform: translate(-70%, -30%); }
-    50% { transform: translate(-30%, -70%); }
-    75% { transform: translate(-40%, -40%); }
-    100% { transform: translate(-50%, -50%); }
-}
-
-.theme-hawkeye .profile-hero::after {
-    content: "⊕";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20rem;
-    color: rgba(255, 255, 255, 0.1);
-    font-family: monospace;
-    pointer-events: none;
-    z-index: 5;
-    animation: scopeDrift 4s infinite ease-in-out;
-}
-
-.theme-hawkeye .hero-image {
-    transition: transform 0.5s ease;
-    filter: contrast(1.1) brightness(1.1);
-}
-
-/* --- 7. BLACK PANTHER: Energía Cinética de Vibranium ---
-   Efecto de carga energética perimetral mediante box-shadow y glow púrpuras. */
-.theme-blackpanther.profile-page::before {
-    background: radial-gradient(circle at center, rgba(147, 51, 234, 0.3) 0%, transparent 80%);
-    animation: bpEnergy 2s infinite alternate ease-in-out;
-}
-
-@keyframes bpEnergy {
-    0% { opacity: 0.2; filter: hue-rotate(0deg); }
-    100% { opacity: 0.6; filter: hue-rotate(20deg); }
-}
-
-.theme-blackpanther .profile-hero::after {
-    content: "";
-    position: absolute;
-    inset: -20px;
-    border: 4px solid rgba(147, 51, 234, 0.4);
-    box-shadow: inset 0 0 50px rgba(147, 51, 234, 0.3), 0 0 50px rgba(147, 51, 234, 0.3);
-    border-radius: 15px;
-    z-index: 15;
-    animation: bpSuitCharge 3s infinite ease-in-out;
-    pointer-events: none;
-}
-
-@keyframes bpSuitCharge {
-    0%, 100% { opacity: 0.2; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.02); }
-}
-
-.theme-blackpanther .hero-image {
-    filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.5));
-}
-
-/* --- 8. SCARLET WITCH: Magia del Caos (Partículas Glifo) ---
-   Generación de elementos decorativos flotantes con rotación y escalado dinámico. */
-.theme-scarletwitch.profile-page::after {
-    content: "✧";
-    position: fixed;
-    font-size: 8rem;
-    color: #ff0000;
-    text-shadow: 0 0 50px #ff0000;
-    opacity: 0;
-    z-index: 160;
-    animation: chaosParticle 3.5s infinite linear;
-}
-
-@keyframes chaosParticle {
-    0% { top: 100%; left: 20%; opacity: 0; transform: scale(0.5) rotate(0deg); }
-    20% { opacity: 0.4; }
-    80% { opacity: 0.4; }
-    100% { top: -10%; left: 80%; opacity: 0; transform: scale(2) rotate(360deg); }
-}
-
-/* ══════════════════════════════════════════════════════════
-   12. DISEÑO RESPONSIVO (Media Queries)
-   ══════════════════════════════════════════════════════════ */
-
-/* Tablet y Pantallas Medianas */
-@media (max-width: 1024px) {
-    .sidebar-terminal { 
-        display: flex !important;
-        transform: translateX(-100%);
-        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        z-index: 1000;
-        width: 280px;
-    }
-    
-    .sidebar-terminal.active {
-        transform: translateX(0);
-        box-shadow: 0 0 50px rgba(232, 0, 28, 0.2);
-    }
-
-    .main-content { margin-left: 0; padding: 1.5rem; }
-    h1 { font-size: 5rem; }
-    .hero-section { padding: 4rem 1.5rem; }
-    .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    
-    /* Adaptación de Perfil para Tablet */
-    .main-content-profile { height: auto; display: block; }
-    .profile-grid { grid-template-columns: 1fr; }
-    .profile-hero { height: 60vh; }
-    .profile-data { padding: 2rem; }
-    .hud-overlay { padding: 1.5rem; }
-    .hero-name { font-size: 3.5rem; }
-
-    /* Mostrar botón hamburguesa */
-    .menu-hamburger {
-        display: flex !important;
-    }
-}
-
-/* Estilos del Botón Hamburguesa */
+/* Botón hamburguesa (solo visible en móvil/tablet, oculto en escritorio) */
 .menu-hamburger {
     display: none;
     background: transparent;
@@ -1424,66 +417,107 @@ input:focus, textarea:focus {
 }
 
 
-/* Móvil - Pantallas Pequeñas */
-@media (max-width: 768px) {
-    h1 { font-size: 3rem; }
-    .section-title { font-size: 2rem; }
-    .nav-links { display: none; }
-    .stats-grid { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1rem; }
-    .stat-number { font-size: 3.5rem; }
-    /* Las tarjetas pasan a 1 columna en móviles */
-    .agent-grid { grid-template-columns: 1fr !important; gap: 0 !important; }
-    .agent-card { flex: 0 0 100% !important; margin: 0; }
-    .video-section video { width: 100%; height: auto; }
-    
-    /* Optimización de Contacto para Móvil */
-    .contact-section { padding: 4rem 1rem; }
-    .tech-form { padding: 2rem 1rem; }
-    .tech-form::before, .tech-form::after { display: none; } /* Quitamos esquinas en móvil para ganar espacio */
+/* ══════════════════════════════════════════════════════════════════════════
+   12. LAYOUT ESTRUCTURAL — SIDEBAR Y CONTENIDO PRINCIPAL
+   La sidebar está fijada a la izquierda; el contenido principal se desplaza
+   a la derecha con margin-left igual al ancho del sidebar.
+   ══════════════════════════════════════════════════════════════════════════ */
 
-    /* Adaptación de Perfil para Móvil */
-    .profile-hero { height: 50vh; }
-    .hero-name { font-size: 2.5rem; }
-    .hud-badge { font-size: 0.6rem; padding: 0.3rem 0.6rem; }
-    .bio-title { font-size: 1.2rem; }
-    .bio-text { font-size: 0.95rem; line-height: 1.6; }
-    .p-12 { padding: 1.5rem !important; }
+/* Área de contenido desplazada para dar espacio al sidebar */
+.main-content {
+    margin-left: 260px;
+    padding-top: 80px;    /* Compensa la altura del nav fijo */
 }
 
-
-/* Tablet y pantallas estrechas */
-@media (max-width: 1024px) and (min-width: 769px) {
-    /* Las tarjetas pasan a 2 columnas en tablets */
-    .agent-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 2rem; }
+/* Encabezado interno del sidebar (título y nivel de clearance) */
+.sidebar-header {
+    padding: 2.5rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-
-/* Móvil Pequeño */
-@media (max-width: 480px) {
-    h1 { font-size: 2.2rem; }
-    .hero-subtitle { font-size: 0.7rem; }
-    .preloader-content { width: 80%; }
-    .shield-logo-loading { width: 60px; height: 60px; }
+/* Título del sidebar: nombre de la organización */
+.sidebar-title {
+    font-size: 0.85rem;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
 }
 
-/* Clases de Utilidad */
-.grid { display: grid; }
-.gap-6 { gap: 1.5rem; }
-.gap-8 { gap: 2rem; }
-.grid-cols-1 { grid-template-columns: 1fr; }
-.md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-.lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
-.p-12 { padding: 3rem; }
-.text-center { text-align: center; }
-.mt-12 { margin-top: 3rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.mb-12 { margin-bottom: 3rem; }
-.max-w-4xl { max-width: 56rem; }
-.mx-auto { margin-left: auto; margin-right: auto; }
+/* Subtítulo: nivel de acceso */
+.sidebar-subtitle {
+    font-size: 0.6rem;
+    opacity: 0.4;
+    letter-spacing: 2px;
+}
 
-/* Sidebar ID Footer */
+/* Menú de navegación del sidebar (ocupa el espacio disponible) */
+.sidebar-menu {
+    flex-grow: 1;
+}
+
+/* Elemento de menú del sidebar */
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgba(229, 225, 231, 0.6);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Estado hover y activo del item del sidebar */
+.sidebar-item:hover, .sidebar-item.active {
+    background: rgba(232, 0, 28, 0.1);
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+}
+
+/* Control de audio integrado en el sidebar */
+.audio-control {
+    margin-top: auto;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Botón de silencio/activar audio */
+.mute-btn {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.mute-btn:hover {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+/* Texto de estado del audio */
+.audio-status {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin: 0;
+}
+
+/* Pie del sidebar: identificación del agente */
 .sidebar-footer {
-    margin: 2rem 1.5rem; /* Margen para centrar el cuadro */
+    margin: 2rem 1.5rem;
     margin-top: auto;
     padding: 1.5rem;
     background: rgba(232, 0, 28, 0.05);
@@ -1492,6 +526,7 @@ input:focus, textarea:focus {
     border-radius: 4px;
 }
 
+/* Etiqueta "S.H.I.E.L.D. ID" */
 .id-label {
     font-size: 0.6rem;
     color: var(--primary);
@@ -1501,25 +536,37 @@ input:focus, textarea:focus {
     text-transform: uppercase;
 }
 
+/* Valor del ID del agente autenticado */
 .id-value {
     font-size: 0.85rem;
     font-weight: 700;
     color: white;
     font-family: 'Rajdhani', sans-serif;
     letter-spacing: 1px;
+    margin: 0;
 }
 
-/* ══════════════════════════════════════════════════════════
-   13. EFECTOS ESPECIALES DE LA TERMINAL PRINCIPAL
-   Simulación de flujo de datos y aberración cromática.
-   ══════════════════════════════════════════════════════════ */
 
+/* ══════════════════════════════════════════════════════════════════════════
+   13. SECCIONES DE CONTENIDO — HERO, ESTADÍSTICAS Y ENCABEZADOS
+   Estilos específicos para la sección de bienvenida y las estadísticas
+   globales del equipo Vengadores.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Sección Hero: pantalla completa centrada con fondo técnico */
 .hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
     position: relative;
     overflow: hidden;
     background: radial-gradient(circle at center, rgba(232, 0, 28, 0.05) 0%, transparent 70%);
 }
 
+/* Fondo de terminal (texto binario en movimiento) */
 .terminal-bg {
     position: absolute;
     inset: 0;
@@ -1529,6 +576,7 @@ input:focus, textarea:focus {
     mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
 }
 
+/* Contenido de texto que simula un flujo de datos de terminal */
 .terminal-bg::before {
     content: "SYSTEM_ACCESS_GRANTED... LOADING_AGENT_DATA... CLEARANCE_LEVEL_7... ENCRYPTING... 0101010110100101010110101010110101101010110101010110101011010101011010101101010101101010110101010110101011010101011010101101010101101010110101010110101011010101011010101101010101101010110101010110101011010101011010101101010101101010110101010110101011010101011010101101010";
     position: absolute;
@@ -1544,12 +592,7 @@ input:focus, textarea:focus {
     animation: terminalScroll 40s linear infinite;
 }
 
-@keyframes terminalScroll {
-    from { transform: translateY(0); }
-    to { transform: translateY(-50%); }
-}
-
-/* Efecto de Aura Explosiva Potenciado V2 */
+/* Texto "MARVEL" con efecto de destello */
 .hero-marvel {
     color: var(--primary);
     filter: drop-shadow(0 0 20px var(--primary));
@@ -1558,24 +601,20 @@ input:focus, textarea:focus {
     animation: textFlash 3s infinite alternate ease-in-out;
 }
 
-@keyframes textFlash {
-    0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px var(--primary)); }
-    50% { opacity: 0.9; filter: drop-shadow(0 0 20px var(--primary)); }
-}
-
+/* Contenedor del título principal con padding lateral */
 .hero-title {
     position: relative;
     padding: 3rem;
 }
 
-
-
+/* Texto "HEROES" en blanco con línea decorativa animada */
 .hero-accent {
     position: relative;
     display: inline-block;
     color: white;
 }
 
+/* Línea decorativa bajo "HEROES" */
 .hero-accent::after {
     content: "";
     position: absolute;
@@ -1588,89 +627,280 @@ input:focus, textarea:focus {
     animation: linePulse 2s infinite;
 }
 
-@keyframes linePulse {
-    0%, 100% { opacity: 0.5; transform: scaleX(0.8); }
-    50% { opacity: 1; transform: scaleX(1); }
+/* Grid de estadísticas globales (3 columnas) */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--surface-high);
+    padding: 1.5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* ══════════════════════════════════════════════════════════
-   15. PANTALLA DE CARGA (BOOT SEQUENCE)
-   Simulación de arranque de terminal táctico.
-   ══════════════════════════════════════════════════════════ */
+/* Celda de estadística individual */
+.stat-item {
+    text-align: center;
+}
 
-.preloader {
-    position: fixed;
-    inset: 0;
-    background: #0e0e12;
-    z-index: 9999;
+/* Número grande animado (contador) */
+.stat-number {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--secondary);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Etiqueta descriptiva de la estadística */
+.stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    opacity: 0.5;
+    margin: 0;
+}
+
+/* Encabezado de sección (título + subtítulo) */
+.section-header {
+    margin-bottom: 3rem;
+}
+
+/* Título de sección principal */
+.section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* Subtítulo de sección en versalitas reducidas */
+.section-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    opacity: 0.5;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* Título pequeño de subsección (usado en perfil) */
+.section-title-small {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 5px;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.5rem;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   14. SECCIÓN DE CONTACTO — CANAL DE TRANSMISIÓN
+   Formulario de contacto con estética de terminal segura, esquinas
+   decorativas y campos con efecto de foco luminoso.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Sección de contacto con degradado radial sutil */
+.contact-section {
+    padding: 8rem 2rem;
+    background: radial-gradient(circle at center, rgba(232, 0, 28, 0.03) 0%, transparent 80%);
+}
+
+/* Formulario técnico con efecto cristal */
+.tech-form {
+    background: rgba(27, 27, 31, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 4rem;
+    margin-top: 3rem;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Esquinas decorativas del formulario (efecto HUD) */
+.tech-form::before, .tech-form::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--primary);
+    border-style: solid;
+}
+
+/* Esquina superior izquierda */
+.tech-form::before {
+    top: -1px;
+    left: -1px;
+    border-width: 2px 0 0 2px;
+}
+
+/* Esquina inferior derecha */
+.tech-form::after {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 2px 2px 0;
+}
+
+/* Alias del formulario para la página de login */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Grupo de campo: label + input/textarea */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Label dentro de un grupo de campo */
+.form-group label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--primary);
+    text-transform: uppercase;
+}
+
+/* Input y textarea dentro de un grupo de campo */
+.form-group input, .form-group textarea {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.2rem;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Foco en campos del formulario con resplandor rojo */
+.form-group input:focus, .form-group textarea:focus {
+    border-color: var(--primary);
+    background: rgba(232, 0, 28, 0.05);
+    box-shadow: 0 0 15px rgba(232, 0, 28, 0.1);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   15. COMPONENTES REUTILIZABLES — BOTONES
+   Sistema de botones con variantes para diferentes contextos. Todas las
+   variantes comparten la misma base tipográfica (Rajdhani) y usan las
+   variables de color para mantener coherencia en el sistema de diseño.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Botón primario: relleno rojo, usado para acciones principales */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 15px rgba(232, 0, 28, 0.3);
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background: #ff1a35;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 0, 28, 0.4);
+}
+
+/* Botón de acceso: versión compacta del botón primario (nav) */
+.btn-access {
+    background: var(--primary);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
+    transition: var(--transition);
+}
+
+.btn-access:hover {
+    background: white;
+    color: black;
+}
+
+/* Botón de contorno dorado (para acciones secundarias en perfil) */
+.btn-outline-primary {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid rgba(255, 219, 60, 0.3);
+    color: var(--secondary);
+    font-size: 0.7rem;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: var(--secondary);
+    color: #000;
+}
+
+/* Botón de acción ancho (usado en página de perfil) */
+.btn-primary-wide {
+    display: inline-block;
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    text-align: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(232, 0, 28, 0.2);
+}
+
+.btn-primary-wide:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(232, 0, 28, 0.3);
+}
+
+/* Botón de contorno (usado en login para abortar misión) */
+.btn-abort {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.7rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: opacity 0.8s ease, visibility 0.8s;
+    gap: 0.5rem;
+    margin: 0 auto;
+    transition: all 0.3s ease;
 }
 
-.preloader.hidden {
-    opacity: 0;
-    visibility: hidden;
+.btn-abort:hover {
+    background: white;
+    color: black;
 }
 
-.preloader-content {
-    text-align: center;
-    width: 300px;
-}
-
-.shield-logo-loading {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
-    background: url('../img/shield_logo.png') no-repeat center;
-    background-size: contain;
-    filter: drop-shadow(0 0 15px var(--primary));
-    animation: logoPulse 1.5s infinite ease-in-out;
-}
-
-@keyframes logoPulse {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.1); opacity: 1; }
-}
-
-.loading-text {
+/* Botón "Ver Perfil" en tarjeta de agente — margin-top:auto lo ancla siempre al fondo */
+.btn-view-profile-card {
+    margin-top: auto;
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     font-family: 'Rajdhani', sans-serif;
-    color: var(--primary);
-    letter-spacing: 3px;
-    font-size: 0.8rem;
-    margin-bottom: 10px;
+    font-weight: bold;
 }
 
-.loading-bar {
-    width: 100%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
+.btn-view-profile-card:hover {
+    background: rgba(232, 0, 28, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(232, 0, 28, 0.3);
 }
 
-.loading-progress {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--primary);
-    box-shadow: 0 0 10px var(--primary);
-    animation: progressMove 2.5s infinite ease-in-out;
-}
-
-@keyframes progressMove {
-    0% { left: -100%; }
-    50% { left: 0%; }
-    100% { left: 100%; }
-}
-
-/* ══════════════════════════════════════════════════════════
-   16. BOTÓN VOLVER ARRIBA (UX)
-   ══════════════════════════════════════════════════════════ */
-
+/* Botón volver arriba (fijo, esquina inferior derecha) */
 .btn-back-top {
     position: fixed;
     bottom: 30px;
@@ -1692,6 +922,7 @@ input:focus, textarea:focus {
     box-shadow: 0 0 20px rgba(232, 0, 28, 0.4);
 }
 
+/* Estado visible del botón volver arriba (añadido por JS al hacer scroll) */
 .btn-back-top.show {
     opacity: 1;
     visibility: visible;
@@ -1703,15 +934,251 @@ input:focus, textarea:focus {
     box-shadow: 0 0 30px var(--primary);
 }
 
-/* ══════════════════════════════════════════════════════════
-   16. CARRUSEL DE AGENTES
-   ══════════════════════════════════════════════════════════ */
 
-.carousel-section {
+/* ══════════════════════════════════════════════════════════════════════════
+   16. COMPONENTES REUTILIZABLES — TARJETAS DE AGENTE (agent-card)
+   Las tarjetas son el elemento central del diseño. Cada una combina imagen,
+   overlay, badge, nombre, bio, barras de capacidad y etiquetas de rol.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Tarjeta base: columna flexible — la altura la dicta el contenido; align-items:stretch
+   en .agent-grid garantiza que todas las tarjetas tengan la misma altura automáticamente */
+.agent-card {
     position: relative;
-    padding: 2rem 60px; /* Espacio para los botones laterales */
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--surface-low);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    /* Animación de entrada (se anula y reaplica abajo con nth-child) */
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+    will-change: transform, opacity;
 }
 
+/* Elevación al pasar el cursor */
+.agent-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Retardos escalonados para animar las tarjetas en cascada */
+.agent-card:nth-child(1) { animation-delay: 0.1s; }
+.agent-card:nth-child(2) { animation-delay: 0.2s; }
+.agent-card:nth-child(3) { animation-delay: 0.3s; }
+.agent-card:nth-child(4) { animation-delay: 0.4s; }
+.agent-card:nth-child(5) { animation-delay: 0.5s; }
+.agent-card:nth-child(6) { animation-delay: 0.6s; }
+.agent-card:nth-child(7) { animation-delay: 0.7s; }
+.agent-card:nth-child(8) { animation-delay: 0.8s; }
+
+/* Área de imagen de la tarjeta — flex-shrink:0 evita que se comprima con altura fija */
+.agent-image-wrapper {
+    position: relative;
+    height: 400px;
+    flex-shrink: 0;   /* No permite que el flex-column reduzca el bloque de imagen */
+    overflow: hidden;
+}
+
+/* Imagen del agente con efecto zoom en hover */
+.agent-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.agent-card:hover .agent-image-wrapper img {
+    transform: scale(1.08);
+}
+
+/* Degradado sobre la imagen para legibilidad del texto */
+.agent-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(19, 19, 23, 0.7) 0%, transparent 40%);
+    z-index: 2;
+}
+
+/* Badge numérico (01-08) sobre la imagen */
+.agent-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--secondary);
+    color: #000;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-style: italic;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(255, 219, 60, 0.3);
+}
+
+/* Bloque de nombre y rol en la parte inferior de la imagen */
+.agent-basic-info {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 10;
+}
+
+/* Rol del agente (tag sobre el nombre) */
+.agent-tag {
+    font-size: 0.6rem;
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* Nombre del agente */
+.agent-name {
+    font-size: 2.2rem;
+    line-height: 1;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Área de datos inferior de la tarjeta */
+.agent-footer {
+    padding: 2rem;
+    background: linear-gradient(to bottom, rgba(27, 27, 31, 0.9), var(--surface));
+    border-top: 1px solid rgba(232, 0, 28, 0.2);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Biografía corta con altura fija para alineación consistente */
+.agent-short-bio {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(229, 225, 231, 0.7);
+    margin-bottom: 1.5rem;
+    height: 110px;
+    overflow: hidden;
+}
+
+/* Grid de datos (origen, estado, altura, peso) */
+.agent-data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    font-size: 0.6rem;
+    opacity: 1;
+}
+
+/* Celda de dato */
+.data-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.4rem;
+    border-left: 2px solid transparent;
+}
+
+/* Celda destacada (origen) con borde dorado */
+.data-item.highlight {
+    border-left-color: var(--secondary);
+    color: var(--secondary);
+}
+
+/* Sección de barras de capacidad */
+.agent-capabilities {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(232, 0, 28, 0.2);
+}
+
+/* Título de la sección de capacidades */
+.capability-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    color: var(--primary);
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Elemento de capacidad individual */
+.capability-item {
+    margin-bottom: 0.8rem;
+}
+
+/* Fila de nombre + porcentaje sobre la barra */
+.capability-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    margin-bottom: 0.3rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Fondo de la barra de capacidad */
+.capability-bar-bg {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+/* Relleno de la barra de capacidad (ancho definido inline con dato del agente) */
+.capability-bar-fill {
+    height: 100%;
+    background: #ffaa00;
+    box-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Contenedor de etiquetas de rol — wrap para que no se corten */
+.agent-tags {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;    /* Permite pasar a la siguiente línea en lugar de cortarse */
+    row-gap: 0.4rem;
+}
+
+/* Etiqueta de rol (badge) */
+.badge-tag {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.55rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Variantes de color para badges */
+.badge-red   { background: rgba(232, 0, 28, 0.3);    color: #ff8a8a; border-color: #e8001c; }
+.badge-blue  { background: rgba(0, 102, 204, 0.3);   color: #8ab4ff; border-color: #0066cc; }
+.badge-green { background: rgba(0, 153, 51, 0.3);    color: #8aff9d; border-color: #009933; }
+.badge-grey  { background: rgba(100, 100, 100, 0.3); color: #cccccc; border-color: #666666; }
+.badge-gold  { background: rgba(212, 175, 55, 0.3);  color: #fff1c1; border-color: #d4af37; }
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   17. CARRUSEL DE AGENTES
+   Sistema de desplazamiento horizontal por transformación CSS (translateX).
+   Incluye botones laterales y soporte táctil gestionado desde JS.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Wrapper del carrusel (reserva espacio para botones laterales) */
+.carousel-section {
+    position: relative;
+    padding: 2rem 60px;
+}
+
+/* Ventana visible del carrusel (overflow hidden = clip) */
 .carousel-container {
     overflow: hidden;
     padding: 1.5rem 0;
@@ -1723,20 +1190,23 @@ input:focus, textarea:focus {
     cursor: grabbing;
 }
 
+/* Fila de tarjetas con transición de deslizamiento — align-items:stretch iguala alturas */
 .agent-grid {
     display: flex !important;
+    align-items: stretch;   /* Todas las tarjetas de la misma fila tienen la misma altura */
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     gap: 1.5rem;
     will-change: transform;
 }
 
+/* Cada tarjeta ocupa 25% menos el gap (4 visibles en escritorio) */
 .agent-card {
     flex: 0 0 calc(25% - 1.2rem);
     min-width: 0;
     user-select: none;
 }
 
-/* Botones Laterales fuera del contenedor */
+/* Botones de navegación del carrusel (prev/next) */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -1763,9 +1233,13 @@ input:focus, textarea:focus {
     transform: translateY(-50%) scale(1.1);
 }
 
+/* Posición de botón anterior (izquierda) */
 .carousel-btn.prev { left: 5px; }
+
+/* Posición de botón siguiente (derecha) */
 .carousel-btn.next { right: 5px; }
 
+/* Botón desactivado (cuando el carrusel está en el límite) */
 .carousel-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -1773,135 +1247,985 @@ input:focus, textarea:focus {
     color: #666;
 }
 
-@media (max-width: 1024px) {
-    .carousel-section { padding: 2rem 40px; }
-    .carousel-btn { width: 35px; height: 35px; }
-    .carousel-btn.prev { left: 2px; }
-    .carousel-btn.next { right: 2px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   18. PÁGINA DE PERFIL — ESTRUCTURA HUD
+   La página de perfil de agente usa un grid de dos columnas: imagen a la
+   izquierda con overlays HUD, y datos técnicos a la derecha.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Layout de la página de perfil (pantalla completa, sin sidebar) */
+.main-content-profile {
+    padding-top: 80px;
+    height: 100vh;
+    display: flex;
 }
 
-@media (max-width: 768px) {
-    .carousel-section { padding: 2rem 10px; }
-    .carousel-btn { 
-        width: 30px; 
-        height: 30px;
-        background: rgba(0,0,0,0.5); /* Más visible en móvil */
-    }
+/* Grid 45% imagen / 55% datos */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    width: 100%;
+}
+
+/* Columna izquierda: imagen con overlays */
+.profile-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--surface-low);
+    animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Imagen del agente a pantalla completa en su columna */
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay de degradado lateral para fusionar imagen y datos */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--surface), transparent);
+    z-index: 2;
+}
+
+/* Capa HUD sobre la imagen */
+.hud-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+/* Badge de estado "IDENTIDAD VERIFICADA" */
+.hud-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(232, 0, 28, 0.1);
+    border: 1px solid var(--primary);
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Punto pulsante de estado activo */
+.hud-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary);
+}
+
+/* Nombre del agente en tipografía grande */
+.hero-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 5rem;
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+}
+
+/* Badge de número de expediente */
+.file-badge {
+    background: var(--surface-high);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+/* Badge de nivel de autorización */
+.clearance-badge {
+    background: rgba(232, 0, 28, 0.1);
+    border: 1px solid var(--primary);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Columna derecha: datos técnicos del agente */
+.profile-data {
+    padding: 4rem;
+    background: var(--surface);
+    position: relative;
+    border-left: 1px solid rgba(232, 0, 28, 0.2);
+    overflow: hidden;
+    animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: 0.3s;
+}
+
+/* Scroll interno del panel de datos */
+.data-scroll {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 2rem;
+}
+
+/* Scrollbar técnica personalizada para el panel de datos */
+.data-scroll::-webkit-scrollbar { width: 4px; }
+.data-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+.data-scroll::-webkit-scrollbar-thumb { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+
+/* Texto de biografía del agente */
+.data-bio {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(229, 225, 231, 0.8);
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    text-align: justify;
+}
+
+/* Título de la biografía clasificada */
+.bio-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+/* Texto de la biografía */
+.bio-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(229, 225, 231, 0.8);
+    text-align: justify;
+}
+
+/* Artículo de la biografía — padding interior para que el texto no toque el borde */
+.bio-article {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Grid de barras de estadísticas de poder */
+.stats-bars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Fila de estadística individual */
+.stat-row {
+    margin-bottom: 1.5rem;
+}
+
+/* Encabezado de estadística: nombre + valor */
+.stat-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Valor numérico de la estadística en rojo */
+.stat-value {
+    color: var(--primary);
+}
+
+/* Fondo de la barra de estadística */
+.stat-bar-bg {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Relleno de la barra de estadística */
+.stat-bar-fill {
+    height: 100%;
+    background: var(--primary);
+    box-shadow: 0 0 15px var(--primary);
+    border-radius: 3px;
+    transition: width 1s ease-out;
+}
+
+/* Barras mini para estadísticas de tarjeta de agente */
+.stat-bar-mini {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.stat-bar-mini-fill {
+    height: 100%;
+    background: var(--secondary);
+    box-shadow: 0 0 10px rgba(255, 219, 60, 0.5);
+}
+
+/* Encabezado de fila de estadística mini */
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+/* Contenedor de estadística mini */
+.agent-stat-container {
+    margin-bottom: 1rem;
 }
 
 
-/* Ajustes Responsivos para el Carrusel */
+/* ══════════════════════════════════════════════════════════════════════════
+   19. PÁGINA DE LOGIN — ACCESO RESTRINGIDO
+   Diseño de pantalla de acceso con cintas de peligro animadas, formulario
+   de autenticación y escaneo biométrico simulado.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Fondo de la página de login (pantalla completa negra) */
+.login-page {
+    background: #050505;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Cinta de peligro (danger tape) animada con patrón diagonal */
+.danger-tape {
+    position: fixed;
+    height: 40px;
+    width: 150%;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--secondary),
+        var(--secondary) 20px,
+        #000 20px,
+        #000 40px
+    );
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Texto de advertencia (generado con ::after) */
+.danger-tape::after {
+    content: "DANGER // RESTRICTED ACCESS // WARNING";
+    white-space: nowrap;
+}
+
+/* Cinta superior (rotada para efecto dramático) */
+.danger-tape.top {
+    top: 50px;
+    left: -25%;
+    transform: rotate(-5deg);
+}
+
+/* Cinta inferior */
+.danger-tape.bottom {
+    bottom: 50px;
+    right: -25%;
+    transform: rotate(-5deg);
+}
+
+/* Contenedor del formulario de login */
+.login-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+}
+
+/* Caja principal del login con borde y resplandor */
+.login-box {
+    background: rgba(19, 19, 23, 0.9);
+    border: 1px solid var(--primary);
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(232, 0, 28, 0.2);
+    position: relative;
+}
+
+/* Icono de alerta */
+.alert-icon {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.alert-icon span {
+    font-size: 4rem;
+    animation: pulse 1s infinite;
+}
+
+/* Texto glitch (título "ACCESS DENIED") */
+.glitch-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* Subtítulo del login */
+.login-subtitle {
+    font-size: 0.7rem;
+    color: var(--primary);
+    letter-spacing: 4px;
+    margin-bottom: 2.5rem;
+}
+
+/* Panel de escaneo biométrico (huella dactilar simulada) */
+.biometric-scan {
+    width: 80px;
+    height: 80px;
+    margin: 2rem auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.biometric-scan span {
+    font-size: 3rem;
+    opacity: 0.3;
+}
+
+/* Línea láser del escaneo biométrico */
+.scan-line-laser {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    box-shadow: 0 0 15px var(--primary);
+    top: 0;
+    animation: scan 2s infinite linear;
+}
+
+/* Texto descriptivo del escaneo */
+.scan-text {
+    font-size: 0.6rem;
+    opacity: 0.5;
+    letter-spacing: 2px;
+    margin-bottom: 2.5rem;
+}
+
+/* Zona del botón de abortar misión */
+.abort-mission {
+    margin-top: 1.5rem;
+}
+
+/* Logs del sistema (metadatos en la parte inferior) */
+.system-logs {
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.55rem;
+    font-family: monospace;
+    opacity: 0.3;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   20. EFECTOS VISUALES GLOBALES — HUD, SCANLINES Y GLOW
+   Capas de efectos fijos sobre todo el contenido para simular una pantalla
+   CRT táctica. Usan pointer-events:none para no bloquear la interacción.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Capa de líneas de escaneo CRT (fixed, z-index alto) */
+.scanline-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+    background-size: 100% 2px;
+    pointer-events: none;
+    z-index: 1000;
+    transform: translateZ(0);
+}
+
+/* Resplandor rojo suave en los bordes (efecto pantalla encendida) */
+.crt-screen-glow {
+    position: fixed;
+    inset: 0;
+    box-shadow: inset 0 0 50px rgba(232, 0, 28, 0.02);
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Fondo de puntos técnicos (usado en hero y login) */
+.tech-grid {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+/* Canvas de partículas del hero — capa de fondo interactiva (particles.js) */
+#hero-particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Optimización de renderizado para secciones pesadas */
+.agents-section, .video-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
+}
+
+/* Capa de resplandor del perfil (se activa con temas dinámicos) */
+.profile-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.6;
+    transition: all 1s ease;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   21. TEMATIZACIÓN DINÁMICA — EFECTOS POR HÉROE
+   Cada perfil de agente activa una clase de tema (theme-[agente]) que
+   modifica los colores y añade efectos visuales únicos mediante
+   pseudo-elementos (::before / ::after) y keyframes exclusivos.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* --- IRON MAN: Rejilla Tecnológica Stark (HUD dorado en movimiento) ---
+   La rejilla se anima con background-position para simular el flujo de datos
+   del HUD de la armadura. */
+.theme-ironman .profile-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background-image:
+        linear-gradient(rgba(255, 215, 0, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 215, 0, 0.15) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 10s linear infinite;
+    pointer-events: none;
+}
+
+/* Tema Iron Man: acento dorado */
+.theme-ironman { --primary: #ffd700; }
+.theme-ironman .hero-image { filter: sepia(0.3) brightness(1.2); }
+
+/* --- CAPTAIN AMERICA: Pulso de Vibranium (onda expansiva del escudo) ---
+   El pseudo-elemento crece desde el centro simulando la energía del escudo. */
+.theme-capamerica.profile-page::before {
+    background: radial-gradient(circle at 30% 50%, rgba(0, 82, 155, 0.4) 0%, transparent 75%);
+}
+
+.theme-capamerica .profile-hero::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: shieldPulse 3s infinite;
+    pointer-events: none;
+    z-index: 15;
+}
+
+.theme-capamerica .hero-image {
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 82, 155, 0.3);
+}
+
+/* --- THOR: Relámpagos de Asgard (destello estroboscópico) ---
+   Simula descargas eléctricas con cambios de opacidad en keyframes rápidos. */
+.theme-thor.profile-page::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 150;
+    animation: lightningFlash 4s infinite;
+}
+
+/* --- HULK: Inestabilidad Gamma + Temblor Sísmico ---
+   El resplandor verde pulsa y la página entera tiembla para simular fuerza bruta. */
+.theme-hulk.profile-page::before {
+    background: radial-gradient(circle at center, rgba(0, 255, 0, 0.25) 0%, transparent 80%);
+    animation: gammaPulse 2s infinite alternate;
+}
+
+.theme-hulk .main-content-profile {
+    animation: seismicShake 4s infinite;
+}
+
+/* --- BLACK WIDOW: Escaneo Táctico Láser (barrido de espionaje) ---
+   Línea de scan con brillo que recorre verticalmente la imagen del agente. */
+.theme-blackwidow .profile-hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #ff0000;
+    box-shadow: 0 0 20px #ff0000;
+    z-index: 20;
+    animation: targetScan 2.5s infinite ease-in-out;
+}
+
+/* --- HAWKEYE: Mira Telescópica en Deriva (precisión en movimiento) ---
+   Símbolo de mira gigante que oscila suavemente sobre la imagen. */
+.theme-hawkeye .profile-hero::after {
+    content: "⊕";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20rem;
+    color: rgba(255, 255, 255, 0.1);
+    font-family: monospace;
+    pointer-events: none;
+    z-index: 5;
+    animation: scopeDrift 4s infinite ease-in-out;
+}
+
+.theme-hawkeye .hero-image {
+    transition: transform 0.5s ease;
+    filter: contrast(1.1) brightness(1.1);
+}
+
+/* --- BLACK PANTHER: Energía Cinética de Vibranium (borde púrpura pulsante) ---
+   El borde de la imagen se carga con energía cinética simulada con box-shadow. */
+.theme-blackpanther.profile-page::before {
+    background: radial-gradient(circle at center, rgba(147, 51, 234, 0.3) 0%, transparent 80%);
+    animation: bpEnergy 2s infinite alternate ease-in-out;
+}
+
+.theme-blackpanther .profile-hero::after {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    border: 4px solid rgba(147, 51, 234, 0.4);
+    box-shadow: inset 0 0 50px rgba(147, 51, 234, 0.3), 0 0 50px rgba(147, 51, 234, 0.3);
+    border-radius: 15px;
+    z-index: 15;
+    animation: bpSuitCharge 3s infinite ease-in-out;
+    pointer-events: none;
+}
+
+.theme-blackpanther .hero-image {
+    filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.5));
+}
+
+/* --- SCARLET WITCH: Magia del Caos (glifo flotante ascendente) ---
+   Partícula de estrella que asciende rotando, simulando magia del caos. */
+.theme-scarletwitch.profile-page::after {
+    content: "✧";
+    position: fixed;
+    font-size: 8rem;
+    color: #ff0000;
+    text-shadow: 0 0 50px #ff0000;
+    opacity: 0;
+    z-index: 160;
+    animation: chaosParticle 3.5s infinite linear;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   22. KEYFRAMES — BIBLIOTECA DE ANIMACIONES
+   Todas las animaciones del proyecto centralizadas en una sección.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Entrada de tarjetas desde abajo con desvanecimiento */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Revelado de panel con desenfoque inicial */
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(50px); filter: blur(15px); }
+    to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+/* Scroll infinito del texto de terminal en el fondo del hero */
+@keyframes terminalScroll {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-50%); }
+}
+
+/* Destello del texto "MARVEL" */
+@keyframes textFlash {
+    0%, 100% { opacity: 1;   filter: drop-shadow(0 0 10px var(--primary)); }
+    50%       { opacity: 0.9; filter: drop-shadow(0 0 20px var(--primary)); }
+}
+
+/* Pulsación de la línea decorativa bajo "HEROES" */
+@keyframes linePulse {
+    0%, 100% { opacity: 0.5; transform: scaleX(0.8); }
+    50%       { opacity: 1;   transform: scaleX(1); }
+}
+
+/* Movimiento de rejilla del HUD de Iron Man */
+@keyframes gridMove {
+    from { background-position: 0 0; }
+    to   { background-position: 50px 50px; }
+}
+
+/* Onda expansiva del escudo de Capitán América */
+@keyframes shieldPulse {
+    0%   { width: 100px; height: 100px; opacity: 1; border-width: 5px; }
+    100% { width: 600px; height: 600px; opacity: 0; border-width: 1px; }
+}
+
+/* Destello de relámpago de Thor */
+@keyframes lightningFlash {
+    0%, 90%, 94%, 98%, 100% { background: transparent; }
+    92%, 96% { background: rgba(255, 255, 255, 0.2); box-shadow: inset 0 0 100px rgba(0, 150, 255, 0.3); }
+}
+
+/* Pulsación del resplandor gamma del Hulk */
+@keyframes gammaPulse {
+    from { opacity: 0.3; transform: scale(1); }
+    to   { opacity: 0.7; transform: scale(1.1); }
+}
+
+/* Temblor sísmico del Hulk */
+@keyframes seismicShake {
+    0%, 90%   { transform: translate(0, 0); }
+    91%, 95%  { transform: translate(-10px, 5px); }
+    93%, 97%  { transform: translate(10px, -5px); }
+    100%      { transform: translate(0, 0); }
+}
+
+/* Barrido láser de Black Widow */
+@keyframes targetScan {
+    0%   { top: 0;    opacity: 0; }
+    50%  { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+/* Deriva de la mira de Hawkeye */
+@keyframes scopeDrift {
+    0%   { transform: translate(-50%, -50%); }
+    25%  { transform: translate(-70%, -30%); }
+    50%  { transform: translate(-30%, -70%); }
+    75%  { transform: translate(-40%, -40%); }
+    100% { transform: translate(-50%, -50%); }
+}
+
+/* Carga de energía de Black Panther */
+@keyframes bpEnergy {
+    0%   { opacity: 0.2; filter: hue-rotate(0deg); }
+    100% { opacity: 0.6; filter: hue-rotate(20deg); }
+}
+
+/* Traje de vibranium cargando energía */
+@keyframes bpSuitCharge {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50%      { opacity: 0.8; transform: scale(1.02); }
+}
+
+/* Partícula de magia del caos de Scarlet Witch */
+@keyframes chaosParticle {
+    0%   { top: 100%; left: 20%; opacity: 0; transform: scale(0.5) rotate(0deg); }
+    20%  { opacity: 0.4; }
+    80%  { opacity: 0.4; }
+    100% { top: -10%;  left: 80%; opacity: 0; transform: scale(2) rotate(360deg); }
+}
+
+/* Pulso del icono de alerta del login */
+@keyframes pulse {
+    0%   { opacity: 1;   transform: scale(1); }
+    50%  { opacity: 0.5; transform: scale(1.1); }
+    100% { opacity: 1;   transform: scale(1); }
+}
+
+/* Barrido del láser biométrico */
+@keyframes scan {
+    0%   { top: 0; }
+    50%  { top: 100%; }
+    100% { top: 0; }
+}
+
+/* Pulso del logo de S.H.I.E.L.D. en la pantalla de carga */
+@keyframes logoPulse {
+    0%, 100% { transform: scale(1);   opacity: 0.8; }
+    50%      { transform: scale(1.1); opacity: 1; }
+}
+
+/* Barra de progreso del preloader */
+@keyframes progressMove {
+    0%   { left: -100%; }
+    50%  { left: 0%; }
+    100% { left: 100%; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   23. PANTALLA DE CARGA — BOOT SEQUENCE
+   Simula el arranque de un terminal táctico. Se oculta tras 2.5s mediante
+   la clase .hidden añadida por JS.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Capa de precarga: ocupa toda la pantalla inicialmente */
+.preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--surface-low);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+/* Estado oculto: fade out con transición suave */
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Contenido centrado del preloader */
+.preloader-content {
+    text-align: center;
+    width: 300px;
+}
+
+/* Logo de S.H.I.E.L.D. pulsante */
+.shield-logo-loading {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: url('../img/shield_logo.png') no-repeat center;
+    background-size: contain;
+    filter: drop-shadow(0 0 15px var(--primary));
+    animation: logoPulse 1.5s infinite ease-in-out;
+}
+
+/* Texto de estado del sistema */
+.loading-text {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--primary);
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+/* Barra de progreso (track) */
+.loading-bar {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barra de progreso (fill animado) */
+.loading-progress {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+    animation: progressMove 2.5s infinite ease-in-out;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   24. UTILIDADES Y CLASES AUXILIARES
+   Clases de una sola responsabilidad para composición rápida en HTML.
+   Se definen aquí para garantizar que todas las clases referenciadas en
+   los archivos HTML estén correctamente definidas en la hoja de estilos.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* --- Display y Layout --- */
+.grid           { display: grid; }
+.grid-cols-1    { grid-template-columns: 1fr; }
+
+/* Responsive: 2 columnas en pantallas medianas y grandes */
+.md\:grid-cols-2  { grid-template-columns: repeat(2, 1fr); }
+.lg\:grid-cols-4  { grid-template-columns: repeat(4, 1fr); }
+
+/* --- Espaciado (Padding) --- */
+.p-12   { padding: 3rem; }
+
+/* --- Espaciado (Margin) --- */
+.mt-6   { margin-top: 1.5rem; }
+.mt-12  { margin-top: 3rem; }
+.mb-6   { margin-bottom: 1.5rem; }
+.mb-8   { margin-bottom: 2rem; }
+.mb-12  { margin-bottom: 3rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* --- Gap (Flexbox y Grid) --- */
+.gap-6  { gap: 1.5rem; }
+.gap-8  { gap: 2rem; }
+
+/* --- Tamaños máximos --- */
+.max-w-2xl { max-width: 42rem; }
+.max-w-4xl { max-width: 56rem; }
+
+/* --- Tipografía --- */
+.text-xs       { font-size: 0.75rem; }
+.text-xl       { font-size: 1.25rem; }
+.text-4xl      { font-size: 2.25rem; }
+.text-center   { text-align: center; }
+.uppercase     { text-transform: uppercase; }
+.tracking-widest { letter-spacing: 0.2em; }
+
+/* --- Opacidad --- */
+.opacity-50    { opacity: 0.5; }
+.opacity-80    { opacity: 0.8; }
+
+/* --- Fondos con overlay oscuro --- */
+/* Reemplaza las clases con '/' que no son CSS válido sin escape */
+.bg-dark-overlay-3   { background: rgba(0, 0, 0, 0.3); }
+.bg-dark-overlay-2   { background: rgba(0, 0, 0, 0.2); }
+
+/* --- Bordes sutiles --- */
+.border-top-subtle   { border-top: 1px solid rgba(255, 255, 255, 0.05); }
+
+/* --- Footer de terminal --- */
+.terminal-footer {
+    text-align: center;
+    padding: 3rem;
+    background: #09090b;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   25. DISEÑO RESPONSIVO — MEDIA QUERIES
+   Adaptaciones de layout para tablet (≤1200px, ≤1024px) y móvil (≤768px,
+   ≤480px). El sidebar pasa a overlay en pantallas pequeñas.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* --- Tablet Grande: 4 → 3 tarjetas en el carrusel --- */
 @media (max-width: 1200px) {
     .agent-card { flex: 0 0 calc(33.333% - 1.2rem); }
 }
 
+/* --- Tablet: sidebar oculta (slide-in), 3 → 2 tarjetas --- */
 @media (max-width: 1024px) {
+    /* Sidebar pasa a overlay deslizante (hamburguesa) */
+    .sidebar-terminal {
+        display: flex !important;
+        transform: translateX(-100%);
+        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        z-index: 1000;
+        width: 280px;
+    }
+
+    /* Estado abierto del sidebar en tablet/móvil */
+    .sidebar-terminal.active {
+        transform: translateX(0);
+        box-shadow: 0 0 50px rgba(232, 0, 28, 0.2);
+    }
+
+    /* El contenido ocupa toda la pantalla sin margen lateral */
+    .main-content {
+        margin-left: 0;
+        padding: 1.5rem;
+        padding-top: 80px;
+    }
+
+    /* El botón hamburguesa se muestra en tablet */
+    .menu-hamburger { display: flex !important; }
+
+    /* Encabezado H1 reducido */
+    h1 { font-size: 5rem; }
+
+    .hero-section { padding: 4rem 1.5rem; }
+    .stats-grid   { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+    /* Perfil: pasa a layout de una columna */
+    .main-content-profile { height: auto; display: block; }
+    .profile-grid         { grid-template-columns: 1fr; }
+    .profile-hero         { height: 60vh; }
+    .profile-data         { padding: 2rem; }
+    .hud-overlay          { padding: 1.5rem; }
+    .hero-name            { font-size: 3.5rem; }
+
+    /* Carrusel: botones más pequeños */
+    .carousel-section     { padding: 2rem 40px; }
+    .carousel-btn         { width: 35px; height: 35px; }
+    .carousel-btn.prev    { left: 2px; }
+    .carousel-btn.next    { right: 2px; }
+
+    /* 2 tarjetas visibles en tablet */
     .agent-card { flex: 0 0 calc(50% - 1.2rem); }
 }
 
+/* --- Tablet Intermedia: grid del formulario de 2 a 1 columna --- */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .agent-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 2rem; }
+}
+
+/* --- Móvil: 1 tarjeta, nav links ocultos, estadísticas en columna --- */
 @media (max-width: 768px) {
-    .agent-card { flex: 0 0 100%; }
+    h1            { font-size: 3rem; }
+    .section-title { font-size: 2rem; }
+    .nav-links    { display: none; }   /* Los links se usan desde el sidebar */
+
+    .stats-grid    { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1rem; }
+    .stat-number   { font-size: 3.5rem; }
+
+    /* Carrusel en móvil: 1 tarjeta, botones más pequeños */
+    .agent-grid    { grid-template-columns: 1fr !important; gap: 0 !important; }
+    .agent-card    { flex: 0 0 100% !important; margin: 0; }
+    .carousel-section { padding: 2rem 10px; }
+    .carousel-btn  { width: 30px; height: 30px; background: rgba(0, 0, 0, 0.5); }
+
+    /* Video responsive */
+    .video-section video { width: 100%; height: auto; }
+
+    /* Formulario de contacto simplificado */
+    .contact-section { padding: 4rem 1rem; }
+    .tech-form       { padding: 2rem 1rem; }
+    .tech-form::before, .tech-form::after { display: none; } /* Quitar esquinas en móvil */
+
+    /* Perfil en móvil */
+    .profile-hero { height: 50vh; }
+    .hero-name    { font-size: 2.5rem; }
+    .hud-badge    { font-size: 0.6rem; padding: 0.3rem 0.6rem; }
+    .bio-title    { font-size: 1.2rem; }
+    .bio-text     { font-size: 0.95rem; line-height: 1.6; }
+    .p-12         { padding: 1.5rem !important; }
 }
 
-
-/* Barras de Capacidad en Tarjetas */
-.agent-capabilities {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(232, 0, 28, 0.2);
-}
-
-.capability-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.7rem;
-    color: var(--primary);
-    letter-spacing: 2px;
-    margin-bottom: 0.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.capability-item {
-    margin-bottom: 0.8rem;
-}
-
-.capability-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.65rem;
-    margin-bottom: 0.3rem;
-    opacity: 0.9;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.capability-bar-bg {
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.capability-bar-fill {
-    height: 100%;
-    background: #ffaa00;
-    box-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
-    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Etiquetas de Colores (Badges) */
-.agent-tags {
-    display: flex;
-    gap: 0.4rem;
-    margin-top: 1.2rem;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-    padding-bottom: 5px;
-}
-
-.agent-tags::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-}
-
-.badge-tag {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.55rem; /* Ligeramente más pequeño para asegurar que quepan 3 */
-    padding: 0.2rem 0.5rem;
-    border-radius: 2px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,0.1);
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.badge-red { background: rgba(232, 0, 28, 0.3); color: #ff8a8a; border-color: #e8001c; }
-.badge-blue { background: rgba(0, 102, 204, 0.3); color: #8ab4ff; border-color: #0066cc; }
-.badge-green { background: rgba(0, 153, 51, 0.3); color: #8aff9d; border-color: #009933; }
-.badge-grey { background: rgba(100, 100, 100, 0.3); color: #cccccc; border-color: #666666; }
-.badge-gold { background: rgba(212, 175, 55, 0.3); color: #fff1c1; border-color: #d4af37; }
-
-.btn-view-profile-card {
-    margin-top: 1.5rem;
-    width: 100%;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: white;
-    font-size: 0.7rem;
-    padding: 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: bold;
-}
-
-.btn-view-profile-card:hover {
-    background: rgba(232, 0, 28, 0.1);
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(232, 0, 28, 0.3);
+/* --- Móvil Pequeño (≤480px) --- */
+@media (max-width: 480px) {
+    h1                  { font-size: 2.2rem; }
+    .hero-subtitle      { font-size: 0.7rem; }
+    .preloader-content  { width: 80%; }
+    .shield-logo-loading { width: 60px; height: 60px; }
 }

@@ -98,6 +98,8 @@
     
     <!-- Sección de Bienvenida (Hero) -->
     <section class="hero-section tech-grid">
+        <!-- Canvas de partículas (particles.js) — animación de fondo del hero -->
+        <canvas id="hero-particles"></canvas>
         <div class="terminal-bg"></div>
         <h1 class="hero-title"><span class="hero-marvel">MARVEL</span><br/><span class="hero-accent">HEROES</span></h1>
         <p class="text-xl max-w-2xl text-center mt-6 opacity-80">
@@ -492,8 +494,8 @@
     </section>
 
     <!-- Sección Multimedia (Video) -->
-    <section id="video" class="video-section p-12 bg-black/30">
-        <h2 class="text-4xl mb-8">MATERIAL DE ARCHIVO</h2>
+    <section id="video" class="video-section p-12 bg-dark-overlay-3">
+        <h2 class="mb-8">MATERIAL DE ARCHIVO</h2>
         <div class="max-w-4xl mx-auto">
             <video id="promo-video" controls poster="img/video-poster.png" preload="metadata">
                 <source src="videos/trailer.mp4" type="video/mp4"/>
@@ -503,7 +505,7 @@
     </section>
     
     <!-- Sección de Contacto (Transmisión) -->
-    <section id="contacto" class="contact-section p-12 bg-black/20 border-t border-white/5">
+    <section id="contacto" class="contact-section p-12 bg-dark-overlay-2 border-top-subtle">
         <div class="max-w-2xl mx-auto text-center">
             <h2 class="text-4xl mb-4">CANAL DE TRANSMISIÓN</h2>
             <p class="text-xs tracking-widest opacity-50 mb-12 uppercase">Estableciendo conexión segura // Protocolo S.H.I.E.L.D.</p>
@@ -511,17 +513,17 @@
             <form class="tech-form">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div class="form-group">
-                        <label>IDENTIFICACIÓN AGENTE</label>
-                        <input type="text" placeholder="Nombre completo...">
+                        <label for="contact-name">IDENTIFICACIÓN AGENTE</label>
+                        <input id="contact-name" type="text" name="nombre" autocomplete="name" placeholder="Nombre completo...">
                     </div>
                     <div class="form-group">
-                        <label>CÓDIGO DE ENLACE</label>
-                        <input type="email" placeholder="Email de contacto...">
+                        <label for="contact-email">CÓDIGO DE ENLACE</label>
+                        <input id="contact-email" type="email" name="email" autocomplete="email" placeholder="Email de contacto...">
                     </div>
                 </div>
                 <div class="form-group mb-8">
-                    <label>MENSAJE CODIFICADO</label>
-                    <textarea rows="4" placeholder="Escriba su mensaje..."></textarea>
+                    <label for="contact-message">MENSAJE CODIFICADO</label>
+                    <textarea id="contact-message" name="mensaje" rows="4" placeholder="Escriba su mensaje..."></textarea>
                 </div>
                 <button type="submit" class="btn-primary w-full">ENVIAR TRANSMISIÓN</button>
             </form>
@@ -539,7 +541,7 @@
     </audio>
 
     <!-- Pie de Página -->
-    <footer class="terminal-footer p-12 border-t border-white/5 text-center">
+    <footer class="terminal-footer p-12 border-top-subtle text-center">
         <h3 class="text-xl text-primary mb-4 italic">S.H.I.E.L.D.</h3>
         <p class="text-[10px] opacity-40 uppercase tracking-widest">
             © 2024 Eudaldo Alvaro Cal Saul // Strategic Homeland Intervention, Enforcement and Logistics Division.
@@ -587,23 +589,23 @@
         });
     }
 
-    // Función para intentar reproducir audio
+    // Función para intentar reproducir audio (respeta política de autoplay del navegador)
     const playAudio = () => {
-        if (!audio) return;
+        if (!audio || (video && !video.paused)) return;
         audio.play().catch(() => {
-            // Si el navegador bloquea el autoplay, esperamos a la primera interacción
-            const startAudio = () => {
+            // El navegador bloqueó el autoplay: esperamos la primera interacción del usuario
+            const startOnInteraction = () => {
                 if (audio.paused && (!video || video.paused)) {
-                    audio.play();
+                    audio.play().catch(() => {});
                 }
             };
-            document.addEventListener('click', startAudio, { once: true });
-            document.addEventListener('scroll', startAudio, { once: true });
-            document.addEventListener('touchstart', startAudio, { once: true });
+            ['click', 'keydown', 'touchstart', 'scroll'].forEach(evt =>
+                document.addEventListener(evt, startOnInteraction, { once: true, passive: true })
+            );
         });
     };
 
-    // Intentar reproducir audio al cargar
+    // Intentar reproducir audio al cargar la página
     playAudio();
 
     // Lógica Botón Volver Arriba
@@ -622,11 +624,11 @@
         });
     }
 
-    // Sincronización Audio-Video
-    if (video) {
-        video.onplay = () => audio.pause();
-        video.onpause = () => audio.play();
-        video.onended = () => audio.play();
+    // Sincronización Audio-Video: pausa el audio cuando el vídeo reproduce y viceversa
+    if (video && audio) {
+        video.addEventListener('play',  () => audio.pause());
+        video.addEventListener('pause', () => { if (!video.ended) playAudio(); });
+        video.addEventListener('ended', () => playAudio());
     }
 
     // Control de Mute del Sidebar
@@ -748,6 +750,14 @@
     }
 </script>
 <script src="js/main.js"></script>
+
+<!-- Módulo de partículas: activado solo cuando el preloader termina -->
+<script type="module">
+    import { initParticles } from './js/particles.js';
+    window.addEventListener('load', () => {
+        setTimeout(() => initParticles('hero-particles'), 2600);
+    });
+</script>
 
 </body>
 </html>
