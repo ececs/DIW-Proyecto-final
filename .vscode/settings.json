@@ -1,0 +1,12 @@
+{
+  "liveServer.settings.port": 5501,
+  "liveServer.settings.ignoreFiles": [
+    "videos/**",
+    "**/*.mp4",
+    "**/*.webm",
+    "**/*.mov",
+    "**/*.avi"
+  ],
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.donotShowInfoMsg": true
+}

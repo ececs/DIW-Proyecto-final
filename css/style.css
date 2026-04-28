@@ -1,0 +1,155 @@
+/* 
+  ============================================================
+  S.H.I.E.L.D. TERMINAL — CORE STYLESHEET
+  ============================================================
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap');
+
+:root {
+    /* Color Palette */
+    --primary: #e8001c;        /* Marvel Red */
+    --secondary: #ffdb3c;      /* Gold */
+    --surface: #131317;        /* Dark background */
+    --surface-light: #1b1b1f;
+    --on-surface: #e5e1e7;
+    --on-surface-muted: rgba(229, 225, 231, 0.7);
+    
+    /* Typography */
+    --font-headline: 'Epilogue', sans-serif;
+    --font-data: 'Space Grotesk', sans-serif;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--surface);
+    font-family: var(--font-data);
+    color: var(--on-surface);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Typography Utility */
+h1, h2, h3, .font-headline {
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Layout Elements */
+header, nav, footer, main, section, article, aside {
+    display: block;
+}
+
+/* Global Nav */
+nav {
+    background-color: var(--surface);
+    border-bottom: 1px solid rgba(232, 0, 28, 0.2);
+}
+
+.nav-link {
+    color: var(--on-surface);
+    text-decoration: none;
+    font-family: var(--font-headline);
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: var(--transition-fast);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary);
+}
+
+/* Sidebar */
+aside {
+    background-color: var(--surface-light);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Buttons */
+.btn-access {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    font-family: var(--font-headline);
+    font-weight: 900;
+    font-style: italic;
+    cursor: pointer;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    transition: var(--transition-fast);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-access:hover {
+    background-color: white;
+    color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* Agent Card Styles */
+.agent-card {
+    background: var(--surface-light);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.agent-info {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.agent-name {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.agent-desc {
+    font-size: 0.9rem;
+    color: var(--on-surface-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* Profile Detail specific styles */
+.hero-glitch-border {
+    border-left: 2px solid var(--primary);
+    position: relative;
+}
+
+.stat-number {
+    font-family: var(--font-headline);
+    font-weight: 900;
+    font-size: 4rem;
+}
+
+.hero-glow-gold {
+    color: var(--secondary);
+    text-shadow: 0 0 15px rgba(255, 219, 60, 0.4);
+}
+
+/* Forms (Login) */
+.danger-tape {
+    background: repeating-linear-gradient(
+        -45deg,
+        #ffdb3c,
+        #ffdb3c 20px,
+        #131317 20px,
+        #131317 40px
+    );
+    height: 30px;
+}
