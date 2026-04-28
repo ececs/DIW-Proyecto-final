@@ -7,8 +7,6 @@
     
     <!-- Enlaces a hojas de estilo externas -->
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="css/animations.css"/>
-    <link rel="stylesheet" type="text/css" href="css/enhancements.css"/>
     
     <!-- Iconos de Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
@@ -23,8 +21,10 @@
     <div class="nav-container">
         <div class="nav-logo">S.H.I.E.L.D. TERMINAL</div>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">BASE_DE_DATOS</a>
-            <a href="#" class="nav-link active">EXPEDIENTE</a>
+            <a href="index.html" class="nav-link">INICIO</a>
+            <a href="index.html#agentes" class="nav-link">AGENTES</a>
+            <a href="index.html#video" class="nav-link">VIDEO</a>
+            <a href="index.html#contacto" class="nav-link">CONTACTO</a>
         </div>
         <button onclick="window.location.href='index.html'" class="btn-access">
             SALIR
@@ -99,7 +99,7 @@
             lastName: 'STARK',
             id: '882-B',
             img: 'img/ironman.png',
-            bio: 'Genio, multimillonario, playboy y filántropo. Tony Stark diseñó una armadura de alta tecnología tras ser capturado, convirtiéndose en el pilar tecnológico de los Vengadores.',
+            bio: 'Anthony Edward Stark no es solo un genio tecnológico; es el arquitecto del futuro. Tras sobrevivir a una herida mortal utilizando su primer prototipo de armadura, perfeccionó la tecnología Stark para crear una legión de trajes capaces de responder a cualquier amenaza planetaria. Su intelecto nivel 12 y su capacidad de improvisación estratégica lo convierten en el líder táctico indispensable de los Vengadores.',
             stats: [6, 6, 5, 6, 6, 4]
         },
         'capamerica': {
@@ -108,7 +108,7 @@
             lastName: 'ROGERS',
             id: '107-C',
             img: 'img/cap_america.png',
-            bio: 'El Primer Vengador. Transformado por el suero del Súper Soldado, Steve Rogers lidera con un valor y una moral inquebrantables.',
+            bio: 'Steven Rogers, el hombre fuera del tiempo, es el faro moral del equipo. Inyectado con el Suero del Súper Soldado durante la Segunda Guerra Mundial, su fisiología representa el límite superior de la capacidad humana. Más allá de su fuerza y agilidad, su verdadera potencia reside en su voluntad inquebrantable y su genio táctico. Es capaz de coordinar a los héroes más poderosos de la Tierra con una precisión militar absoluta.',
             stats: [3, 4, 3, 4, 1, 7]
         },
         'thor': {
@@ -117,7 +117,7 @@
             lastName: 'ODINSON',
             id: '004-A',
             img: 'img/thor.png',
-            bio: 'Dios del Trueno y heredero de Asgard. Armado con el Mjolnir, protege tanto la Tierra como los Nueve Reinos de amenazas cósmicas.',
+            bio: 'Hijo de Odín y heredero del trono de Asgard, Thor es un ser de inmenso poder divino. Vinculado al martillo místico Mjolnir, posee el mando absoluto sobre el trueno, el relámpago y las tormentas. Su longevidad asgardiana le ha otorgado siglos de experiencia en combate, convirtiéndolo en uno de los guerreros más formidables del cosmos, vital para repeler amenazas de origen místico o extraterrestre.',
             stats: [2, 7, 6, 7, 6, 4]
         },
         'hulk': {
@@ -126,7 +126,7 @@
             lastName: 'BANNER',
             id: '505-G',
             img: 'img/hulk.png',
-            bio: 'Tras una exposición masiva a radiación gamma, el Dr. Banner se transforma en Hulk, la fuerza física más destructiva de S.H.I.E.L.D.',
+            bio: 'El Dr. Bruce Banner es una de las mentes científicas más brillantes del planeta, experto en física nuclear y radiación gamma. Tras su transformación accidental, posee una fuerza física virtualmente ilimitada que aumenta con su ira. S.H.I.E.L.D. lo clasifica como un "Asset de Destrucción Masiva", siendo la pieza fundamental para misiones de asalto pesado y contención de amenazas nivel omega.',
             stats: [6, 7, 3, 7, 1, 4]
         },
         'blackwidow': {
@@ -135,7 +135,7 @@
             lastName: 'ROMANOFF',
             id: '422-R',
             img: 'img/widow.png',
-            bio: 'Experta en espionaje y combate cuerpo a cuerpo. Natasha es una pieza clave para misiones de infiltración y sigilo táctico.',
+            bio: 'Natalia Alianovna Romanova es la agente de infiltración más letal del mundo. Entrenada desde la infancia en la infame Habitación Roja, domina docenas de artes marciales, sistemas de espionaje y manipulación psicológica. Su habilidad para pasar desapercibida la convierte en la especialista en operaciones encubiertas de S.H.I.E.L.D., capaz de obtener información donde otros solo encuentran callejones sin salida.',
             stats: [4, 3, 2, 3, 1, 7]
         },
         'hawkeye': {
@@ -144,7 +144,7 @@
             lastName: 'BARTON',
             id: '606-H',
             img: 'img/hawkeye.png',
-            bio: 'Maestro tirador con una precisión del 100%. Sus flechas trucadas le permiten enfrentarse a cualquier tipo de amenaza.',
+            bio: 'Clint Barton es el ejemplo vivo de que la voluntad y el entrenamiento pueden igualar a los poderes divinos. Con una vista y coordinación ojo-mano sobrehumanas, es capaz de convertir cualquier objeto en un proyectil letal, aunque prefiere su arco personalizado con flechas de tecnología avanzada. Su rol es el de vigilante y francotirador, proporcionando fuego de cobertura y apoyo estratégico constante.',
             stats: [3, 3, 2, 2, 1, 6]
         },
         'blackpanther': {
@@ -153,7 +153,7 @@
             lastName: 'KING',
             id: '909-P',
             img: 'img/black_panter.png',
-            bio: 'Rey de Wakanda. Combina tecnología avanzada de Vibranium con habilidades físicas aumentadas y sabiduría ancestral.',
+            bio: 'T\'Challa, el Pantera Negra, es el monarca de la nación tecnológicamente más avanzada de la Tierra: Wakanda. Tras ingerir la Hierba de Corazón, posee sentidos, fuerza y agilidad aumentados. Su traje de tejido de Vibranium es capaz de absorber energía cinética para liberarla en ráfagas explosivas. Combina el genio científico de su nación con las tradiciones guerreras milenarias más estrictas.',
             stats: [5, 4, 4, 4, 1, 7]
         },
         'scarletwitch': {
@@ -162,7 +162,7 @@
             lastName: 'MAXIMOFF',
             id: '707-W',
             img: 'img/escarlata.png',
-            bio: 'Poseedora de la Magia del Caos. Su capacidad para alterar la realidad la convierte en uno de los seres más poderosos de la Tierra.',
+            bio: 'Wanda Maximoff es un ser capaz de manipular la Magia del Caos para alterar los hilos de la realidad misma. Sus poderes van desde la telequinesis y el control mental hasta la reescritura completa de la existencia. Debido a la naturaleza inestable de su poder, S.H.I.E.L.D. mantiene un protocolo de monitorización constante, reconociéndola como uno de los activos más poderosos y complejos del equipo.',
             stats: [3, 2, 2, 2, 7, 3]
         }
     };

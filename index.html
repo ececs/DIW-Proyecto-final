@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>S.H.I.E.L.D. DATABASE // AGENTES VENGADORES</title>
+    <meta name="description" content="Base de datos oficial de S.H.I.E.L.D. sobre los Vengadores. Acceso restringido a personal de Nivel 7. Autor: Eudaldo Alvaro Cal Saul."/>
+    <meta name="author" content="Eudaldo Alvaro Cal Saul"/>
+    <title>S.H.I.E.L.D. — Avengers Personnel Database</title>
     
     <!-- Enlaces a hojas de estilo externas (Cumplimiento de Rúbrica) -->
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="css/animations.css"/>
-    <link rel="stylesheet" type="text/css" href="css/enhancements.css"/>
     
     <!-- Iconos de Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
@@ -24,9 +24,9 @@
     <div class="nav-container">
         <a href="index.html" class="nav-logo">S.H.I.E.L.D.</a>
         <div class="nav-links">
-            <a href="#agentes" class="nav-link">HÉROES</a>
+            <a href="index.html" class="nav-link">INICIO</a>
+            <a href="#agentes" class="nav-link">AGENTES</a>
             <a href="#video" class="nav-link">VIDEO</a>
-            <a href="#" class="nav-link">ARCHIVOS</a>
             <a href="#contacto" class="nav-link">CONTACTO</a>
         </div>
         <button onclick="window.location.href='login.html'" class="btn-access">
@@ -42,26 +42,26 @@
         <p class="sidebar-subtitle">CLEARANCE LEVEL 7</p>
     </div>
     <ul class="sidebar-menu">
-        <li class="sidebar-item active" onclick="window.location.hash='#agentes'">
-            <span class="material-symbols-outlined">security</span>
-            AGENTES ACTIVOS
-        </li>
-        <li class="sidebar-item" onclick="window.location.hash='#agentes'">
-            <span class="material-symbols-outlined">warning</span>
-            AMENAZAS
+        <li class="sidebar-item active" onclick="window.location.href='index.html'">
+            <span class="material-symbols-outlined">terminal</span>
+            TERMINAL
         </li>
         <li class="sidebar-item" onclick="window.location.hash='#agentes'">
             <span class="material-symbols-outlined">groups</span>
-            EQUIPO
+            AGENTES
+        </li>
+        <li class="sidebar-item" onclick="window.location.hash='#video'">
+            <span class="material-symbols-outlined">video_library</span>
+            VIDEO
         </li>
         <li class="sidebar-item" onclick="window.location.hash='#contacto'">
             <span class="material-symbols-outlined">mail</span>
             CONTACTO
         </li>
     </ul>
-    <div class="p-6 mt-auto border-t border-white/5">
-        <p class="text-[8px] opacity-30 font-mono">S.H.I.E.L.D. ID</p>
-        <p class="text-[10px] font-mono">NICK_FURY_01</p>
+    <div class="sidebar-footer">
+        <p class="id-label">S.H.I.E.L.D. ID</p>
+        <p class="id-value">NICK_FURY_01</p>
     </div>
 </aside>
 
@@ -116,7 +116,7 @@
                     </div>
                 </div>
                 <div class="agent-footer">
-                    <p class="agent-short-bio">Genio, multimillonario, playboy, filántropo. El cerebro tecnológico de los Vengadores.</p>
+                    <p class="agent-short-bio">Genio multimillonario. Lidera la vanguardia tecnológica con su armadura de última generación y armamento táctico.</p>
                     <div class="agent-data-grid">
                         <div class="data-item highlight">ORIGEN: NY, USA</div>
                         <div class="data-item">ESTADO: ACTIVO</div>
@@ -148,7 +148,7 @@
                     </div>
                 </div>
                 <div class="agent-footer">
-                    <p class="agent-short-bio">El primer vengador. Símbolo de justicia y portador del suero del súper soldado.</p>
+                    <p class="agent-short-bio">El primer súper soldado. Estratega maestro y líder nato de los Vengadores armado con su escudo de Vibranium.</p>
                     <div class="agent-data-grid">
                         <div class="data-item highlight">ORIGEN: NY, USA</div>
                         <div class="data-item">ESTADO: ACTIVO</div>
@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <div class="agent-footer">
-                    <p class="agent-short-bio">Dios del Trueno y Rey de Asgard. Poseedor del martillo místico Mjolnir.</p>
+                    <p class="agent-short-bio">Dios del Trueno de Asgard. Posee el control absoluto sobre el rayo y el martillo místico Mjolnir.</p>
                     <div class="agent-data-grid">
                         <div class="data-item highlight">ORIGEN: ASGARD</div>
                         <div class="data-item">ESTADO: ACTIVO</div>
@@ -212,7 +212,7 @@
                     </div>
                 </div>
                 <div class="agent-footer">
-                    <p class="agent-short-bio">Tras una exposición masiva a radiación gamma, el Dr. Banner se transforma en Hulk.</p>
+                    <p class="agent-short-bio">Fuerza física imparable. El Dr. Banner se convierte en un gigante de energía gamma y destrucción masiva.</p>
                     <div class="agent-data-grid">
                         <div class="data-item highlight">ORIGEN: OHIO, USA</div>
                         <div class="data-item">ESTADO: ACTIVO</div>
@@ -244,7 +244,7 @@
                     </div>
                 </div>
                 <div class="agent-footer">
-                    <p class="agent-short-bio">Experta en espionaje y combate cuerpo a cuerpo. Ex-agente de la KGB.</p>
+                    <p class="agent-short-bio">Especialista en infiltración y espionaje. Maestra en combate letal y desmantelamiento de redes enemigas.</p>
                     <div class="agent-data-grid">
                         <div class="data-item highlight">ORIGEN: RUSIA</div>
                         <div class="data-item">ESTADO: ACTIVA</div>
@@ -276,7 +276,7 @@
                     </div>
                 </div>
                 <div class="agent-footer">
-                    <p class="agent-short-bio">Maestro tirador con una precisión del 100%. Experto en armas tácticas.</p>
+                    <p class="agent-short-bio">Precisión absoluta. Tirador experto equipado con flechas de tecnología táctica avanzada para apoyo a distancia.</p>
                     <div class="agent-data-grid">
                         <div class="data-item highlight">ORIGEN: IOWA, USA</div>
                         <div class="data-item">ESTADO: ACTIVO</div>
@@ -308,7 +308,7 @@
                     </div>
                 </div>
                 <div class="agent-footer">
-                    <p class="agent-short-bio">Rey de Wakanda. Combina tecnología de Vibranium con habilidades ancestrales.</p>
+                    <p class="agent-short-bio">Soberano de Wakanda. Protegido por un traje de Vibranium con agilidad y fuerza felina aumentadas.</p>
                     <div class="agent-data-grid">
                         <div class="data-item highlight">ORIGEN: WAKANDA</div>
                         <div class="data-item">ESTADO: ACTIVO</div>
@@ -340,7 +340,7 @@
                     </div>
                 </div>
                 <div class="agent-footer">
-                    <p class="agent-short-bio">Poseedora de la Magia del Caos. Capaz de alterar la realidad a su voluntad.</p>
+                    <p class="agent-short-bio">Manipuladora de la Magia del Caos. Capaz de alterar la realidad y la energía a su voluntad absoluta.</p>
                     <div class="agent-data-grid">
                         <div class="data-item highlight">ORIGEN: SOKOVIA</div>
                         <div class="data-item">ESTADO: ACTIVA</div>
@@ -408,7 +408,7 @@
     <footer class="terminal-footer p-12 border-t border-white/5 text-center">
         <h3 class="text-xl text-primary mb-4 italic">S.H.I.E.L.D.</h3>
         <p class="text-[10px] opacity-40 uppercase tracking-widest">
-            © 2024 Strategic Homeland Intervention, Enforcement and Logistics Division.
+            © 2024 Eudaldo Alvaro Cal Saul // Strategic Homeland Intervention, Enforcement and Logistics Division.
         </p>
     </footer>
 
