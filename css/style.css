@@ -1141,15 +1141,9 @@ input:focus, textarea:focus {
     display: flex;
     gap: 0.4rem;
     margin-top: 1.2rem;
-    margin-bottom: 2rem; /* Espacio extra respecto al botón */
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.agent-tags::-webkit-scrollbar {
-    display: none;
+    margin-bottom: 2rem; /* Mantenemos la separación */
+    flex-wrap: wrap;     /* Volvemos a permitir el salto de línea */
+    row-gap: 0.5rem;     /* Espacio entre filas si hay salto */
 }
 
 /* Etiqueta de rol (badge) */
