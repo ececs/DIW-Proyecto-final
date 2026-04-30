@@ -1851,8 +1851,10 @@ input:focus, textarea:focus {
 /* ══════════════════════════════════════════════════════════════════════════
    21. TERMINAL TÁCTICO MODAL (EXPERIENCIA INMERSIVA)
    Diseño de HUD holográfico que simula el acceso a archivos de S.H.I.E.L.D.
+   Implementado con backdrop-filter para efecto cristal y animaciones GPU.
    ══════════════════════════════════════════════════════════════════════════ */
 
+/* Contenedor principal del modal: pantalla completa con desenfoque */
 .terminal-modal {
     position: fixed;
     inset: 0;
@@ -1867,11 +1869,13 @@ input:focus, textarea:focus {
     transition: opacity 0.5s ease;
 }
 
+/* Estado activo del modal controlado por JavaScript */
 .terminal-modal.active {
     display: flex;
     opacity: 1;
 }
 
+/* Ventana interna del terminal con bordes luminosos */
 .terminal-window {
     width: 100%;
     max-width: 800px;
@@ -1885,6 +1889,7 @@ input:focus, textarea:focus {
     animation: terminalOpen 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* Cabecera de la ventana con fondo tintado */
 .terminal-header {
     background: rgba(232, 0, 28, 0.15);
     border-bottom: 1px solid var(--primary);
@@ -1894,6 +1899,7 @@ input:focus, textarea:focus {
     align-items: center;
 }
 
+/* Controles decorativos de ventana (estilo Mac/Unix táctico) */
 .terminal-controls {
     display: flex;
     gap: 8px;
@@ -1907,6 +1913,7 @@ input:focus, textarea:focus {
     opacity: 0.5;
 }
 
+/* Título de la cabecera en Rajdhani (fuente técnica) */
 .terminal-title {
     font-family: 'Rajdhani', sans-serif;
     font-size: 0.75rem;
@@ -1916,6 +1923,7 @@ input:focus, textarea:focus {
     text-transform: uppercase;
 }
 
+/* Cuerpo del terminal con fondo de rejilla técnica */
 .terminal-body {
     height: 450px;
     padding: 2.5rem;
@@ -1928,6 +1936,7 @@ input:focus, textarea:focus {
     background-size: 20px 20px;
 }
 
+/* Estilo del texto de logs inyectado */
 .terminal-text {
     font-size: 0.95rem;
     color: var(--primary-light);
@@ -1936,6 +1945,7 @@ input:focus, textarea:focus {
     white-space: pre-wrap;
 }
 
+/* Línea de escaneo láser animada */
 .scanning-line {
     position: absolute;
     top: 0;
@@ -1950,6 +1960,7 @@ input:focus, textarea:focus {
     opacity: 0.5;
 }
 
+/* Logo de S.H.I.E.L.D. como marca de agua en el fondo */
 .shield-watermark {
     position: absolute;
     top: 50%;
@@ -1964,6 +1975,7 @@ input:focus, textarea:focus {
     filter: grayscale(1) brightness(2);
 }
 
+/* Barra de estado inferior con indicador luminoso */
 .terminal-footer-status {
     background: rgba(0, 0, 0, 0.8);
     border-top: 1px solid rgba(232, 0, 28, 0.2);
@@ -1977,6 +1989,7 @@ input:focus, textarea:focus {
     letter-spacing: 1px;
 }
 
+/* Punto de estado parpadeante */
 .status-blink {
     width: 8px;
     height: 8px;

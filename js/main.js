@@ -55,12 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // 5. Secuencia de Terminal Táctico (Animación Marvel)
+    // ══════════════════════════════════════════════════════════════════════════
+    // 5. SECUENCIA DE TERMINAL TÁCTICO (ANIMACIÓN MARVEL)
+    // Simula el acceso a una terminal de comandos con efecto de escritura
+    // y desplazamiento automático de la base de datos de agentes.
+    // ══════════════════════════════════════════════════════════════════════════
+    
     const startTerminalBtn = document.getElementById('start-terminal-btn');
     const terminalModal = document.getElementById('tactical-terminal');
     const terminalContent = document.getElementById('terminal-content');
 
     if (startTerminalBtn && terminalModal && terminalContent) {
+        // Lista de comandos/logs que aparecerán en el terminal
         const terminalLines = [
             "> INITIALIZING HYPERION PROTOCOL...",
             "> ESTABLISHING SECURE UPLINK TO GLOBAL SATELLITE NETWORK...",
@@ -80,24 +86,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let lineIndex = 0;
 
+        /**
+         * Función recursiva que simula la escritura línea por línea
+         * con intervalos de tiempo aleatorios para mayor realismo.
+         */
         const typeLine = () => {
             if (lineIndex < terminalLines.length) {
                 const p = document.createElement('div');
                 p.textContent = terminalLines[lineIndex];
                 terminalContent.appendChild(p);
+                
+                // Mantener el scroll siempre al final para ver el nuevo log
                 terminalContent.scrollTop = terminalContent.scrollHeight;
+                
                 lineIndex++;
+                // Tiempo de espera aleatorio entre 50ms y 200ms
                 setTimeout(typeLine, Math.random() * 150 + 50);
             } else {
-                // Secuencia finalizada
+                // Una vez finalizada la escritura, cerrar tras un breve retraso
                 setTimeout(() => {
                     terminalModal.style.opacity = '0';
                     setTimeout(() => {
                         terminalModal.classList.remove('active');
                         terminalModal.style.display = 'none';
-                        document.body.style.overflow = ''; // Restaurar scroll
+                        document.body.style.overflow = ''; // Rehabilitar el scroll de la página
                         
-                        // Ir a la sección de agentes
+                        // Desplazamiento automático hacia la sección de Agentes
                         const agentesSection = document.getElementById('agentes');
                         if (agentesSection) {
                             agentesSection.scrollIntoView({ behavior: 'smooth' });
@@ -107,24 +121,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
+        // Listener para activar la experiencia desde el botón del Hero
         startTerminalBtn.addEventListener('click', () => {
-            // Iniciar música si estaba pausada
+            // Iniciar música de fondo (si el navegador lo permite tras la interacción)
             if (bgMusic) bgMusic.play().catch(() => {});
 
-            // Preparar terminal
+            // Resetear el estado del terminal antes de mostrarlo
             terminalContent.innerHTML = "";
             lineIndex = 0;
             
-            // Bloquear scroll
+            // Bloquear el scroll del body para evitar movimientos durante la animación
             document.body.style.overflow = 'hidden';
             
-            // Mostrar modal
+            // Activar el modal con transición de opacidad
             terminalModal.style.display = 'flex';
             setTimeout(() => {
                 terminalModal.classList.add('active');
                 terminalModal.style.opacity = '1';
                 
-                // Iniciar escritura
+                // Iniciar la secuencia de escritura tras un pequeño delay de apertura
                 setTimeout(typeLine, 500);
             }, 10);
         });

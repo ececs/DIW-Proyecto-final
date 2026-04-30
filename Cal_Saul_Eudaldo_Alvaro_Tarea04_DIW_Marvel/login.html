@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Portal de acceso restringido S.H.I.E.L.D. — Nivel de autorización 7 requerido. Solo personal autorizado."/>
+    <meta name="author" content="Eudaldo Alvaro Cal Saul"/>
+    <title>S.H.I.E.L.D. — ACCESO RESTRINGIDO</title>
+
+    <!-- Hoja de estilos externa (único archivo CSS del proyecto) -->
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <!-- Iconos de Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+</head>
+<body class="login-page">
+
+<!-- Efectos CRT -->
+<div class="scanline-overlay"></div>
+
+<!-- Cintas de advertencia (Danger Tape) -->
+<div class="danger-tape top"></div>
+<div class="danger-tape bottom"></div>
+
+<main class="login-container">
+    <div class="login-box tech-grid">
+        <div class="alert-icon">
+            <span class="material-symbols-outlined">report</span>
+        </div>
+        
+        <h1 class="glitch-text">ACCESS DENIED</h1>
+        <p class="login-subtitle">PROHIBIDO EL PASO A PERSONAL NO AUTORIZADO</p>
+        
+        <form class="login-form" novalidate>
+            <div class="form-group">
+                <label for="login-agent-id">AGENTE_ID</label>
+                <input id="login-agent-id" type="text" name="agente_id" autocomplete="username" placeholder="EJ: STARK-001">
+            </div>
+            <div class="form-group">
+                <label for="login-password">CÓDIGO_ENCRIPTADO</label>
+                <input id="login-password" type="password" name="password" autocomplete="current-password" placeholder="••••••••••••">
+            </div>
+        </form>
+
+        <div class="biometric-scan">
+            <div class="scan-line-laser"></div>
+            <span class="material-symbols-outlined">fingerprint</span>
+        </div>
+        <p class="scan-text">PRESIONE PARA ESCANEO BIOMÉTRICO</p>
+
+        <div class="abort-mission">
+            <button onclick="window.location.href='index.html'" class="btn-abort">
+                <span class="material-symbols-outlined">arrow_back</span>
+                ABORTAR MISIÓN Y VOLVER
+            </button>
+        </div>
+    </div>
+    
+    <div class="system-logs">
+        <span>S.H.I.E.L.D. SECURE LAYER v7.4 // BY EUDALDO ALVARO CAL SAUL</span>
+        <span>IP_TRACED: 192.168.0.X</span>
+    </div>
+</main>
+
+</body>
+</html>

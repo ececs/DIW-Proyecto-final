@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Base de datos oficial de S.H.I.E.L.D. sobre los Vengadores. Acceso restringido a personal de Nivel 7. Autor: Eudaldo Alvaro Cal Saul."/>
+    <meta name="author" content="Eudaldo Alvaro Cal Saul"/>
+    <title>S.H.I.E.L.D. — Avengers Personnel Database</title>
+    
+    <!-- Enlaces a hojas de estilo externas (Cumplimiento de Rúbrica) -->
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    
+    <!-- Optimización de carga de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos de Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+    <!-- Icono de pestaña (Favicon) -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
+</head>
+<body>
+
+<!-- Pantalla de Carga (Terminal Boot Sequence) -->
+<div id="preloader" class="preloader">
+    <div class="preloader-content">
+        <div class="shield-logo-loading"></div>
+        <div class="loading-text">DECRYPTING_DATABASE...</div>
+        <div class="loading-bar"><div class="loading-progress"></div></div>
+    </div>
+</div>
+
+<!-- Capas de efectos visuales (Escanlines y rejilla técnica) -->
+<div class="scanline-overlay"></div>
+<div class="crt-screen-glow"></div>
+
+<!-- Navegación Superior Fija -->
+<nav class="fixed-nav">
+    <div class="nav-container">
+        <!-- Botón Hamburguesa (Solo móvil/tablet) -->
+        <button id="menu-toggle" class="menu-hamburger" aria-label="Abrir menú">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <a href="index.html" class="nav-logo">S.H.I.E.L.D.</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">INICIO</a>
+            <a href="#agentes" class="nav-link">AGENTES</a>
+            <a href="#video" class="nav-link">VIDEO</a>
+            <a href="#contacto" class="nav-link">CONTACTO</a>
+        </div>
+        <button onclick="window.location.href='login.html'" class="btn-access">
+            ACCESO AGENTE
+        </button>
+    </div>
+</nav>
+
+<!-- Barra Lateral de Estado del Sistema -->
+<aside class="sidebar-terminal">
+    <div class="sidebar-header">
+        <h3 class="sidebar-title">STRATEGIC HAZARD</h3>
+        <p class="sidebar-subtitle">CLEARANCE LEVEL 7</p>
+    </div>
+    <ul class="sidebar-menu">
+        <li class="sidebar-item active" onclick="window.location.href='index.html'">
+            <span class="material-symbols-outlined">terminal</span>
+            TERMINAL
+        </li>
+        <li class="sidebar-item" onclick="window.location.hash='#agentes'">
+            <span class="material-symbols-outlined">groups</span>
+            AGENTES
+        </li>
+        <li class="sidebar-item" onclick="window.location.hash='#video'">
+            <span class="material-symbols-outlined">video_library</span>
+            VIDEO
+        </li>
+        <li class="sidebar-item" onclick="window.location.hash='#contacto'">
+            <span class="material-symbols-outlined">mail</span>
+            CONTACTO
+        </li>
+    </ul>
+    <div class="audio-control">
+        <button id="mute-toggle" class="mute-btn" title="Alternar Sonido" aria-label="Alternar Sonido de fondo">
+            <span id="mute-icon" class="material-symbols-outlined">volume_up</span>
+        </button>
+        <div class="audio-info">
+            <p class="audio-status" id="audio-status-text">Audio: Activo</p>
+        </div>
+    </div>
+    <div class="sidebar-footer">
+        <p class="id-label">S.H.I.E.L.D. ID</p>
+        <p class="id-value">NICK_FURY_01</p>
+    </div>
+</aside>
+
+<!-- Contenido Principal -->
+<main class="main-content">
+    
+    <!-- Sección de Bienvenida (Hero) -->
+    <section class="hero-section tech-grid">
+        <!-- Canvas de partículas (particles.js) — animación de fondo del hero -->
+        <canvas id="hero-particles"></canvas>
+        <div class="terminal-bg"></div>
+        <h1 class="hero-title"><span class="hero-marvel">MARVEL</span><br/><span class="hero-accent">HEROES</span></h1>
+        <p class="text-xl max-w-2xl text-center mt-6 opacity-80">
+            Base de datos oficial de agentes con habilidades mejoradas. 
+            Acceso restringido a personal de Nivel 7.
+        </p>
+        <button class="btn-primary mt-12" aria-label="Iniciar experiencia de terminal táctico" onclick="document.getElementById('bg-music').play()">
+            INICIAR TERMINAL
+        </button>
+    </section>
+
+    <!-- Sección de Estadísticas -->
+    <section class="stats-grid">
+        <div class="stat-item">
+            <span class="stat-number">08</span>
+            <p class="stat-label">AGENTES ACTIVOS</p>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">12</span>
+            <p class="stat-label">MISIONES COMPLETADAS</p>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">05</span>
+            <p class="stat-label">AMENAZAS NIVEL OMEGA</p>
+        </div>
+    </section>
+
+    <!-- Base de Datos de Agentes (8 tarjetas) -->
+    <section id="agentes" class="agents-section p-12">
+        <div class="section-header mb-12">
+            <h2 class="section-title">BASE DE DATOS</h2>
+            <p class="section-subtitle uppercase tracking-widest text-xs opacity-50">S.H.I.E.L.D. ACTIVE FILES // 2024</p>
+        </div>
+
+        <!-- Botones de Navegación -->
+        <button id="prev-btn" class="carousel-btn prev" title="Anterior" aria-label="Agente anterior">
+            <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <button id="next-btn" class="carousel-btn next" title="Siguiente" aria-label="Siguiente agente">
+            <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+
+        <div class="carousel-container" id="carousel-container">
+            <div class="agent-grid" id="agent-grid">
+            <!-- Tarjeta 1: Iron Man -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=ironman'">
+                <div class="agent-image-wrapper">
+                    <img src="img/ironman.png" alt="Iron Man" class="agent-image" loading="lazy">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">01</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">AVENGER // GENIUS</p>
+                        <h3 class="agent-name">IRON MAN</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Genio multimillonario. Lidera la vanguardia tecnológica con su armadura de última generación y armamento táctico.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: NY, USA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.85 M</div>
+                        <div class="data-item">PESO: 102 KG</div>
+                    </div>
+                    <div class="agent-capabilities">
+                        <h4 class="capability-title">CAPACIDADES</h4>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>INTELIGENCIA</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>FUERZA</span><span>85%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 85%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>TECNOLOGÍA</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="badge-tag badge-red">VENGADORES</span>
+                        <span class="badge-tag badge-blue">S.H.I.E.L.D.</span>
+                        <span class="badge-tag badge-grey">GENIO</span>
+                    </div>
+                    <button class="btn-view-profile-card">VER PERFIL COMPLETO</button>
+                </div>
+            </article>
+            
+            <!-- Tarjeta 2: Cap. America -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=capamerica'">
+                <div class="agent-image-wrapper">
+                    <img src="img/cap_america.png" alt="Capitán América" class="agent-image" loading="lazy">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">02</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">VETERAN // SOLDIER</p>
+                        <h3 class="agent-name">CAP. AMERICA</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">El primer súper soldado. Estratega maestro y líder nato de los Vengadores armado con su escudo de Vibranium.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: NY, USA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.88 M</div>
+                        <div class="data-item">PESO: 109 KG</div>
+                    </div>
+                    <div class="agent-capabilities">
+                        <h4 class="capability-title">CAPACIDADES</h4>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>FUERZA</span><span>90%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>LIDERAZGO</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>COMBATE</span><span>95%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 95%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="badge-tag badge-red">VENGADORES</span>
+                        <span class="badge-tag badge-blue">S.S.R.</span>
+                        <span class="badge-tag badge-gold">LÍDER</span>
+                    </div>
+                    <button class="btn-view-profile-card">VER PERFIL COMPLETO</button>
+                </div>
+            </article>
+
+            <!-- Tarjeta 3: Thor -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=thor'">
+                <div class="agent-image-wrapper">
+                    <img src="img/thor.png" alt="Thor" class="agent-image" loading="lazy">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">03</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">GOD // ASGARDIAN</p>
+                        <h3 class="agent-name">THOR</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Dios del Trueno de Asgard. Posee el control absoluto sobre el rayo y el martillo místico Mjolnir.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: ASGARD</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.98 M</div>
+                        <div class="data-item">PESO: 290 KG</div>
+                    </div>
+                    <div class="agent-capabilities">
+                        <h4 class="capability-title">CAPACIDADES</h4>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>FUERZA</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>ELECTRICIDAD</span><span>98%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 98%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>RESISTENCIA</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="badge-tag badge-red">VENGADORES</span>
+                        <span class="badge-tag badge-blue">ASGARDIANO</span>
+                        <span class="badge-tag badge-gold">SEMIDIOS</span>
+                    </div>
+                    <button class="btn-view-profile-card">VER PERFIL COMPLETO</button>
+                </div>
+            </article>
+
+            <!-- Tarjeta 4: Hulk -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=hulk'">
+                <div class="agent-image-wrapper">
+                    <img src="img/hulk.png" alt="Hulk" class="agent-image" loading="lazy">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">04</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">MONSTER // SCIENTIST</p>
+                        <h3 class="agent-name">HULK</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Fuerza física imparable. El Dr. Banner se convierte en un gigante de energía gamma y destrucción masiva.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: OHIO, USA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 2.44 M</div>
+                        <div class="data-item">PESO: 635 KG</div>
+                    </div>
+                    <div class="agent-capabilities">
+                        <h4 class="capability-title">CAPACIDADES</h4>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>FUERZA</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>RESISTENCIA</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>INTELIGENCIA</span><span>90%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="badge-tag badge-red">VENGADORES</span>
+                        <span class="badge-tag badge-green">GAMMA</span>
+                        <span class="badge-tag badge-grey">CIENTÍFICO</span>
+                    </div>
+                    <button class="btn-view-profile-card">VER PERFIL COMPLETO</button>
+
+                </div>
+            </article>
+
+            <!-- Tarjeta 5: Black Widow -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=blackwidow'">
+                <div class="agent-image-wrapper">
+                    <img src="img/widow.png" alt="Black Widow" class="agent-image" loading="lazy">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">05</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">SPY // ASSASSIN</p>
+                        <h3 class="agent-name">BLACK WIDOW</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Especialista en infiltración y espionaje. Maestra en combate letal y desmantelamiento de redes enemigas.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: RUSIA</div>
+                        <div class="data-item">ESTADO: ACTIVA</div>
+                        <div class="data-item">ALTURA: 1.70 M</div>
+                        <div class="data-item">PESO: 59 KG</div>
+                    </div>
+                    <div class="agent-capabilities">
+                        <h4 class="capability-title">CAPACIDADES</h4>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>ESPIONAJE</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>AGILIDAD</span><span>95%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>COMBATE</span><span>90%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="badge-tag badge-red">VENGADORES</span>
+                        <span class="badge-tag badge-blue">S.H.I.E.L.D.</span>
+                        <span class="badge-tag badge-green">AGENTE</span>
+                    </div>
+                    <button class="btn-view-profile-card">VER PERFIL COMPLETO</button>
+                </div>
+            </article>
+
+            <!-- Tarjeta 6: Hawkeye -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=hawkeye'">
+                <div class="agent-image-wrapper">
+                    <img src="img/hawkeye.png" alt="Hawkeye" class="agent-image" loading="lazy">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">06</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">ARCHER // AGENT</p>
+                        <h3 class="agent-name">HAWKEYE</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Precisión absoluta. Tirador experto equipado con flechas de tecnología táctica avanzada para apoyo a distancia.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: IOWA, USA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.90 M</div>
+                        <div class="data-item">PESO: 104 KG</div>
+                    </div>
+                    <div class="agent-capabilities">
+                        <h4 class="capability-title">CAPACIDADES</h4>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>PUNTERÍA</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>TACTICA</span><span>95%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>AGILIDAD</span><span>90%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="badge-tag badge-red">VENGADORES</span>
+                        <span class="badge-tag badge-blue">S.H.I.E.L.D.</span>
+                        <span class="badge-tag badge-grey">AGENT</span>
+                    </div>
+                    <button class="btn-view-profile-card">VER PERFIL COMPLETO</button>
+                </div>
+            </article>
+
+            <!-- Tarjeta 7: Black Panther -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=blackpanther'">
+                <div class="agent-image-wrapper">
+                    <img src="img/black_panter.png" alt="Black Panther" class="agent-image" loading="lazy">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">07</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">KING // WAKANDA</p>
+                        <h3 class="agent-name">BLACK PANTHER</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Soberano de Wakanda. Protegido por un traje de Vibranium con agilidad y fuerza felina aumentadas.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: WAKANDA</div>
+                        <div class="data-item">ESTADO: ACTIVO</div>
+                        <div class="data-item">ALTURA: 1.83 M</div>
+                        <div class="data-item">PESO: 91 KG</div>
+                    </div>
+                    <div class="agent-capabilities">
+                        <h4 class="capability-title">CAPACIDADES</h4>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>TECNOLOGÍA</span><span>98%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 98%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>AGILIDAD</span><span>95%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>COMBATE</span><span>95%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 95%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="badge-tag badge-red">VENGADORES</span>
+                        <span class="badge-tag badge-blue">WAKANDA</span>
+                        <span class="badge-tag badge-gold">REY</span>
+                    </div>
+                    <button class="btn-view-profile-card">VER PERFIL COMPLETO</button>
+                </div>
+            </article>
+
+            <!-- Tarjeta 8: Scarlet Witch -->
+            <article class="agent-card" onclick="window.location.href='profile-detail.html?agent=scarletwitch'">
+                <div class="agent-image-wrapper">
+                    <img src="img/escarlata.png" alt="Scarlet Witch" class="agent-image" loading="lazy">
+                    <div class="agent-overlay"></div>
+                    <div class="agent-badge">08</div>
+                    <div class="agent-basic-info">
+                        <p class="agent-tag">MAGE // CHAOS</p>
+                        <h3 class="agent-name">SCARLET WITCH</h3>
+                    </div>
+                </div>
+                <div class="agent-footer">
+                    <p class="agent-short-bio">Manipuladora de la Magia del Caos. Capaz de alterar la realidad y la energía a su voluntad absoluta.</p>
+                    <div class="agent-data-grid">
+                        <div class="data-item highlight">ORIGEN: SOKOVIA</div>
+                        <div class="data-item">ESTADO: ACTIVA</div>
+                        <div class="data-item">ALTURA: 1.70 M</div>
+                        <div class="data-item">PESO: 59 KG</div>
+                    </div>
+                    <div class="agent-capabilities">
+                        <h4 class="capability-title">CAPACIDADES</h4>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>MAGIA</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>PODER</span><span>100%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="capability-item">
+                            <div class="capability-info"><span>MENTAL</span><span>95%</span></div>
+                            <div class="capability-bar-bg"><div class="capability-bar-fill" style="width: 95%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="agent-tags">
+                        <span class="badge-tag badge-red">VENGADORES</span>
+                        <span class="badge-tag badge-green">CAOS</span>
+                        <span class="badge-tag badge-grey">BRUJA</span>
+                    </div>
+                    <button class="btn-view-profile-card">VER PERFIL COMPLETO</button>
+
+                </div>
+            </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Multimedia (Video) -->
+    <section id="video" class="video-section p-12 bg-dark-overlay-3">
+        <h2 class="mb-8">MATERIAL DE ARCHIVO</h2>
+        <div class="max-w-4xl mx-auto">
+            <video id="promo-video" controls poster="img/video-poster.png" preload="metadata">
+                <source src="videos/trailer.mp4" type="video/mp4"/>
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+    </section>
+    
+    <!-- Sección de Contacto (Transmisión) -->
+    <section id="contacto" class="contact-section p-12 bg-dark-overlay-2 border-top-subtle">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-4xl mb-4">CANAL DE TRANSMISIÓN</h2>
+            <p class="text-xs tracking-widest opacity-50 mb-12 uppercase">Estableciendo conexión segura // Protocolo S.H.I.E.L.D.</p>
+            
+            <form class="tech-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="form-group">
+                        <label for="contact-name">IDENTIFICACIÓN AGENTE</label>
+                        <input id="contact-name" type="text" name="nombre" autocomplete="name" placeholder="Nombre completo...">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">CÓDIGO DE ENLACE</label>
+                        <input id="contact-email" type="email" name="email" autocomplete="email" placeholder="Email de contacto...">
+                    </div>
+                </div>
+                <div class="form-group mb-8">
+                    <label for="contact-message">MENSAJE CODIFICADO</label>
+                    <textarea id="contact-message" name="mensaje" rows="4" placeholder="Escriba su mensaje..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-full">ENVIAR TRANSMISIÓN</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Botón Volver Arriba (Usabilidad) -->
+    <button id="back-to-top" class="btn-back-top" aria-label="Volver al inicio">
+        <span class="material-symbols-outlined">expand_less</span>
+    </button>
+
+    <!-- Audio del Sistema -->
+    <audio id="bg-music" loop autoplay>
+        <source src="audio/sonido.mp3" type="audio/mpeg"/>
+    </audio>
+
+    <!-- Pie de Página -->
+    <footer class="terminal-footer p-12 border-top-subtle text-center">
+        <h3 class="text-xl text-primary mb-4 italic">S.H.I.E.L.D.</h3>
+        <p class="text-[10px] opacity-40 uppercase tracking-widest">
+            © 2024 Eudaldo Alvaro Cal Saul // Strategic Homeland Intervention, Enforcement and Logistics Division.
+        </p>
+    </footer>
+
+</main>
+
+<!-- Scripts de Funcionalidad -->
+<script>
+    const audio = document.getElementById('bg-music');
+    const video = document.getElementById('promo-video');
+    const preloader = document.getElementById('preloader');
+
+    // Ocultar pantalla de carga tras inicialización simulada
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            if (preloader) {
+                preloader.classList.add('hidden');
+                // Iniciar animación de contadores tras el preloader
+                setTimeout(animateCounters, 500);
+            }
+        }, 2500); 
+    });
+
+    // Función para animar contadores de estadísticas
+    function animateCounters() {
+        const stats = document.querySelectorAll('.stat-number');
+        stats.forEach(stat => {
+            const target = parseInt(stat.innerText);
+            let count = 0;
+            const duration = 800; // Aún más rápido (0.8s)
+            const increment = target / (duration / 16); 
+
+            const update = () => {
+                count += increment;
+                if (count < target) {
+                    stat.innerText = Math.floor(count).toString().padStart(2, '0');
+                    requestAnimationFrame(update);
+                } else {
+                    stat.innerText = target.toString().padStart(2, '0');
+                }
+            };
+            update();
+        });
+    }
+
+    // Función para intentar reproducir audio (respeta política de autoplay del navegador)
+    const playAudio = () => {
+        if (!audio || (video && !video.paused)) return;
+        audio.play().catch(() => {
+            // El navegador bloqueó el autoplay: esperamos la primera interacción del usuario
+            const startOnInteraction = () => {
+                if (audio.paused && (!video || video.paused)) {
+                    audio.play().catch(() => {});
+                }
+            };
+            ['click', 'keydown', 'touchstart', 'scroll'].forEach(evt =>
+                document.addEventListener(evt, startOnInteraction, { once: true, passive: true })
+            );
+        });
+    };
+
+    // Intentar reproducir audio al cargar la página
+    playAudio();
+
+    // Lógica Botón Volver Arriba
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 400) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Sincronización Audio-Video: pausa el audio cuando el vídeo reproduce y viceversa
+    if (video && audio) {
+        video.addEventListener('play',  () => audio.pause());
+        video.addEventListener('pause', () => { if (!video.ended) playAudio(); });
+        video.addEventListener('ended', () => playAudio());
+    }
+
+    // Control de Mute del Sidebar
+    const muteBtn = document.getElementById('mute-toggle');
+    const muteIcon = document.getElementById('mute-icon');
+    const audioStatusText = document.getElementById('audio-status-text');
+
+    if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+            audio.muted = !audio.muted;
+            if (audio.muted) {
+                muteIcon.innerText = 'volume_off';
+                audioStatusText.innerText = 'Audio: Silenciado';
+                muteBtn.style.background = 'rgba(255, 0, 0, 0.3)';
+            } else {
+                muteIcon.innerText = 'volume_up';
+                audioStatusText.innerText = 'Audio: Activo';
+                muteBtn.style.background = 'rgba(255, 0, 0, 0.1)';
+            }
+        });
+    }
+
+    // Lógica del Carrusel de Agentes con Soporte Táctil
+    const agentGrid = document.getElementById('agent-grid');
+    const carouselContainer = document.getElementById('carousel-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    let currentPosition = 0;
+
+    const updateCarousel = () => {
+        if (!agentGrid) return;
+        const card = document.querySelector('.agent-card');
+        if (!card) return;
+        
+        const style = window.getComputedStyle(agentGrid);
+        const gap = parseInt(style.columnGap) || 0;
+        const cardWidth = card.offsetWidth + gap;
+        const containerWidth = carouselContainer.offsetWidth;
+        const visibleCards = Math.round(containerWidth / (cardWidth - gap)) || 1;
+        const totalCards = document.querySelectorAll('.agent-card').length;
+        const maxPosition = Math.max(0, totalCards - visibleCards);
+
+        // Ajuste de límites para bucle infinito
+        if (currentPosition < 0) currentPosition = maxPosition;
+        if (currentPosition > maxPosition) currentPosition = 0;
+
+        agentGrid.style.transform = `translateX(-${currentPosition * cardWidth}px)`;
+
+        // Los botones ya no se deshabilitan para permitir el bucle infinito
+        if (prevBtn) prevBtn.disabled = false;
+        if (nextBtn) nextBtn.disabled = false;
+    };
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { currentPosition++; updateCarousel(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { currentPosition--; updateCarousel(); });
+
+    // --- Soporte Táctil (Swipe) ---
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    if (carouselContainer) {
+        carouselContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+    }
+
+    const handleSwipe = () => {
+        const swipeThreshold = 50;
+        if (touchStartX - touchEndX > swipeThreshold) {
+            if (currentPosition < document.querySelectorAll('.agent-card').length - 1) {
+                currentPosition++;
+                updateCarousel();
+            }
+        } else if (touchEndX - touchStartX > swipeThreshold) {
+            if (currentPosition > 0) {
+                currentPosition--;
+                updateCarousel();
+            }
+        }
+    };
+
+    window.addEventListener('resize', updateCarousel);
+    window.addEventListener('load', () => setTimeout(updateCarousel, 3000));
+
+    // --- Lógica del Menú Hamburguesa ---
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.querySelector('.sidebar-terminal');
+
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+            
+            // Cambiar icono
+            const icon = menuToggle.querySelector('.material-symbols-outlined');
+            icon.innerText = sidebar.classList.contains('active') ? 'close' : 'menu';
+        });
+
+        // Cerrar al hacer clic fuera o en un enlace
+        document.addEventListener('click', (e) => {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && e.target !== menuToggle) {
+                sidebar.classList.remove('active');
+                menuToggle.querySelector('.material-symbols-outlined').innerText = 'menu';
+            }
+        });
+
+        const sidebarLinks = document.querySelectorAll('.sidebar-item');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                menuToggle.querySelector('.material-symbols-outlined').innerText = 'menu';
+            });
+        });
+    }
+</script>
+<script src="js/main.js"></script>
+
+<!-- Módulo de partículas: activado solo cuando el preloader termina -->
+<script type="module">
+    import { initParticles } from './js/particles.js';
+    window.addEventListener('load', () => {
+        setTimeout(() => initParticles('hero-particles'), 2600);
+    });
+</script>
+
+</body>
+</html>

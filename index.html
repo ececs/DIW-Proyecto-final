@@ -546,22 +546,32 @@
         <p class="text-[10px] opacity-40 uppercase tracking-widest">
             © 2024 Eudaldo Alvaro Cal Saul // Strategic Homeland Intervention, Enforcement and Logistics Division.
         </p>
+        <p class="text-[10px] opacity-40 uppercase tracking-widest mt-4">
+            <a href="https://ececs.github.io/DIW-Proyecto-final/" target="_blank" style="color: var(--primary); text-decoration: underline;">DEPLOYED_AT: GITHUB_PAGES</a>
+        </p>
     </footer>
 
-    <!-- Modal de Terminal Táctico S.H.I.E.L.D. -->
+    <!-- 
+        MODAL DE TERMINAL TÁCTICO S.H.I.E.L.D.
+        Este componente simula una interfaz HUD (Head-Up Display) táctica.
+        Se activa mediante JS cuando el usuario pulsa el botón "INICIAR TERMINAL".
+    -->
     <div id="tactical-terminal" class="terminal-modal">
         <div class="terminal-window">
+            <!-- Cabecera estilo ventana de sistema operativo táctico -->
             <div class="terminal-header">
                 <div class="terminal-controls">
                     <span></span><span></span><span></span>
                 </div>
                 <div class="terminal-title">S.H.I.E.L.D. TACTICAL HUD // LEVEL 7</div>
             </div>
+            <!-- Cuerpo del terminal donde se inyectan los logs -->
             <div class="terminal-body">
-                <div class="scanning-line"></div>
-                <div id="terminal-content" class="terminal-text"></div>
-                <div class="shield-watermark"></div>
+                <div class="scanning-line"></div> <!-- Línea de escaneo láser -->
+                <div id="terminal-content" class="terminal-text"></div> <!-- Contenedor de logs -->
+                <div class="shield-watermark"></div> <!-- Logo de fondo sutil -->
             </div>
+            <!-- Barra de estado inferior -->
             <div class="terminal-footer-status">
                 <span class="status-blink"></span> ENCRYPTED_CONNECTION_ESTABLISHED
             </div>

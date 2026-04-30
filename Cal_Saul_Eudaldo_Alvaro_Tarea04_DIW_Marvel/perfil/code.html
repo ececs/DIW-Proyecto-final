@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>S.H.I.E.L.D. TERMINAL - AGENT PROFILE: IRON MAN</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&amp;family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #131317;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #e5e1e7;
+            overflow-x: hidden;
+        }
+        .font-headline { font-family: 'Epilogue', sans-serif; }
+        .font-data { font-family: 'Space Grotesk', sans-serif; }
+        
+        .scanline-overlay {
+            background: linear-gradient(to bottom, transparent 50%, rgba(232, 0, 28, 0.05) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        
+        .crt-glow {
+            box-shadow: inset 0 0 40px rgba(232, 0, 28, 0.1);
+        }
+
+        .hero-glitch-border {
+            border-left: 2px solid #e8001c;
+            position: relative;
+        }
+
+        .hero-glitch-border::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -2px; width: 2px; height: 30%;
+            background: #ffdb3c;
+        }
+
+        .stat-bar-fill {
+            background: linear-gradient(90deg, #e8001c 0%, #ffdb3c 100%);
+        }
+
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(27, 27, 31, 0.7);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#af8783",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "on-primary": "#690006",
+                      "surface-tint": "#ffb4ac",
+                      "on-primary-fixed": "#410002",
+                      "on-primary-container": "#fff9f8",
+                      "tertiary-fixed-dim": "#c6c6c6",
+                      "primary-fixed": "#ffdad6",
+                      "on-surface-variant": "#e9bcb7",
+                      "on-secondary-fixed": "#221b00",
+                      "tertiary": "#c6c6c6",
+                      "on-primary-fixed-variant": "#93000d",
+                      "on-error-container": "#ffdad6",
+                      "secondary": "#fff9ef",
+                      "on-error": "#690005",
+                      "tertiary-container": "#727373",
+                      "primary": "#ffb4ac",
+                      "on-tertiary-container": "#fbfafa",
+                      "surface-container-lowest": "#0e0e12",
+                      "surface-container-low": "#1b1b1f",
+                      "secondary-fixed-dim": "#e9c400",
+                      "primary-container": "#e8001c",
+                      "on-tertiary": "#2f3131",
+                      "surface-dim": "#131317",
+                      "surface-bright": "#39393d",
+                      "error": "#ffb4ab",
+                      "background": "#131317",
+                      "on-surface": "#e5e1e7",
+                      "inverse-primary": "#c00015",
+                      "tertiary-fixed": "#e3e2e2",
+                      "surface-container": "#1f1f23",
+                      "on-tertiary-fixed-variant": "#464747",
+                      "on-secondary-container": "#725f00",
+                      "primary-fixed-dim": "#ffb4ac",
+                      "surface-container-highest": "#353439",
+                      "inverse-on-surface": "#303034",
+                      "surface-variant": "#353439",
+                      "on-background": "#e5e1e7",
+                      "outline-variant": "#5e3f3b",
+                      "error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#544600",
+                      "on-secondary": "#3a3000",
+                      "surface-container-high": "#2a292e",
+                      "secondary-fixed": "#ffe16d",
+                      "secondary-container": "#ffdb3c",
+                      "surface": "#131317",
+                      "inverse-surface": "#e5e1e7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0rem",
+                      "lg": "0rem",
+                      "xl": "0rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Epilogue"],
+                      "display": ["Epilogue"],
+                      "body": ["Space Grotesk"],
+                      "label": ["Space Grotesk"]
+              }
+            },
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-white">
+<!-- TOP NAVIGATION SHELL -->
+<nav class="bg-[#131317] text-[#e8001c] font-['Epilogue'] tracking-widest uppercase text-sm font-bold flex justify-between items-center w-full px-6 h-16 z-50 fixed top-0 shadow-[0_4px_20px_rgba(232,0,28,0.1)]">
+<div class="text-2xl font-black tracking-tighter text-[#e8001c] italic">S.H.I.E.L.D. TERMINAL</div>
+<div class="hidden md:flex space-x-8">
+<a class="text-[#e5e1e7] opacity-70 hover:opacity-100 transition-opacity" href="#">INTEL</a>
+<a class="text-[#e8001c] border-b-2 border-[#e8001c] pb-1" href="#">MISSIONS</a>
+<a class="text-[#e5e1e7] opacity-70 hover:opacity-100 transition-opacity" href="#">LOGISTICS</a>
+<a class="text-[#e5e1e7] opacity-70 hover:opacity-100 transition-opacity" href="#">ARCHIVE</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined hover:text-[#ffb4ac] transition-colors cursor-pointer" data-icon="notifications_active">notifications_active</span>
+<span class="material-symbols-outlined hover:text-[#ffb4ac] transition-colors cursor-pointer" data-icon="settings">settings</span>
+<div class="w-8 h-8 bg-surface-container-high overflow-hidden border border-primary-container/30">
+<img alt="Agent Avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a serious military intelligence officer with tactical eyewear in a dark blue lit room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK11bO9doL7OQJ-YuyaLyoLURX3BIbrzAyJP_6kJJPyz-51pvYPAHatydfmlywHCU6Jh7IQNSTfb2tDnrtBe39_WM5ZKQJuqyqNs9Cfigvsvx-DpBygEePB32RoLijoqk3Dgw9_oOI5N8XGDXVQl-ZJWYbcEHFfhfO5tgADFCYS35FEcQLaGTRWg2K45XCIQziRI1ArZlc2bLpEZYHwxNPF57yWN0_xJpz4RRxhHwaarBZCYsL40uIKinQBrtU49QG9CGTrgavfCA"/>
+</div>
+</div>
+</nav>
+<!-- SIDE NAVIGATION (WEB ONLY) -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-0 h-full z-40 pt-20 bg-[#1b1b1f] text-[#e8001c] font-mono text-[10px] tracking-tighter uppercase h-screen w-64 left-0 rounded-none border-r border-[#e8001c]/10">
+<div class="px-6 py-4 mb-4">
+<div class="text-lg font-bold text-[#e5e1e7]">STRATEGIC HAZARD</div>
+<div class="text-[8px] text-primary">INTERVENTION DIVISION</div>
+</div>
+<nav class="flex-1">
+<a class="flex items-center gap-4 px-6 py-4 text-[#e5e1e7] hover:bg-[#2a292e] transition-all hover:border-l-4 hover:border-[#e8001c]" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>OPERATIVES</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 bg-[#e8001c] text-[#131317] font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<span>THREATS</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#e5e1e7] hover:bg-[#2a292e] transition-all hover:border-l-4 hover:border-[#e8001c]" href="#">
+<span class="material-symbols-outlined" data-icon="handyman">handyman</span>
+<span>ARSENAL</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#e5e1e7] hover:bg-[#2a292e] transition-all hover:border-l-4 hover:border-[#e8001c]" href="#">
+<span class="material-symbols-outlined" data-icon="vpn_key">vpn_key</span>
+<span>ENCRYPTED</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#e5e1e7] hover:bg-[#2a292e] transition-all hover:border-l-4 hover:border-[#e8001c]" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>HISTORY</span>
+</a>
+</nav>
+<div class="p-6">
+<button class="w-full bg-primary-container text-white py-3 font-bold tracking-widest text-xs hover:shadow-[0_0_15px_rgba(232,0,28,0.5)] transition-all">
+                INITIATE LOCKDOWN
+            </button>
+</div>
+<div class="mt-auto border-t border-white/5">
+<a class="flex items-center gap-4 px-6 py-4 text-[#e5e1e7] opacity-50 hover:opacity-100" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>LOGOUT</span>
+</a>
+</div>
+</aside>
+<!-- MAIN CONTENT AREA -->
+<main class="pt-16 lg:pl-64 min-h-screen flex flex-col">
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden relative">
+<!-- LEFT SECTION: HERO IMAGE & HUD -->
+<section class="lg:col-span-5 h-[614px] lg:h-full relative overflow-hidden bg-surface-container-lowest">
+<div class="absolute inset-0 z-0">
+<img alt="Iron Man Suit" class="w-full h-full object-cover grayscale opacity-60 mix-blend-screen" data-alt="Cinematic close-up of a high-tech red and gold mechanical suit with glowing blue arc reactor energy pulses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtWaq8zzKPT8_i8RM--o8Uv3P0CDMkkp7YqTNyr-tyseZ-znb2x0z7t6VDgr-T439qjtuDmPxZWJVH_Qtwu7CIsh4mheEa2pvV3BP6-X9b4dNv4b1vMKpIualbMR99Jbxzwoqs8LpPbynLLKvWoUsss419P9kBnpIMejsU9SpYBxqvV7WpUUPOlSYUPA50I4uoQefirRNR2hqVcZezmpWgJekCqiJi98UD64NE8_cwA2aCiH0w_aXBa71QjLtHulKgQVcrmwWLbao"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+<div class="scanline-overlay absolute inset-0"></div>
+</div>
+<!-- HUD Overlays -->
+<div class="absolute inset-0 p-8 flex flex-col justify-between z-10">
+<div class="flex justify-between items-start">
+<div class="bg-primary-container/20 border border-primary-container p-2">
+<div class="flex items-center gap-2 text-primary font-bold text-[10px] tracking-[0.2em]">
+<span class="w-2 h-2 bg-primary animate-pulse"></span>
+                                IDENTITY VERIFIED: 100%
+                            </div>
+<div class="text-[8px] opacity-60 mt-1 uppercase">Stark, Anthony Edward // Avengers-001</div>
+</div>
+<div class="text-right text-secondary-container font-mono text-[10px]">
+<div>LAT: 40.7128° N</div>
+<div>LNG: 74.0060° W</div>
+</div>
+</div>
+<div class="hero-glitch-border pl-6 pb-12">
+<div class="text-secondary uppercase text-xs font-bold tracking-[0.3em] mb-2">Subject: Iron Man</div>
+<h1 class="font-headline text-6xl lg:text-8xl font-black text-on-surface leading-none tracking-tighter uppercase italic">
+                            TONY<br/><span class="text-primary-container">STARK</span>
+</h1>
+<div class="flex gap-4 mt-6">
+<div class="border border-white/20 px-3 py-1 text-[10px] uppercase font-bold tracking-widest bg-surface-container-high">S.H.I.E.L.D. FILE // 882-B</div>
+<div class="border border-primary-container px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-primary bg-primary-container/10">CLEARANCE: LEVEL 7</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT SECTION: TECHNICAL DATA PANEL -->
+<section class="lg:col-span-7 p-6 lg:p-12 overflow-y-auto bg-surface crt-glow">
+<div class="max-w-3xl mx-auto space-y-16">
+<!-- POWER GRID SECTION -->
+<div>
+<div class="flex items-center gap-4 mb-8">
+<span class="text-secondary-container material-symbols-outlined text-3xl" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<h2 class="font-headline text-2xl font-bold tracking-widest uppercase">POWER GRID // ANALYTICS</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+<!-- Stat 1 -->
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-on-surface/70">
+<span>Intelligence</span>
+<span class="text-secondary-container">6 / 7</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="stat-bar-fill h-full absolute left-0" style="width: 85.7%"></div>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-on-surface/70">
+<span>Strength</span>
+<span class="text-secondary-container">6 / 7</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="stat-bar-fill h-full absolute left-0" style="width: 85.7%"></div>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-on-surface/70">
+<span>Speed</span>
+<span class="text-secondary-container">5 / 7</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="stat-bar-fill h-full absolute left-0" style="width: 71.4%"></div>
+</div>
+</div>
+<!-- Stat 4 -->
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-on-surface/70">
+<span>Durability</span>
+<span class="text-secondary-container">6 / 7</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="stat-bar-fill h-full absolute left-0" style="width: 85.7%"></div>
+</div>
+</div>
+<!-- Stat 5 -->
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-on-surface/70">
+<span>Energy Projection</span>
+<span class="text-secondary-container">6 / 7</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="stat-bar-fill h-full absolute left-0" style="width: 85.7%"></div>
+</div>
+</div>
+<!-- Stat 6 -->
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-on-surface/70">
+<span>Combat Skills</span>
+<span class="text-secondary-container">4 / 7</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="stat-bar-fill h-full absolute left-0" style="width: 57.1%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- BIOGRAFÍA CLASIFICADA -->
+<div class="glass-panel p-8 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+<h3 class="font-headline text-lg font-bold tracking-widest text-primary mb-6 uppercase">BIOGRAFÍA CLASIFICADA</h3>
+<p class="font-body text-sm leading-relaxed text-on-surface/80">
+                            Genio, multimillonario, playboy y filántropo. Tras ser capturado en Afganistán, Anthony Stark diseñó una armadura de alta tecnología para escapar de sus captores. Desde entonces, ha refinado su tecnología Mark para convertirse en el protector global conocido como Iron Man. 
+                            <br/><br/>
+                            S.H.I.E.L.D. mantiene un monitoreo constante debido a la volatilidad de sus reactores de arco y su tendencia a la autonomía estratégica. Stark es un componente vital del Proyecto Vengadores, aunque su perfil psicológico indica una resistencia marcada a la autoridad institucional.
+                        </p>
+</div>
+<!-- EQUIPAMIENTO Y TECNOLOGÍA -->
+<div class="space-y-6">
+<h3 class="font-headline text-lg font-bold tracking-widest text-secondary-container uppercase flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+                            EQUIPAMIENTO Y TECNOLOGÍA
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-4 border-l-2 border-primary-container/20">
+<div class="text-[10px] font-bold text-primary mb-1 uppercase">Primary Core</div>
+<div class="text-sm font-bold uppercase">Repulsor Transmitters</div>
+<div class="text-[10px] opacity-60 mt-1">Direct-fire energy weapons located in palms.</div>
+</div>
+<div class="bg-surface-container-high p-4 border-l-2 border-primary-container/20">
+<div class="text-[10px] font-bold text-primary mb-1 uppercase">AI Interface</div>
+<div class="text-sm font-bold uppercase">F.R.I.D.A.Y. OS</div>
+<div class="text-[10px] opacity-60 mt-1">Autonomous threat detection &amp; targeting systems.</div>
+</div>
+<div class="bg-surface-container-high p-4 border-l-2 border-primary-container/20">
+<div class="text-[10px] font-bold text-primary mb-1 uppercase">Propulsion</div>
+<div class="text-sm font-bold uppercase">Supersonic Flight</div>
+<div class="text-[10px] opacity-60 mt-1">Thrust-vectoring repulsor boots and flight stabilizers.</div>
+</div>
+<div class="bg-surface-container-high p-4 border-l-2 border-primary-container/20">
+<div class="text-[10px] font-bold text-primary mb-1 uppercase">Defense</div>
+<div class="text-sm font-bold uppercase">Nanotech Plating</div>
+<div class="text-[10px] opacity-60 mt-1">Molecular-level self-repairing armor plating.</div>
+</div>
+</div>
+</div>
+<!-- REGISTRO DE MISIONES -->
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-white/10 pb-2">
+<h3 class="font-headline text-lg font-bold tracking-widest text-on-surface uppercase">REGISTRO DE MISIONES</h3>
+<span class="text-[10px] opacity-50 uppercase">Live Feed // Active</span>
+</div>
+<div class="h-48 overflow-y-auto bg-black/40 p-4 font-mono text-[11px] text-primary/80 leading-tight space-y-2">
+<div class="flex gap-2"><span class="text-secondary-container">[14:02]</span> OP_ULTRON: Critical failure in Sokovia sector. System Override initiated.</div>
+<div class="flex gap-2"><span class="text-secondary-container">[14:05]</span> IRON_MAN: Deployment at coordinates 48.2082° N, 16.3738° E.</div>
+<div class="flex gap-2"><span class="text-secondary-container">[14:08]</span> COMMS: Stark reporting heavy resistance from sentry bots.</div>
+<div class="flex gap-2"><span class="text-secondary-container">[14:15]</span> ARC_REACTOR: Energy levels at 88%. Rerouting to chest unibeam.</div>
+<div class="flex gap-2"><span class="text-secondary-container">[14:22]</span> MISSION_STATUS: Target neutralized. Awaiting extraction.</div>
+<div class="flex gap-2"><span class="text-secondary-container">[14:25]</span> LOG: Return to Avengers Tower for diagnostics.</div>
+<div class="flex gap-2"><span class="text-secondary-container">[14:26]</span> SYSTEM: Backup protocols synced with S.H.I.E.L.D. central hub.</div>
+</div>
+</div>
+<!-- CTA BUTTON -->
+<div class="pt-8 pb-16 lg:pb-0">
+<button class="group relative w-full overflow-hidden bg-primary-container text-white py-5 flex items-center justify-center gap-4 transition-all hover:scale-[1.02] active:scale-95">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+<span class="font-headline font-black tracking-[0.2em] uppercase text-sm">VOLVER A LA BASE DE DATOS</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BOTTOM NAVBAR (MOBILE ONLY) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 bg-[#131317]/95 backdrop-blur-md text-[#e8001c] font-mono text-[10px] uppercase font-bold border-t border-[#e8001c]/20">
+<div class="flex flex-col items-center justify-center text-[#e8001c] bg-[#e8001c]/10 border-t-2 border-[#e8001c] pt-2 pb-1">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span>TERMINAL</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#e5e1e7] opacity-50 pt-2 pb-1 hover:text-[#ffb4ac] hover:bg-[#2a292e]">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span>SCANNER</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#e5e1e7] opacity-50 pt-2 pb-1 hover:text-[#ffb4ac] hover:bg-[#2a292e]">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span>COMMS</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#e5e1e7] opacity-50 pt-2 pb-1 hover:text-[#ffb4ac] hover:bg-[#2a292e]">
+<span class="material-symbols-outlined" data-icon="account_box">account_box</span>
+<span>PROFILE</span>
+</div>
+</nav>
+</body></html>

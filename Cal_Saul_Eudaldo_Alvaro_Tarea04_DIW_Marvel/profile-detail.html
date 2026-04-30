@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Expediente clasificado S.H.I.E.L.D. — Datos técnicos, capacidades y biografía de agentes Vengadores. Nivel de acceso 7."/>
+    <meta name="author" content="Eudaldo Alvaro Cal Saul"/>
+    <title>S.H.I.E.L.D. — PERFIL DE AGENTE</title>
+
+    <!-- Hoja de estilos externa (único archivo CSS del proyecto) -->
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <!-- Iconos de Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+</head>
+<body class="profile-page">
+
+<!-- Capas de efectos CRT -->
+<div class="scanline-overlay"></div>
+
+<!-- Navegación Superior -->
+<nav class="fixed-nav">
+    <div class="nav-container">
+        <div class="nav-logo">S.H.I.E.L.D. TERMINAL</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">INICIO</a>
+            <a href="index.html#agentes" class="nav-link">AGENTES</a>
+            <a href="index.html#video" class="nav-link">VIDEO</a>
+            <a href="index.html#contacto" class="nav-link">CONTACTO</a>
+        </div>
+        <button onclick="window.location.href='index.html'" class="btn-access">
+            SALIR
+        </button>
+    </div>
+</nav>
+
+<main class="main-content-profile">
+    <div class="profile-grid">
+        
+        <!-- SECCIÓN IZQUIERDA: IMAGEN Y HUD -->
+        <section class="profile-hero">
+            <img id="hero-img" src="" alt="Agente" class="hero-image">
+            <div class="hero-overlay"></div>
+            
+            <div class="hud-overlay">
+                <div class="hud-top">
+                    <div class="hud-badge">
+                        <span class="hud-dot"></span>
+                        IDENTIDAD VERIFICADA: 100%
+                    </div>
+                </div>
+                
+                <div class="hud-bottom">
+                    <h3 id="subject-label" class="hud-label">SUBJECT: AGENT</h3>
+                    <h1 id="agent-name-display" class="hero-name">NOMBRE<br/><span class="text-primary">APELLIDO</span></h1>
+                    <div class="hud-files">
+                        <span id="file-id" class="file-badge">FILE // 000-X</span>
+                        <span class="clearance-badge">NIVEL 7</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DERECHA: DATOS TÉCNICOS -->
+        <section class="profile-data p-12">
+            <div class="data-container">
+                
+                <!-- Cuadrícula de Poder -->
+                <div class="power-grid-section">
+                    <h2 class="section-title-small">POWER GRID // ANALÍTICAS</h2>
+                    <div id="stats-container" class="stats-bars">
+                        <!-- Las barras de poder se inyectan por JS -->
+                    </div>
+                </div>
+
+                <!-- Biografía Clasificada -->
+                <article class="bio-article">
+                    <h3 class="bio-title">BIOGRAFÍA CLASIFICADA</h3>
+                    <p id="agent-bio" class="bio-text">
+                        Cargando datos del servidor central...
+                    </p>
+                </article>
+
+                <!-- Botón de retorno -->
+                <div class="mt-12">
+                    <a href="index.html" class="btn-primary-wide">
+                        VOLVER A LA BASE DE DATOS
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Audio del Sistema -->
+<audio id="bg-music" loop autoplay>
+    <source src="audio/sonido.mp3" type="audio/mpeg"/>
+</audio>
+
+<script>
+    // Datos de los 8 agentes sincronizados con index.html
+    const agentsData = {
+        'ironman': {
+            subject: 'Iron Man',
+            firstName: 'TONY',
+            lastName: 'STARK',
+            id: '882-B',
+            img: 'img/ironman.png',
+            bio: 'Anthony Edward Stark no es solo un genio tecnológico; es el arquitecto del futuro. Tras sobrevivir a una herida mortal utilizando su primer prototipo de armadura, perfeccionó la tecnología Stark para crear una legión de trajes capaces de responder a cualquier amenaza planetaria. Su intelecto nivel 12 y su capacidad de improvisación estratégica lo convierten en el líder táctico indispensable de los Vengadores.',
+            stats: [6, 6, 5, 6, 6, 4]
+        },
+        'capamerica': {
+            subject: 'Capitán América',
+            firstName: 'STEVE',
+            lastName: 'ROGERS',
+            id: '107-C',
+            img: 'img/cap_america.png',
+            bio: 'Steven Rogers, el hombre fuera del tiempo, es el faro moral del equipo. Inyectado con el Suero del Súper Soldado durante la Segunda Guerra Mundial, su fisiología representa el límite superior de la capacidad humana. Más allá de su fuerza y agilidad, su verdadera potencia reside en su voluntad inquebrantable y su genio táctico. Es capaz de coordinar a los héroes más poderosos de la Tierra con una precisión militar absoluta.',
+            stats: [3, 4, 3, 4, 1, 7]
+        },
+        'thor': {
+            subject: 'Thor Odinson',
+            firstName: 'THOR',
+            lastName: 'ODINSON',
+            id: '004-A',
+            img: 'img/thor.png',
+            bio: 'Hijo de Odín y heredero del trono de Asgard, Thor es un ser de inmenso poder divino. Vinculado al martillo místico Mjolnir, posee el mando absoluto sobre el trueno, el relámpago y las tormentas. Su longevidad asgardiana le ha otorgado siglos de experiencia en combate, convirtiéndolo en uno de los guerreros más formidables del cosmos, vital para repeler amenazas de origen místico o extraterrestre.',
+            stats: [2, 7, 6, 7, 6, 4]
+        },
+        'hulk': {
+            subject: 'Bruce Banner',
+            firstName: 'BRUCE',
+            lastName: 'BANNER',
+            id: '505-G',
+            img: 'img/hulk.png',
+            bio: 'El Dr. Bruce Banner es una de las mentes científicas más brillantes del planeta, experto en física nuclear y radiación gamma. Tras su transformación accidental, posee una fuerza física virtualmente ilimitada que aumenta con su ira. S.H.I.E.L.D. lo clasifica como un "Asset de Destrucción Masiva", siendo la pieza fundamental para misiones de asalto pesado y contención de amenazas nivel omega.',
+            stats: [6, 7, 3, 7, 1, 4]
+        },
+        'blackwidow': {
+            subject: 'Black Widow',
+            firstName: 'NATASHA',
+            lastName: 'ROMANOFF',
+            id: '422-R',
+            img: 'img/widow.png',
+            bio: 'Natalia Alianovna Romanova es la agente de infiltración más letal del mundo. Entrenada desde la infancia en la infame Habitación Roja, domina docenas de artes marciales, sistemas de espionaje y manipulación psicológica. Su habilidad para pasar desapercibida la convierte en la especialista en operaciones encubiertas de S.H.I.E.L.D., capaz de obtener información donde otros solo encuentran callejones sin salida.',
+            stats: [4, 3, 2, 3, 1, 7]
+        },
+        'hawkeye': {
+            subject: 'Hawkeye',
+            firstName: 'CLINT',
+            lastName: 'BARTON',
+            id: '606-H',
+            img: 'img/hawkeye.png',
+            bio: 'Clint Barton es el ejemplo vivo de que la voluntad y el entrenamiento pueden igualar a los poderes divinos. Con una vista y coordinación ojo-mano sobrehumanas, es capaz de convertir cualquier objeto en un proyectil letal, aunque prefiere su arco personalizado con flechas de tecnología avanzada. Su rol es el de vigilante y francotirador, proporcionando fuego de cobertura y apoyo estratégico constante.',
+            stats: [3, 3, 2, 2, 1, 6]
+        },
+        'blackpanther': {
+            subject: 'Black Panther',
+            firstName: "T'CHALLA",
+            lastName: 'KING',
+            id: '909-P',
+            img: 'img/black_panter.png',
+            bio: 'T\'Challa, el Pantera Negra, es el monarca de la nación tecnológicamente más avanzada de la Tierra: Wakanda. Tras ingerir la Hierba de Corazón, posee sentidos, fuerza y agilidad aumentados. Su traje de tejido de Vibranium es capaz de absorber energía cinética para liberarla en ráfagas explosivas. Combina el genio científico de su nación con las tradiciones guerreras milenarias más estrictas.',
+            stats: [5, 4, 4, 4, 1, 7]
+        },
+        'scarletwitch': {
+            subject: 'Scarlet Witch',
+            firstName: 'WANDA',
+            lastName: 'MAXIMOFF',
+            id: '707-W',
+            img: 'img/escarlata.png',
+            bio: 'Wanda Maximoff es un ser capaz de manipular la Magia del Caos para alterar los hilos de la realidad misma. Sus poderes van desde la telequinesis y el control mental hasta la reescritura completa de la existencia. Debido a la naturaleza inestable de su poder, S.H.I.E.L.D. mantiene un protocolo de monitorización constante, reconociéndola como uno de los activos más poderosos y complejos del equipo.',
+            stats: [3, 2, 2, 2, 7, 3]
+        }
+    };
+
+    const statNames = ['Inteligencia', 'Fuerza', 'Velocidad', 'Resistencia', 'Energía', 'Combate'];
+
+    /**
+     * Motor de inicialización de perfil táctico.
+     * Extrae el ID del agente de la URL y mapea los datos correspondientes.
+     */
+    function initProfile() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const agentId = urlParams.get('agent') || 'ironman';
+        const data = agentsData[agentId] || agentsData['ironman'];
+
+        // SISTEMA DE TEMATIZACIÓN DINÁMICA: 
+        // Inyecta una clase de tema específica para activar los efectos CSS exclusivos del héroe.
+        document.body.className = `profile-page theme-${agentId}`;
+
+        // RENDERIZADO DE IDENTIDAD: Actualiza los campos de texto e imagen del terminal.
+        document.getElementById('hero-img').src = data.img;
+        document.getElementById('subject-label').textContent = `SUBJECT: ${data.subject}`;
+        document.getElementById('agent-name-display').innerHTML = `${data.firstName}<br/><span style="color:#e8001c">${data.lastName}</span>`;
+        document.getElementById('file-id').textContent = `FILE // ${data.id}`;
+        document.getElementById('agent-bio').textContent = data.bio;
+
+        // GENERACIÓN PROCEDURAL DE ESTADÍSTICAS:
+        // Crea dinámicamente las barras de progreso basadas en la escala de 1 a 7 de Marvel.
+        const container = document.getElementById('stats-container');
+        data.stats.forEach((val, i) => {
+            const percentage = (val / 7) * 100;
+            container.innerHTML += `
+                <div class="stat-row">
+                    <div class="stat-info">
+                        <span>${statNames[i]}</span>
+                        <span class="stat-value">${val} / 7</span>
+                    </div>
+                    <div class="stat-bar-bg">
+                        <div class="stat-bar-fill" style="width: ${percentage}%"></div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Ejecución diferida para asegurar la carga completa del DOM.
+    window.onload = () => {
+        initProfile();
+        
+        // Autoplay Fallback
+        const audio = document.getElementById('bg-music');
+        if (audio) {
+            audio.play().catch(() => {
+                document.addEventListener('click', () => audio.play(), { once: true });
+            });
+        }
+    };
+</script>
+
+</body>
+</html>
