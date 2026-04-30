@@ -106,7 +106,7 @@
             Base de datos oficial de agentes con habilidades mejoradas. 
             Acceso restringido a personal de Nivel 7.
         </p>
-        <button class="btn-primary mt-12" aria-label="Iniciar experiencia de terminal táctico" onclick="document.getElementById('bg-music').play()">
+        <button class="btn-primary mt-12" id="start-terminal-btn" aria-label="Iniciar experiencia de terminal táctico">
             INICIAR TERMINAL
         </button>
     </section>
@@ -547,6 +547,26 @@
             © 2024 Eudaldo Alvaro Cal Saul // Strategic Homeland Intervention, Enforcement and Logistics Division.
         </p>
     </footer>
+
+    <!-- Modal de Terminal Táctico S.H.I.E.L.D. -->
+    <div id="tactical-terminal" class="terminal-modal">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="terminal-title">S.H.I.E.L.D. TACTICAL HUD // LEVEL 7</div>
+            </div>
+            <div class="terminal-body">
+                <div class="scanning-line"></div>
+                <div id="terminal-content" class="terminal-text"></div>
+                <div class="shield-watermark"></div>
+            </div>
+            <div class="terminal-footer-status">
+                <span class="status-blink"></span> ENCRYPTED_CONNECTION_ESTABLISHED
+            </div>
+        </div>
+    </div>
 
 </main>
 

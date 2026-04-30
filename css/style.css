@@ -1849,6 +1849,161 @@ input:focus, textarea:focus {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
+   21. TERMINAL TÁCTICO MODAL (EXPERIENCIA INMERSIVA)
+   Diseño de HUD holográfico que simula el acceso a archivos de S.H.I.E.L.D.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.terminal-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(15px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.terminal-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.terminal-window {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(13, 13, 17, 0.95);
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 50px rgba(232, 0, 28, 0.3), inset 0 0 20px rgba(232, 0, 28, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: terminalOpen 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.terminal-header {
+    background: rgba(232, 0, 28, 0.15);
+    border-bottom: 1px solid var(--primary);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-controls span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0.5;
+}
+
+.terminal-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--primary);
+    text-transform: uppercase;
+}
+
+.terminal-body {
+    height: 450px;
+    padding: 2.5rem;
+    position: relative;
+    overflow-y: auto;
+    font-family: 'Courier New', Courier, monospace;
+    background-image: 
+        linear-gradient(rgba(232, 0, 28, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 0, 28, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.terminal-text {
+    font-size: 0.95rem;
+    color: var(--primary-light);
+    line-height: 1.6;
+    text-shadow: 0 0 5px var(--primary);
+    white-space: pre-wrap;
+}
+
+.scanning-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(232, 0, 28, 0.2), transparent);
+    border-top: 1px solid var(--primary);
+    z-index: 10;
+    pointer-events: none;
+    animation: scanMove 4s linear infinite;
+    opacity: 0.5;
+}
+
+.shield-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: url('../favicon.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.05;
+    pointer-events: none;
+    filter: grayscale(1) brightness(2);
+}
+
+.terminal-footer-status {
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid rgba(232, 0, 28, 0.2);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.7rem;
+    color: var(--primary-light);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.status-blink {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary);
+    animation: statusBlink 1.5s infinite;
+}
+
+/* Keyframes específicos del terminal */
+@keyframes terminalOpen {
+    from { transform: scale(0.9) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes scanMove {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(500%); }
+}
+
+@keyframes statusBlink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
    22. KEYFRAMES — BIBLIOTECA DE ANIMACIONES
    Todas las animaciones del proyecto centralizadas en una sección.
    ══════════════════════════════════════════════════════════════════════════ */
